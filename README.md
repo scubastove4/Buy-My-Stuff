@@ -4,7 +4,7 @@
 
 ### By: Steve Morello
 
-[GitHub](https://github.com/scubastove4) | [LinkedIn](https://www.linkedin.com/in/stephen-morello/) | [Twitter](https://twitter.com/scubastove4) | [Trello](https://trello.com/b/ts1aBqm9/buy-my-stuff) | Buy My Stuff (pending)
+[GitHub](https://github.com/scubastove4) | [LinkedIn](https://www.linkedin.com/in/stephen-morello/) | [Trello](https://trello.com/b/ts1aBqm9/buy-my-stuff) | Buy My Stuff (pending)
 
 ---
 
