@@ -8,6 +8,10 @@ django = "*"
 psycopg2-binary = "*"
 pillow = "*"
 python-decouple = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+pyjwt = "*"
 
 [dev-packages]
 
