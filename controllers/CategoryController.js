@@ -1,4 +1,4 @@
-const { Category } = require('../models')
+const { Category, Item } = require('../models')
 
 const GetAllCategories = async (req, res) => {
   try {
@@ -38,6 +38,7 @@ const GetCategoryById = async (req, res) => {
 const CreateCategory = async (req, res) => {
   try {
     const createdCategory = await Category.create({
+      adminId: req.body.adminId,
       name: req.body.name,
       description: req.body.description
     })
