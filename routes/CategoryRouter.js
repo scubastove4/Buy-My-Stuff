@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const controllers = require('../controllers')
-const middleware = require('../middleware')
+// const middleware = require('../middleware')
 
 router.get('/', controllers.CategoryControllers.GetAllCategories)
 router.get('/:category_id', controllers.CategoryControllers.GetCategoryById)

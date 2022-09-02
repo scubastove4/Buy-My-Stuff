@@ -3,10 +3,8 @@ const cors = require('cors')
 const logger = require('morgan')
 const app = express()
 
-const CustomerRouter = require('./routes/CustomerRouter')
-const CategoryRouter = require('./routes/CategoryRouter')
+const AppRouter = require('./routes/AppRouter')
 const AdminRouter = require('./routes/AdminRouter')
-const ItemRouter = require('./routes/ItemRouter')
 
 const PORT = process.env.PORT || 3001
 
@@ -17,9 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/admin', AdminRouter)
-app.use('/api/customer', CustomerRouter)
-app.use('/api/category', CategoryRouter)
-app.use('/api/item', ItemRouter)
+app.use('/api', AppRouter)
 
 app.use('/uploads', express.static('./uploads'))
 
