@@ -1,7 +1,4 @@
 'use strict'
-
-const { defaultValueSchemable } = require('sequelize/types/utils')
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('customers', {
