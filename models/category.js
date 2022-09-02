@@ -13,7 +13,20 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
-      name: DataTypes.STRING
+      adminId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'admins',
+          key: 'id'
+        },
+        field: 'admin_id'
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     },
     {
       sequelize,

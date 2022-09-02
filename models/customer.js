@@ -9,14 +9,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Customer.belongsToMany(models.Item, { as: 'cart' })
     }
   }
   Customer.init(
     {
-      firstName: DataTypes.STRING,
-      email: DataTypes.STRING,
-      passwordDigest: DataTypes.STRING,
-      isAdmin: DataTypes.BOOLEAN
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'first_name'
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      passwordDigest: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'password_digest'
+      },
+      isAdmin: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'is_admin',
+        defaultValue: false
+      }
     },
     {
       sequelize,

@@ -13,11 +13,40 @@ module.exports = (sequelize, DataTypes) => {
   }
   Item.init(
     {
-      name: DataTypes.STRING,
-      categoryId: DataTypes.INTEGER,
-      image: DataTypes.STRING,
-      price: DataTypes.FLOAT,
-      description: DataTypes.STRING
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      adminId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'admins',
+          key: 'id'
+        },
+        field: 'admin_id'
+      },
+      categoryId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'categories',
+          key: 'id'
+        },
+        field: 'category_id'
+      },
+      image: {
+        type: DataTypes.STRING
+      },
+      price: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+      },
+      description: {
+        type: DataTypes.STRING
+      }
     },
     {
       sequelize,

@@ -13,8 +13,26 @@ module.exports = (sequelize, DataTypes) => {
   }
   Bookmark.init(
     {
-      customerId: DataTypes.INTEGER,
-      itemId: DataTypes.INTEGER
+      customerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'customers',
+          key: 'id'
+        },
+        field: 'customer_id'
+      },
+      itemId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'items',
+          key: 'id'
+        },
+        field: 'item_id'
+      }
     },
     {
       sequelize,
