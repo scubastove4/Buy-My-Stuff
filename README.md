@@ -74,6 +74,6 @@ To use Email.js you will need a service ID, template ID, and public key, which c
 
 ## **_Credits_**
 
--
+- [Django-Frontend User Auth](https://sushil-kamble.medium.com/django-rest-framework-react-authentication-workflow-2022-part-1-a21f22b3f358)
 -
 -
