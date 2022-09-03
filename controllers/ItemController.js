@@ -24,7 +24,7 @@ const CreateItem = async (req, res) => {
       name: req.body.name,
       description: req.body.description
     })
-    res.send(createdCategory)
+    res.send(createdItem)
   } catch (error) {
     throw error
   }
@@ -32,7 +32,7 @@ const CreateItem = async (req, res) => {
 
 const UpdateItem = async (req, res) => {
   try {
-    const updatedItem = await Category.create(
+    const updatedItem = await Item.create(
       { ...req.body },
       { where: { id: req.params.item_id }, returning: true }
     )
