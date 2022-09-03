@@ -13,13 +13,13 @@ router.post('/sign_up', controllers.AdminController.SignUp)
 router.post('/login', controllers.AdminController.Login)
 
 router.put(
-  '/profile/email',
+  '/change/email',
   middleware.stripToken,
   middleware.verifyToken,
   controllers.AdminController.ChangeEmail
 )
 router.put(
-  '/profile/password',
+  '/change/password',
   middleware.stripToken,
   middleware.verifyToken,
   controllers.AdminController.ChangePassword

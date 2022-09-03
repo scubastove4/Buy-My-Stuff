@@ -19,7 +19,7 @@ router.put(
   controllers.CustomerController.ChangeEmail
 )
 router.put(
-  '/profile/password',
+  '/change/password',
   middleware.stripToken,
   middleware.verifyToken,
   controllers.CustomerController.ChangePassword
