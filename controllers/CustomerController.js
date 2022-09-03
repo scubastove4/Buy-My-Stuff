@@ -55,7 +55,12 @@ const ChangeEmail = async (req, res) => {
     })
     if (customer) {
       await customer.update({ ...customer, email: req.body.newEmail })
-      return res.send({ status: 'Success', msg: 'Email udpated!' })
+      return res.send({
+        status: 'Success',
+        msg: `Email udpated to ${req.body.newEmail}!`
+      })
+    } else {
+      return res.send({ status: 'Error', msg: 'Email not found' })
     }
   } catch (e) {
     throw e
@@ -77,6 +82,10 @@ const ChangePassword = async (req, res) => {
       let passwordDigest = await middleware.hashPassword(req.body.newPassword)
       await customer.update({ passwordDigest })
       return res.send({ status: 'Success', msg: 'Password udpated!' })
+    } else if (!customer) {
+      return res.send({ status: 'Error', msg: 'Email not found' })
+    } else {
+      return res.send({ status: 'Error', msg: 'Incorrect password' })
     }
   } catch (e) {
     throw e
@@ -88,10 +97,24 @@ const CheckSession = async (req, res) => {
   res.send(payload)
 }
 
+const DeleteCustomer = async (req, res) => {
+  try {
+    await Customer.destroy({ where: { id: req.params.customer_id } })
+    res.send({
+      msg: 'Customer removed',
+      payload: req.params.customer_id,
+      status: 'Ok'
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   SignUp,
   Login,
   ChangeEmail,
   ChangePassword,
-  CheckSession
+  CheckSession,
+  DeleteCustomer
 }

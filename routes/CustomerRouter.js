@@ -25,4 +25,11 @@ router.put(
   controllers.CustomerController.ChangePassword
 )
 
+router.delete(
+  '/:customer_id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controllers.CustomerController.DeleteCustomer
+)
+
 module.exports = router
