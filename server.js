@@ -14,7 +14,7 @@ app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/admin', AdminRouter)
+// app.use('/admin', AdminRouter)
 app.use('/api', AppRouter)
 
 app.use('/uploads', express.static('./uploads'))
