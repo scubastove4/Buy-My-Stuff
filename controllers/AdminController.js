@@ -55,7 +55,12 @@ const ChangeEmail = async (req, res) => {
     })
     if (admin) {
       await admin.update({ ...admin, email: req.body.newEmail })
-      return res.send({ status: 'Success', msg: 'Email udpated!' })
+      return res.send({
+        status: 'Success',
+        msg: `Email udpated to ${req.body.newEmail}!`
+      })
+    } else {
+      return res.send({ status: 'Error', msg: 'Email not found' })
     }
   } catch (e) {
     throw e
@@ -77,6 +82,10 @@ const ChangePassword = async (req, res) => {
       let passwordDigest = await middleware.hashPassword(req.body.newPassword)
       await admin.update({ passwordDigest })
       return res.send({ status: 'Success', msg: 'Password udpated!' })
+    } else if (!admin) {
+      return res.send({ status: 'Error', msg: 'Email not found' })
+    } else {
+      return res.send({ status: 'Error', msg: 'Incorrect password' })
     }
   } catch (e) {
     throw e
@@ -88,10 +97,24 @@ const CheckSession = async (req, res) => {
   res.send(payload)
 }
 
+const DeleteAdmin = async (req, res) => {
+  try {
+    await Admin.destroy({ where: { id: req.params.admin_id } })
+    res.send({
+      msg: 'Admin removed',
+      payload: req.params.admin_id,
+      status: 'Ok'
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   SignUp,
   Login,
   ChangeEmail,
   ChangePassword,
-  CheckSession
+  CheckSession,
+  DeleteAdmin
 }

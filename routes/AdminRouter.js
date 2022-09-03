@@ -25,4 +25,11 @@ router.put(
   controllers.AdminController.ChangePassword
 )
 
+router.delete(
+  '/:admin_id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controllers.AdminController.DeleteAdmin
+)
+
 module.exports = router
