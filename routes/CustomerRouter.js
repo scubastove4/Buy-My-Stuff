@@ -4,8 +4,8 @@ const middleware = require('../middleware')
 
 router.get(
   '/session',
-  middleware.stripToken,
-  middleware.verifyToken,
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
   controllers.CustomerController.CheckSession
 )
 
@@ -14,21 +14,21 @@ router.post('/login', controllers.CustomerController.Login)
 
 router.put(
   '/profile/email',
-  middleware.stripToken,
-  middleware.verifyToken,
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
   controllers.CustomerController.ChangeEmail
 )
 router.put(
   '/change/password',
-  middleware.stripToken,
-  middleware.verifyToken,
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
   controllers.CustomerController.ChangePassword
 )
 
 router.delete(
   '/:customer_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
   controllers.CustomerController.DeleteCustomer
 )
 
