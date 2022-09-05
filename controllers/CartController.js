@@ -3,7 +3,7 @@ const { Cart } = require('../models')
 const CreateCart = async (req, res) => {
   try {
     const createdCart = await Cart.create({
-      userId: req.body.userId,
+      customerId: req.body.customerId,
       itemId: req.body.itemId
     })
     res.send(createdCart)

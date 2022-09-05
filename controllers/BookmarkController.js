@@ -3,7 +3,7 @@ const { Bookmark } = require('../models')
 const CreateBookmark = async (req, res) => {
   try {
     const createdBookmark = await Bookmark.create({
-      userId: req.body.userId,
+      customerId: req.body.customerId,
       itemId: req.body.itemId
     })
     res.send(createdBookmark)

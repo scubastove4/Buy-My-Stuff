@@ -3,7 +3,7 @@ const { Category, Item } = require('../models')
 const GetAllCategories = async (req, res) => {
   try {
     const categories = await Category.findAll({
-      order: [['ASC']],
+      order: [['name', 'ASC']],
       include: [
         {
           model: Item,
@@ -37,11 +37,7 @@ const GetCategoryById = async (req, res) => {
 
 const CreateCategory = async (req, res) => {
   try {
-    const createdCategory = await Category.create({
-      adminId: req.body.adminId,
-      name: req.body.name,
-      description: req.body.description
-    })
+    const createdCategory = await Category.create(req.body)
     res.send(createdCategory)
   } catch (error) {
     throw error
@@ -50,7 +46,7 @@ const CreateCategory = async (req, res) => {
 
 const UpdateCategory = async (req, res) => {
   try {
-    const updatedCategory = await Category.create(
+    const updatedCategory = await Category.update(
       { ...req.body },
       { where: { id: req.params.category_id }, returning: true }
     )

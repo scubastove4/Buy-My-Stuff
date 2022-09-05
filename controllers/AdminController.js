@@ -8,7 +8,9 @@ const SignUp = async (req, res) => {
     if (existingAdmin) {
       res.send({ msg: `${existingAdmin.email} already exists.` })
     } else {
-      let passwordDigest = await middleware.hashPassword(password)
+      let passwordDigest = await middleware.AdminMiddleware.hashPassword(
+        password
+      )
       const newAdmin = await Admin.create({
         firstName: firstName,
         email: email,
@@ -29,7 +31,7 @@ const Login = async (req, res) => {
     })
     if (
       admin &&
-      (await middleware.comparePassword(
+      (await middleware.AdminMiddleware.comparePassword(
         req.body.password,
         admin.passwordDigest
       ))
@@ -39,7 +41,7 @@ const Login = async (req, res) => {
         email: admin.email,
         firstName: admin.firstName
       }
-      let token = middleware.createToken(payload)
+      let token = middleware.AdminMiddleware.createToken(payload)
       return res.send({ admin: payload, token })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
@@ -74,12 +76,14 @@ const ChangePassword = async (req, res) => {
     })
     if (
       admin &&
-      (await middleware.comparePassword(
+      (await middleware.AdminMiddleware.comparePassword(
         req.body.oldPassword,
         admin.dataValues.passwordDigest
       ))
     ) {
-      let passwordDigest = await middleware.hashPassword(req.body.newPassword)
+      let passwordDigest = await middleware.AdminMiddleware.hashPassword(
+        req.body.newPassword
+      )
       await admin.update({ passwordDigest })
       return res.send({ status: 'Success', msg: 'Password udpated!' })
     } else if (!admin) {

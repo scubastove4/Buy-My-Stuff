@@ -1,9 +1,28 @@
 const { Item, Category } = require('../models')
 
+const GetAllItems = async (req, res) => {
+  try {
+    const items = await Item.findAll({
+      order: [['name', 'ASC']],
+      include: [
+        {
+          model: Category,
+          as: 'category',
+          attributes: ['id', 'name']
+        }
+      ]
+    })
+    res.send(items)
+  } catch (error) {
+    throw error
+  }
+}
+
 const GetItemById = async (req, res) => {
   try {
     const item = await Item.findOne({
       where: { id: req.params.item_id },
+      order: [['name', 'ASC']],
       include: [
         {
           model: Category,
@@ -20,10 +39,7 @@ const GetItemById = async (req, res) => {
 
 const CreateItem = async (req, res) => {
   try {
-    const createdItem = await Item.create({
-      name: req.body.name,
-      description: req.body.description
-    })
+    const createdItem = await Item.create(req.body)
     res.send(createdItem)
   } catch (error) {
     throw error
@@ -32,7 +48,7 @@ const CreateItem = async (req, res) => {
 
 const UpdateItem = async (req, res) => {
   try {
-    const updatedItem = await Item.create(
+    const updatedItem = await Item.update(
       { ...req.body },
       { where: { id: req.params.item_id }, returning: true }
     )
@@ -56,6 +72,7 @@ const DeleteItem = async (req, res) => {
 }
 
 module.exports = {
+  GetAllItems,
   GetItemById,
   CreateItem,
   UpdateItem,

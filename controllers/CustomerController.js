@@ -8,7 +8,9 @@ const SignUp = async (req, res) => {
     if (existingCustomer) {
       res.send({ msg: `${existingCustomer.email} already exists.` })
     } else {
-      let passwordDigest = await middleware.hashPassword(password)
+      let passwordDigest = await middleware.CustomerMiddleware.hashPassword(
+        password
+      )
       const newCustomer = await Customer.create({
         firstName: firstName,
         email: email,
@@ -29,7 +31,7 @@ const Login = async (req, res) => {
     })
     if (
       customer &&
-      (await middleware.comparePassword(
+      (await middleware.CustomerMiddleware.comparePassword(
         req.body.password,
         customer.passwordDigest
       ))
@@ -39,7 +41,7 @@ const Login = async (req, res) => {
         email: customer.email,
         firstName: customer.firstName
       }
-      let token = middleware.createToken(payload)
+      let token = middleware.CustomerMiddleware.createToken(payload)
       return res.send({ customer: payload, token })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
@@ -74,12 +76,14 @@ const ChangePassword = async (req, res) => {
     })
     if (
       customer &&
-      (await middleware.comparePassword(
+      (await middleware.CustomerMiddleware.comparePassword(
         req.body.oldPassword,
         customer.dataValues.passwordDigest
       ))
     ) {
-      let passwordDigest = await middleware.hashPassword(req.body.newPassword)
+      let passwordDigest = await middleware.CustomerMiddleware.hashPassword(
+        req.body.newPassword
+      )
       await customer.update({ passwordDigest })
       return res.send({ status: 'Success', msg: 'Password udpated!' })
     } else if (!customer) {

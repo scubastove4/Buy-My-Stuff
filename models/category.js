@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Category.belongsTo(models.Admin, { foreignKey: 'adminId' })
       Category.hasMany(models.Item, {
         foreignKey: 'categoryId',
-        as: 'category'
+        as: 'category_items'
       })
     }
   }

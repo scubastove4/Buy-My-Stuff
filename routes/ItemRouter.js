@@ -2,6 +2,7 @@ const router = require('express').Router()
 const controllers = require('../controllers')
 const middleware = require('../middleware')
 
+router.get('/', controllers.ItemController.GetAllItems)
 router.get('/:item_id', controllers.ItemController.GetItemById)
 
 router.post(
