@@ -49,15 +49,11 @@ const GetItemById = async (req, res) => {
 
 const CreateItem = async (req, res) => {
   try {
-    let createdItem = null
+    let createdItem
     if (req.file) {
       createdItem = await Item.create({
-        name: req.body.name,
-        adminId: req.body.adminId,
-        categoryId: req.body.categoryId,
-        image: req.file.publicUrl,
-        price: req.body.price,
-        description: req.body.description
+        ...req.body,
+        image: req.file.publicUrl
       })
     } else {
       createdItem = await Item.create(req.body)
@@ -70,10 +66,18 @@ const CreateItem = async (req, res) => {
 
 const UpdateItem = async (req, res) => {
   try {
-    const updatedItem = await Item.update(
-      { ...req.body },
-      { where: { id: req.params.item_id }, returning: true }
-    )
+    let updatedItem
+    if (req.file) {
+      updatedItem = await Item.update(
+        { ...req.body, image: req.file.publicUrl },
+        { where: { id: req.params.item_id }, returning: true }
+      )
+    } else {
+      updatedItem = await Item.update(
+        { ...req.body },
+        { where: { id: req.params.item_id }, returning: true }
+      )
+    }
     res.send(updatedItem)
   } catch (error) {
     throw error
