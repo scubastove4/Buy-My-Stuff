@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar />
+    <NavBar :user="user" />
     <main>
       <router-view header="Buy My Stuff"></router-view>
     </main>
@@ -17,7 +17,13 @@ export default {
   components: {
     NavBar,
     Footer
-  }
+  },
+  data: () => ({
+    user: {
+      name: 'user1',
+      id: 1
+    }
+  })
 }
 </script>
 

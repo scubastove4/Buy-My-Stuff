@@ -1,18 +1,18 @@
 <template>
-  <nav>
+  <nav v-if="user">
     <router-link to="/" name="Home">Home</router-link>
     <router-link to="/items" name="Items">Items</router-link>
     <router-link to="/login" name="Login">Login</router-link>
     <router-link to="/cart" name="Cart">Cart</router-link>
-    <router-link to="/profile/:user_id" name="Profile">Profile</router-link>
-    <!-- <router-link to="/categories/:category_id" name="CategoryDetails">CategoryDetails</router-link> -->
+    <router-link :to="`/profile/${user.id}`" name="Profile"
+      >Profile</router-link
+    >
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'NavBar'
-}
+<script setup>
+const props = defineProps(['user'])
+console.log(props.user)
 </script>
 
 <style>
