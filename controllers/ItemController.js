@@ -1,4 +1,14 @@
 const { Item, Category } = require('../models')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname)
+  }
+})
 
 const GetAllItems = async (req, res) => {
   try {
@@ -39,7 +49,19 @@ const GetItemById = async (req, res) => {
 
 const CreateItem = async (req, res) => {
   try {
-    const createdItem = await Item.create(req.body)
+    let createdItem = null
+    if (req.file) {
+      createdItem = await Item.create({
+        name: req.body.name,
+        adminId: req.body.adminId,
+        categoryId: req.body.categoryId,
+        image: req.file.publicUrl,
+        price: req.body.price,
+        description: req.body.description
+      })
+    } else {
+      createdItem = await Item.create(req.body)
+    }
     res.send(createdItem)
   } catch (error) {
     throw error

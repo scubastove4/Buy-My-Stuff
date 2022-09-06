@@ -9,6 +9,7 @@ router.post(
   '/',
   middleware.AdminMiddleware.stripToken,
   middleware.AdminMiddleware.verifyToken,
+  middleware.MulterMiddleware.multer.single('image'),
   controllers.ItemController.CreateItem
 )
 
@@ -16,6 +17,7 @@ router.put(
   '/:item_id',
   middleware.AdminMiddleware.stripToken,
   middleware.AdminMiddleware.verifyToken,
+  middleware.MulterMiddleware.multer.single('image'),
   controllers.ItemController.UpdateItem
 )
 
