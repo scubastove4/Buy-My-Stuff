@@ -1,42 +1,36 @@
 <template>
   <main v-if="user">
-    <button v-if="user.isAdmin" @click="changeAddingCategory">
-      Add Category
-    </button>
-    <CategoryForm
-      v-if="addingCategory"
+    <button v-if="user.isAdmin" @click="changeAddingItem">Add Item</button>
+    <ItemForm
+      v-if="addingItem"
       :user="user"
-      :newCategoryValues="newCategoryValues"
+      :newItemValues="newItemValues"
       :editing="editing"
-      :editingCategory="editingCategory"
-      @setNewCategoryValues="setNewCategoryValues"
-      @resetNewCategoryValues="resetNewCategoryValues"
-      @submitNewCategoryForm="submitNewCategoryForm"
-      @changeEditingCategoryValues="changeEditingCategoryValues"
-      @submitEditingCategoryForm="submitEditingCategoryForm"
+      :editingItem="editingItem"
+      @setNewItemValues="setNewItemValues"
+      @resetNewItemValues="resetNewItemValues"
+      @submitNewItemForm="submitNewItemForm"
+      @changeEditingItemValues="changeEditingItemValues"
+      @submitEditingItemForm="submitEditingItemForm"
     />
-    <section v-if="categories">
-      <div v-for="category in categories" :key="category.id">
-        <CategoryForm
-          v-if="editing && category.id === editingCategory.id"
+    <section v-if="items">
+      <div v-for="item in items" :key="item.id">
+        <ItemForm
+          v-if="editing && item.id === editingItem.id"
           :user="user"
-          :newCategoryValues="newCategoryValues"
+          :newItemValues="newItemValues"
           :editing="editing"
-          :editingCategory="editingCategory"
-          @setNewCategoryValues="setNewCategoryValues"
-          @resetNewCategoryValues="resetNewCategoryValues"
-          @submitNewCategoryForm="submitNewCategoryForm"
-          @changeEditingCategoryValues="changeEditingCategoryValues"
-          @submitEditingCategoryForm="submitEditingCategoryForm"
+          :editingItem="editingItem"
+          @setNewItemValues="setNewItemValues"
+          @resetNewItemValues="resetNewItemValues"
+          @submitNewItemForm="submitNewItemForm"
+          @changeEditingItemValues="changeEditingItemValues"
+          @submitEditingItemForm="submitEditingItemForm"
         />
-        <CategoryCard
-          v-else
-          :category="category"
-          @click="selectCategory(category.id)"
-        />
+        <ItemCard v-else :item="item" @click="selectItem(item.id)" />
         <span v-if="user.isAdmin">
-          <button @click="setEditingCategory(category)">Edit Category</button>
-          <button @click="deleteCategory(category.id)">Delete Category</button>
+          <button @click="setEditingItem(item)">Edit Item</button>
+          <button @click="deleteItem(item.id)">Delete Item</button>
         </span>
       </div>
     </section>
@@ -46,92 +40,89 @@
 <script setup>
 import { onMounted, ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
-import CategoryCard from '../components/CategoryCard.vue'
-import CategoryForm from '../components/CategoryForm.vue'
-import {
-  GetCategories,
-  PostCategory,
-  UpdateCategory,
-  DeleteCategory
-} from '../services/CategoryReq'
+import ItemCard from '../components/ItemCard.vue'
+import ItemForm from '../components/ItemForm.vue'
+import { GetItems, PostItem, UpdateItem, DeleteItem } from '../services/ItemReq'
 
 defineProps(['user'])
 
 const router = useRouter()
 // const route = useRoute() useRoute
 
-/////////////  get all categories  /////////////
-const categories = ref([])
-async function setCategories() {
-  const data = await GetCategories()
-  categories.value = data
+/////////////  get all items  /////////////
+const items = ref([])
+async function setItems() {
+  const data = await GetItems()
+  items.value = data
 }
-function selectCategory(categoryId) {
-  router.push(`/categories/${categoryId}`)
-}
-onMounted(setCategories)
+onMounted(setItems)
 
-/////////////  add new category  /////////////
-const addingCategory = ref(false)
-function changeAddingCategory() {
-  !addingCategory.value
-    ? (addingCategory.value = true)
-    : (addingCategory.value = false)
+/////////////  get item by id  /////////////
+function selectItem(itemId) {
+  router.push(`/items/${itemId}`)
 }
-const newCategoryValues = ref({
+
+/////////////  add new Item  /////////////
+const addingItem = ref(false)
+function changeAddingItem() {
+  !addingItem.value ? (addingItem.value = true) : (addingItem.value = false)
+}
+const newItemValues = ref({
   name: '',
+  image: '',
+  price: '',
   description: ''
 })
-function setNewCategoryValues(name, val) {
-  newCategoryValues.value[name] = val
+function setNewItemValues(name, val) {
+  newItemValues.value[name] = val
 }
-function resetNewCategoryValues() {
-  newCategoryValues.value = {
+function resetNewItemValues() {
+  newItemValues.value = {
     name: '',
     description: ''
   }
-  changeAddingCategory()
+  changeAddingItem()
 }
-async function submitNewCategoryForm(user) {
-  let category = { ...newCategoryValues.value, adminId: user.id }
-  await PostCategory(category)
-  resetNewCategoryValues()
-  setCategories()
+async function submitNewItemForm(user) {
+  let item = { ...newItemValues.value, adminId: user.id }
+  await PostItem(item)
+  resetNewItemValues()
+  setItems()
 }
 
-/////////////  edit category  /////////////
+/////////////  edit item  /////////////
 const editing = ref(false)
-const editingCategory = ref({
+const editingItem = ref({
   name: '',
   description: '',
   id: 0
 })
 
-function setEditingCategory(category) {
+function setEditingItem(item) {
   editing.value = true
-  editingCategory.value.name = category.name
-  editingCategory.value.description = category.description
-  editingCategory.value.id = category.id
+  editingItem.value.name = item.name
+  editingItem.value.description = item.description
+  editingItem.value.id = item.id
 }
-function changeEditingCategoryValues(name, val) {
-  editingCategory.value[name] = val
+function changeEditingItemValues(name, val) {
+  editingItem.value[name] = val
 }
-async function submitEditingCategoryForm() {
-  let category = { ...editingCategory.value }
-  await UpdateCategory(editingCategory.value.id, category)
-  setCategories()
+async function submitEditingItemForm() {
+  let item = { ...editingItem.value }
+  await UpdateItem(editingItem.value.id, item)
+  setItems()
   editing.value = false
-  editingCategory.value = {
+  editingItem.value = {
     name: '',
     description: '',
     id: 0
   }
 }
 
-/////////////  delete category  /////////////
-async function deleteCategory(categoryId) {
-  await DeleteCategory(categoryId)
-  setCategories()
+/////////////  delete item  /////////////
+async function deleteItem(itemId) {
+  await DeleteItem(itemId)
+  setItems()
 }
 </script>
 

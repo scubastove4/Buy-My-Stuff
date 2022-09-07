@@ -95,7 +95,7 @@
         type="text"
         id="add-item-image"
         name="name"
-        :value="newItemValues.name"
+        :value="newItemValues.image"
         @input="
           $emit('setNewItemValues', $event.target.name, $event.target.value)
         "

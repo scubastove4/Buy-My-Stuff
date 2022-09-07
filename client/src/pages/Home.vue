@@ -66,10 +66,12 @@ async function setCategories() {
   const data = await GetCategories()
   categories.value = data
 }
+onMounted(setCategories)
+
+/////////////  get category by id  /////////////
 function selectCategory(categoryId) {
   router.push(`/categories/${categoryId}`)
 }
-onMounted(setCategories)
 
 /////////////  add new category  /////////////
 const addingCategory = ref(false)
