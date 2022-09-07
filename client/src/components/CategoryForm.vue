@@ -1,4 +1,5 @@
 <template>
+  <!-- ////////    edit category form     //////////// -->
   <form v-if="editing" @submit.prevent="$emit('submitEditingCategoryForm')">
     <span>
       <label for="edit-category-name">Name</label>
@@ -37,6 +38,8 @@
       Edit Category
     </button>
   </form>
+
+  <!-- ////////    new category form     //////////// -->
   <form v-else @submit.prevent="$emit('submitNewCategoryForm', user)">
     <span>
       <label for="add-category-name">Name</label>

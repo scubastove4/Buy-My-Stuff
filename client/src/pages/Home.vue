@@ -130,7 +130,6 @@ async function submitEditingCategoryForm() {
 
 /////////////  delete category  /////////////
 async function deleteCategory(categoryId) {
-  // console.log(categoryId)
   await DeleteCategory(categoryId)
   setCategories()
 }
