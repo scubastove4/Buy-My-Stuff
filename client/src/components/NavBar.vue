@@ -8,14 +8,19 @@
     >
     <router-link v-else to="/login" name="Login">Login</router-link>
     <router-link v-if="user" to="/cart" name="Cart">Cart</router-link>
+    <router-link v-if="user" to="/login" name="Logout" @click="$emit('logout')"
+      >Logout</router-link
+    >
   </nav>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
-const props = defineProps(['user'])
-console.log(props.user)
+defineProps(['user'])
+defineEmits(['logout'])
+
+// console.log(user)
 </script>
 
 <style>

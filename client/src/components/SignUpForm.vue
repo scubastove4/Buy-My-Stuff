@@ -9,7 +9,7 @@
         placeholder="Michael"
         :value="signUpValues.firstName"
         @input="
-          $emit('setSignUpFormValues', $event.target.name, $event.target.value)
+          $emit('setSignUpValues', $event.target.name, $event.target.value)
         "
         required
       />
@@ -23,7 +23,7 @@
         placeholder="michael@michael.com"
         :value="signUpValues.email"
         @input="
-          $emit('setSignUpFormValues', $event.target.name, $event.target.value)
+          $emit('setSignUpValues', $event.target.name, $event.target.value)
         "
         required
       />
@@ -37,7 +37,7 @@
         placeholder="Minimum 8 characters"
         :value="signUpValues.password"
         @input="
-          $emit('setSignUpFormValues', $event.target.name, $event.target.value)
+          $emit('setSignUpValues', $event.target.name, $event.target.value)
         "
         minLength="8"
         required
@@ -52,7 +52,7 @@
         placeholder="Must match"
         :value="signUpValues.confirmPassword"
         @input="
-          $emit('setSignUpFormValues', $event.target.name, $event.target.value)
+          $emit('setSignUpValues', $event.target.name, $event.target.value)
         "
         required
       />
@@ -75,4 +75,8 @@
   </form>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps } from 'vue'
+
+defineProps(['signUpValues', 'setSignUpValues'])
+</script>
