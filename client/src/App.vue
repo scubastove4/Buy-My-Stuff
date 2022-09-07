@@ -2,28 +2,26 @@
   <div>
     <NavBar :user="user" />
     <main>
-      <router-view header="Buy My Stuff"></router-view>
+      <router-view
+        header="Buy My Stuff"
+        :user="user"
+        @setUser="setUser"
+      ></router-view>
     </main>
     <Footer />
   </div>
 </template>
 
-<script>
+<script setup>
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 
-export default {
-  name: 'App',
-  components: {
-    NavBar,
-    Footer
-  }
-  // data: () => ({
-  //   user: {
-  //     name: 'user1',
-  //     id: 1
-  //   }
-  // })
+import { ref } from 'vue'
+
+const user = ref(null)
+
+function setUser(payload) {
+  user.value = payload
 }
 </script>
 

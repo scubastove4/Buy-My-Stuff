@@ -10,19 +10,19 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import CategoryCard from '../components/CategoryCard.vue'
+import { GetCategories } from '../services/CategoryReq'
 
 const router = useRouter()
 // const route = useRoute() useRoute
 
 const categories = ref([])
 
-async function getCategories() {
-  const res = await axios.get('http://localhost:3001/api/category')
-  categories.value = res.data
+async function setCategories() {
+  const data = await GetCategories()
+  categories.value = data
   console.log(categories)
 }
 
@@ -30,7 +30,7 @@ function selectCategory(categoryId) {
   router.push(`/categories/${categoryId}`)
 }
 
-onMounted(getCategories)
+onMounted(setCategories)
 </script>
 
 <style></style>
