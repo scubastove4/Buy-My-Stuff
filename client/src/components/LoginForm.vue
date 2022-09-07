@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="login" id="login-form">
+  <form @submit.prevent="$emit('login')" id="login-form">
     <span>
       <label for="login-email">Email</label>
       <input

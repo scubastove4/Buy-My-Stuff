@@ -1,19 +1,23 @@
 import Client from './api'
 
-export const SignUpUser = async (data) => {
+export const SignUpCustomer = async (data) => {
   try {
-    const res = await Client.post('/user/sign_up', data)
+    const res = await Client.post('/customer/sign_up', data)
     return res.data
   } catch (e) {
     console.error(e)
   }
 }
 
-export const LoginUser = async (data) => {
+export const LoginCustomer = async (data) => {
   try {
-    const res = await Client.post('/user/login', data)
+    const res = await Client.post('/customer/login', {
+      email: data.value.email,
+      password: data.value.password
+    })
     localStorage.setItem('token', res.data.token)
-    return res.data.user
+    // console.log(res.data.customer)
+    return res.data.customer
   } catch (e) {
     console.error(e)
   }
@@ -21,7 +25,7 @@ export const LoginUser = async (data) => {
 
 export const CheckSession = async () => {
   try {
-    const res = await Client.get('/user/session')
+    const res = await Client.get('/customer/session')
     return res.data
   } catch (e) {
     console.error(e)
@@ -30,7 +34,7 @@ export const CheckSession = async () => {
 
 export const ChangePassword = async (data) => {
   try {
-    const res = await Client.put('/user/profile', data)
+    const res = await Client.put('/customer/profile', data)
     return res.data
   } catch (e) {
     console.error(e)

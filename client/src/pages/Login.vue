@@ -9,14 +9,13 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import LoginForm from '../components/LoginForm.vue'
-import { LoginUser } from '../services/AuthReq'
+import { LoginCustomer } from '../services/AuthReq'
 
 const router = useRouter()
 
-defineProps(['user'])
 const emit = defineEmits(['setUser'])
 
 const loginValues = ref({
@@ -38,7 +37,9 @@ function resetLoginValues() {
 }
 
 async function login() {
-  const payload = await LoginUser(loginValues)
+  // console.log(loginValues)
+  const payload = await LoginCustomer(loginValues)
+  // console.log(payload)
   emit('setUser', payload)
   resetLoginValues()
   router.push('/')
