@@ -27,20 +27,18 @@ export const PostCategory = async (data) => {
   }
 }
 
-export const DeleteCategory = async (categoryId) => {
+export const UpdateCategory = async (categoryId, data) => {
   try {
-    const res = await Client.delete(`/category/${categoryId}`)
+    const res = await Client.put(`/category/${categoryId}`, data)
     return res.data
   } catch (e) {
     console.error(e)
   }
 }
 
-export const UpdateCategory = async (categoryId, data) => {
+export const DeleteCategory = async (categoryId) => {
   try {
-    // console.log(categoryId, data)
-    const res = await Client.put(`/category/${categoryId}`, data)
-    return res.data
+    await Client.delete(`/category/${categoryId}`)
   } catch (e) {
     console.error(e)
   }

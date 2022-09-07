@@ -36,7 +36,7 @@
         />
         <span v-if="user.isAdmin">
           <button @click="setEditingCategory(category)">Edit Category</button>
-          <button>Delete Category</button>
+          <button @click="deleteCategory(category.id)">Delete Category</button>
         </span>
       </div>
     </section>
@@ -51,7 +51,8 @@ import CategoryForm from '../components/CategoryForm.vue'
 import {
   GetCategories,
   PostCategory,
-  UpdateCategory
+  UpdateCategory,
+  DeleteCategory
 } from '../services/CategoryReq'
 
 defineProps(['user'])
@@ -117,9 +118,7 @@ function changeEditingCategoryValues(name, val) {
 }
 async function submitEditingCategoryForm() {
   let category = { ...editingCategory.value }
-  // console.log(category)
-  let updatedCategory = await UpdateCategory(editingCategory.value.id, category)
-  console.log(updatedCategory)
+  await UpdateCategory(editingCategory.value.id, category)
   setCategories()
   editing.value = false
   editingCategory.value = {
@@ -127,6 +126,13 @@ async function submitEditingCategoryForm() {
     description: '',
     id: 0
   }
+}
+
+/////////////  delete category  /////////////
+async function deleteCategory(categoryId) {
+  // console.log(categoryId)
+  await DeleteCategory(categoryId)
+  setCategories()
 }
 </script>
 
