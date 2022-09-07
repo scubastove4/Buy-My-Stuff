@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="user">
     <button v-if="user.isAdmin" @click="changeAddingCategory">
       Add Category
     </button>
