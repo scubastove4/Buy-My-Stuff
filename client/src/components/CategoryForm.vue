@@ -1,5 +1,43 @@
 <template>
-  <form @submit.prevent="$emit('submitNewCategoryForm', user)">
+  <form v-if="editing" @submit.prevent="$emit('submitEditingCategoryForm')">
+    <span>
+      <label for="edit-category-name">Name</label>
+      <input
+        type="text"
+        id="edit-category-name"
+        name="name"
+        :value="editingCategory.name"
+        @input="
+          $emit(
+            'changeEditingCategoryValues',
+            $event.target.name,
+            $event.target.value
+          )
+        "
+        required
+      />
+    </span>
+    <span>
+      <label for="edit-category-description">Description</label>
+      <textarea
+        id="edit-category-description"
+        name="description"
+        :value="editingCategory.description"
+        @input="
+          $emit(
+            'changeEditingCategoryValues',
+            $event.target.name,
+            $event.target.value
+          )
+        "
+        required
+      ></textarea>
+    </span>
+    <button type="submit" :disabled="!editingCategory.name">
+      Edit Category
+    </button>
+  </form>
+  <form v-else @submit.prevent="$emit('submitNewCategoryForm', user)">
     <span>
       <label for="add-category-name">Name</label>
       <input
@@ -34,6 +72,11 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue'
 
-defineProps(['user', 'newCategoryValues'])
-defineEmits(['setNewCategoryValues', 'submitNewCategoryForm'])
+defineProps(['user', 'newCategoryValues', 'editing', 'editingCategory'])
+defineEmits([
+  'setNewCategoryValues',
+  'submitNewCategoryForm',
+  'changeEditingCategoryValues',
+  'submitEditingCategoryForm'
+])
 </script>

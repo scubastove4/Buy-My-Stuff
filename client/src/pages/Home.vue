@@ -7,9 +7,13 @@
       v-if="addingCategory"
       :user="user"
       :newCategoryValues="newCategoryValues"
+      :editing="editing"
+      :editingCategory="editingCategory"
       @setNewCategoryValues="setNewCategoryValues"
       @resetNewCategoryValues="resetNewCategoryValues"
       @submitNewCategoryForm="submitNewCategoryForm"
+      @changeEditingCategoryValues="changeEditingCategoryValues"
+      @submitEditingCategoryForm="submitEditingCategoryForm"
     />
     <section v-if="categories">
       <div v-for="category in categories" :key="category.id">
@@ -17,9 +21,13 @@
           v-if="editing && category.id === editingCategory.id"
           :user="user"
           :newCategoryValues="newCategoryValues"
+          :editing="editing"
+          :editingCategory="editingCategory"
           @setNewCategoryValues="setNewCategoryValues"
           @resetNewCategoryValues="resetNewCategoryValues"
           @submitNewCategoryForm="submitNewCategoryForm"
+          @changeEditingCategoryValues="changeEditingCategoryValues"
+          @submitEditingCategoryForm="submitEditingCategoryForm"
         />
         <CategoryCard
           v-else
@@ -40,7 +48,11 @@ import { onMounted, ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import CategoryCard from '../components/CategoryCard.vue'
 import CategoryForm from '../components/CategoryForm.vue'
-import { GetCategories, PostCategory } from '../services/CategoryReq'
+import {
+  GetCategories,
+  PostCategory,
+  UpdateCategory
+} from '../services/CategoryReq'
 
 defineProps(['user'])
 
@@ -49,16 +61,13 @@ const router = useRouter()
 
 /////////////  get all categories  /////////////
 const categories = ref([])
-
 async function setCategories() {
   const data = await GetCategories()
   categories.value = data
 }
-
 function selectCategory(categoryId) {
   router.push(`/categories/${categoryId}`)
 }
-
 onMounted(setCategories)
 
 /////////////  add new category  /////////////
@@ -102,6 +111,22 @@ function setEditingCategory(category) {
   editingCategory.value.name = category.name
   editingCategory.value.description = category.description
   editingCategory.value.id = category.id
+}
+function changeEditingCategoryValues(name, val) {
+  editingCategory.value[name] = val
+}
+async function submitEditingCategoryForm() {
+  let category = { ...editingCategory.value }
+  // console.log(category)
+  let updatedCategory = await UpdateCategory(editingCategory.value.id, category)
+  console.log(updatedCategory)
+  setCategories()
+  editing.value = false
+  editingCategory.value = {
+    name: '',
+    description: '',
+    id: 0
+  }
 }
 </script>
 

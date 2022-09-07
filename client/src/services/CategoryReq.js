@@ -38,6 +38,7 @@ export const DeleteCategory = async (categoryId) => {
 
 export const UpdateCategory = async (categoryId, data) => {
   try {
+    // console.log(categoryId, data)
     const res = await Client.put(`/category/${categoryId}`, data)
     return res.data
   } catch (e) {
