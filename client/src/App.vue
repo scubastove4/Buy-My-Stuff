@@ -25,6 +25,8 @@ const user = ref(null)
 
 function setUser(payload) {
   user.value = payload
+  if (user.value.isAdmin === 'false') user.value.isAdmin = false
+  // JSON.parse(user.value.isAdmin)
 }
 
 async function checkToken() {

@@ -2,15 +2,19 @@
   <nav>
     <router-link to="/" name="Home">Home</router-link>
     <router-link to="/items" name="Items">Items</router-link>
-
-    <router-link v-if="user" :to="`/profile/${user.id}`" name="Profile"
-      >Profile</router-link
-    >
+    <span v-if="user">
+      <router-link :to="`/profile/${user.id}`" name="Profile"
+        >Profile</router-link
+      >
+      <router-link v-if="user.isAdmin" to="/users" name="Users"
+        >Users</router-link
+      >
+      <router-link v-else to="/cart" name="Cart">Cart</router-link>
+      <router-link to="/login" name="Logout" @click="$emit('logout')"
+        >Logout</router-link
+      >
+    </span>
     <router-link v-else to="/login" name="Login">Login</router-link>
-    <router-link v-if="user" to="/cart" name="Cart">Cart</router-link>
-    <router-link v-if="user" to="/login" name="Logout" @click="$emit('logout')"
-      >Logout</router-link
-    >
   </nav>
 </template>
 
