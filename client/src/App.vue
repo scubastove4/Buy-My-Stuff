@@ -1,12 +1,11 @@
 <template>
   <div>
-    <NavBar :user="user" />
+    <NavBar :user="user" @logout="logout" />
     <main>
       <router-view
         header="Buy My Stuff"
         :user="user"
         @setUser="setUser"
-        @logout="logout"
       ></router-view>
     </main>
     <Footer />
@@ -17,9 +16,10 @@
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 
-import { ref } from 'vue'
-import { CheckCustomerSession } from './services/CustomerReq'
-import { CheckAdminSession } from './services/AdminReq'
+import { ref, onBeforeMount } from 'vue'
+// import { CheckCustomerSession } from './services/CustomerReq'
+// import { CheckAdminSession } from './services/AdminReq'
+import { CheckSession } from './services/CheckSessionReq'
 
 const user = ref(null)
 
@@ -28,23 +28,19 @@ function setUser(payload) {
 }
 
 async function checkToken() {
-  let userCheck
-  if (user.isAdmin) {
-    userCheck = await CheckAdminSession()
-  } else {
-    userCheck = await CheckCustomerSession()
-  }
+  const userCheck = await CheckSession()
   setUser(userCheck)
 }
 
-const logout = () => {
+function logout() {
   user.value = null
   localStorage.clear()
 }
-onMounted = (checkToken) => {
+
+onBeforeMount(() => {
   const token = localStorage.getItem('token')
   if (token) checkToken()
-}
+})
 </script>
 
 <style></style>

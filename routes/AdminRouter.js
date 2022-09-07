@@ -5,7 +5,7 @@ const middleware = require('../middleware')
 router.get(
   '/session',
   middleware.AdminMiddleware.stripToken,
-  middleware.AdminMiddleware.verifyToken,
+  middleware.CheckSessionMiddleware.verifySessionToken,
   controllers.AdminController.CheckSession
 )
 

@@ -1,5 +1,4 @@
 import Client from './api'
-import { user } from '../App.vue'
 
 export const SignUpCustomer = async (data) => {
   try {
@@ -28,19 +27,14 @@ export const LoginCustomer = async (data) => {
   }
 }
 
-export const CheckCustomerSession = async () => {
-  try {
-    let res
-    if (user.value.isAdmin) {
-      res = await Client.get('/admin/session')
-    } else {
-      res = await Client.get('/customer/session')
-    }
-    return res.data
-  } catch (e) {
-    console.error(e)
-  }
-}
+// export const CheckCustomerSession = async () => {
+//   try {
+//     const res = await Client.get('/customer/session')
+//     return res.data
+//   } catch (e) {
+//     console.error(e)
+//   }
+// }
 
 export const ChangeCustomerPassword = async (data) => {
   try {
