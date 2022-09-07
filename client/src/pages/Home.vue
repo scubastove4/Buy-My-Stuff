@@ -12,8 +12,8 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
-import CategoryCard from '../components/CategoryCard.vue'
 import { useRouter } from 'vue-router'
+import CategoryCard from '../components/CategoryCard.vue'
 
 const router = useRouter()
 // const route = useRoute() useRoute

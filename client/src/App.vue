@@ -17,13 +17,13 @@ export default {
   components: {
     NavBar,
     Footer
-  },
-  data: () => ({
-    user: {
-      name: 'user1',
-      id: 1
-    }
-  })
+  }
+  // data: () => ({
+  //   user: {
+  //     name: 'user1',
+  //     id: 1
+  //   }
+  // })
 }
 </script>
 

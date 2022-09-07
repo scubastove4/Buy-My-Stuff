@@ -1,8 +1,8 @@
 <template>
-  <nav>
+  <footer>
     <router-link to="/contact" name="Contact">Contact</router-link>
     <!-- <router-link to="/" name="Home">Home</router-link> -->
-  </nav>
+  </footer>
 </template>
 
 <script>

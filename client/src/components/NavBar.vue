@@ -1,12 +1,13 @@
 <template>
-  <nav v-if="user">
+  <nav>
     <router-link to="/" name="Home">Home</router-link>
     <router-link to="/items" name="Items">Items</router-link>
-    <router-link to="/login" name="Login">Login</router-link>
-    <router-link to="/cart" name="Cart">Cart</router-link>
-    <router-link :to="`/profile/${user.id}`" name="Profile"
+
+    <router-link v-if="user" :to="`/profile/${user.id}`" name="Profile"
       >Profile</router-link
     >
+    <router-link v-else to="/login" name="Login">Login</router-link>
+    <router-link v-if="user" to="/cart" name="Cart">Cart</router-link>
   </nav>
 </template>
 
@@ -22,12 +23,14 @@ console.log(props.user)
   color: #fff;
 }
 
-nav {
+nav,
+footer {
   background: #42b983;
   padding: 1em;
 }
 
-nav a {
+nav a,
+footer a {
   margin: 1em;
   color: #2c3e50;
   text-decoration: none;
