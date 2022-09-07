@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="$emit('submitNewCategoryForm', user)">
     <span>
       <label for="add-category-name">Name</label>
       <input
@@ -8,7 +8,7 @@
         name="name"
         :value="newCategoryValues.name"
         @input="
-          $emit('setnewCategoryValues', $event.target.name, $event.target.value)
+          $emit('setNewCategoryValues', $event.target.name, $event.target.value)
         "
         required
       />
@@ -20,23 +20,20 @@
         name="description"
         :value="newCategoryValues.description"
         @input="
-          $emit('setnewCategoryValues', $event.target.name, $event.target.value)
+          $emit('setNewCategoryValues', $event.target.name, $event.target.value)
         "
         required
       ></textarea>
     </span>
-    <button
-      type="submit"
-      :disabled="!newCategoryValues.name || !newCategoryValues.description"
-    >
-      Login
+    <button type="submit" :disabled="!newCategoryValues.name">
+      Add Category
     </button>
   </form>
-  <!-- <h2>Hi there</h2> -->
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
-defineProps(['newCategoryValues'])
+defineProps(['user', 'newCategoryValues'])
+defineEmits(['setNewCategoryValues', 'submitNewCategoryForm'])
 </script>

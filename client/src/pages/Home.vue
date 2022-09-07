@@ -5,6 +5,7 @@
     </button>
     <CategoryForm
       v-if="addingCategory"
+      :user="user"
       :newCategoryValues="newCategoryValues"
       @setNewCategoryValues="setNewCategoryValues"
       @resetNewCategoryValues="resetNewCategoryValues"
@@ -26,7 +27,7 @@ import { onMounted, ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import CategoryCard from '../components/CategoryCard.vue'
 import CategoryForm from '../components/CategoryForm.vue'
-import { GetCategories } from '../services/CategoryReq'
+import { GetCategories, PostCategory } from '../services/CategoryReq'
 
 defineProps(['user'])
 
@@ -52,8 +53,14 @@ function resetNewCategoryValues() {
     name: '',
     description: ''
   }
+  changeAddingCategory()
 }
-async function submitNewCategoryForm() {}
+async function submitNewCategoryForm(user) {
+  let category = { ...newCategoryValues.value, adminId: user.id }
+  await PostCategory(category)
+  resetNewCategoryValues()
+  setCategories()
+}
 
 /////////////  get all categories  /////////////
 const categories = ref([])
@@ -61,7 +68,6 @@ const categories = ref([])
 async function setCategories() {
   const data = await GetCategories()
   categories.value = data
-  console.log(categories)
 }
 
 function selectCategory(categoryId) {

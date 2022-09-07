@@ -11,8 +11,8 @@ export const GetCategories = async () => {
 
 export const GetCategoryById = async (categoryId) => {
   try {
-    const response = await Client.get(`/category/${categoryId}`)
-    return response.data
+    const res = await Client.get(`/category/${categoryId}`)
+    return res.data
   } catch (e) {
     console.error(e)
   }
@@ -20,8 +20,8 @@ export const GetCategoryById = async (categoryId) => {
 
 export const PostCategory = async (data) => {
   try {
-    const response = await Client.post('/category/', data)
-    return response.data
+    const res = await Client.post('/category/', data)
+    return res.data
   } catch (e) {
     console.error(e)
   }
@@ -29,8 +29,8 @@ export const PostCategory = async (data) => {
 
 export const DeleteCategory = async (categoryId) => {
   try {
-    const response = await Client.delete(`/feats/${categoryId}`)
-    return response.data
+    const res = await Client.delete(`/category/${categoryId}`)
+    return res.data
   } catch (e) {
     console.error(e)
   }
