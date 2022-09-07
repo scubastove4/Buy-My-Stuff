@@ -21,7 +21,7 @@ import { ref, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import SignUpForm from '../components/SignUpForm.vue'
 import LoginForm from '../components/LoginForm.vue'
-import { SignUpCustomer, LoginCustomer } from '../services/AuthReq'
+import { SignUpCustomer, LoginCustomer } from '../services/CustomerReq'
 
 const router = useRouter()
 

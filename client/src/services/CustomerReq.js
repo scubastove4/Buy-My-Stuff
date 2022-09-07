@@ -28,7 +28,7 @@ export const LoginCustomer = async (data) => {
   }
 }
 
-export const CheckSession = async () => {
+export const CheckCustomerSession = async () => {
   try {
     let res
     if (user.value.isAdmin) {
@@ -42,7 +42,7 @@ export const CheckSession = async () => {
   }
 }
 
-export const ChangePassword = async (data) => {
+export const ChangeCustomerPassword = async (data) => {
   try {
     const res = await Client.put('/customer/profile', data)
     return res.data
