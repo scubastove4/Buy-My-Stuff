@@ -2,7 +2,11 @@ import Client from './api'
 
 export const SignUpCustomer = async (data) => {
   try {
-    const res = await Client.post('/customer/sign_up', data)
+    const res = await Client.post('/customer/sign_up', {
+      firstName: data.value.firstName,
+      email: data.value.email,
+      password: data.value.password
+    })
     return res.data
   } catch (e) {
     console.error(e)
