@@ -2,12 +2,12 @@ const router = require('express').Router()
 const controllers = require('../controllers')
 const middleware = require('../middleware')
 
-router.get(
-  '/session',
-  middleware.CustomerMiddleware.stripToken,
-  middleware.CheckSessionMiddleware.verifySessionToken,
-  controllers.CustomerController.CheckSession
-)
+// router.get(
+//   '/session',
+//   middleware.CustomerMiddleware.stripToken,
+//   middleware.CheckSessionMiddleware.verifySessionToken,
+//   controllers.CustomerController.CheckSession
+// )
 
 router.post('/sign_up', controllers.CustomerController.SignUp)
 router.post('/login', controllers.CustomerController.Login)

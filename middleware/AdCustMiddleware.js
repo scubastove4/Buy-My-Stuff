@@ -16,6 +16,19 @@ const verifySessionToken = (req, res, next) => {
   res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
 }
 
+const stripToken = (req, res, next) => {
+  try {
+    const token = req.headers['authorization'].split(' ')[1]
+    if (token) {
+      res.locals.token = token
+      return next()
+    }
+  } catch (e) {
+    res
+  }
+}
+
 module.exports = {
-  verifySessionToken
+  verifySessionToken,
+  stripToken
 }

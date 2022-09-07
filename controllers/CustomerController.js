@@ -97,10 +97,10 @@ const ChangePassword = async (req, res) => {
   }
 }
 
-const CheckSession = async (req, res) => {
-  const { payload } = res.locals
-  res.send(payload)
-}
+// const CheckSession = async (req, res) => {
+//   const { payload } = res.locals
+//   res.send(payload)
+// }
 
 const DeleteCustomer = async (req, res) => {
   try {
@@ -120,6 +120,6 @@ module.exports = {
   Login,
   ChangeEmail,
   ChangePassword,
-  CheckSession,
+  // CheckSession,
   DeleteCustomer
 }
