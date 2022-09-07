@@ -11,14 +11,27 @@
       @resetNewCategoryValues="resetNewCategoryValues"
       @submitNewCategoryForm="submitNewCategoryForm"
     />
-    <div v-if="categories">
-      <CategoryCard
-        v-for="category in categories"
-        :key="category.id"
-        :category="category"
-        @click="selectCategory(category.id)"
-      />
-    </div>
+    <section v-if="categories">
+      <div v-for="category in categories" :key="category.id">
+        <CategoryForm
+          v-if="editing && category.id === editingCategory.id"
+          :user="user"
+          :newCategoryValues="newCategoryValues"
+          @setNewCategoryValues="setNewCategoryValues"
+          @resetNewCategoryValues="resetNewCategoryValues"
+          @submitNewCategoryForm="submitNewCategoryForm"
+        />
+        <CategoryCard
+          v-else
+          :category="category"
+          @click="selectCategory(category.id)"
+        />
+        <span v-if="user.isAdmin">
+          <button @click="setEditingCategory(category)">Edit Category</button>
+          <button>Delete Category</button>
+        </span>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -33,6 +46,20 @@ defineProps(['user'])
 
 const router = useRouter()
 // const route = useRoute() useRoute
+
+/////////////  get all categories  /////////////
+const categories = ref([])
+
+async function setCategories() {
+  const data = await GetCategories()
+  categories.value = data
+}
+
+function selectCategory(categoryId) {
+  router.push(`/categories/${categoryId}`)
+}
+
+onMounted(setCategories)
 
 /////////////  add new category  /////////////
 const addingCategory = ref(false)
@@ -62,19 +89,20 @@ async function submitNewCategoryForm(user) {
   setCategories()
 }
 
-/////////////  get all categories  /////////////
-const categories = ref([])
+/////////////  edit category  /////////////
+const editing = ref(false)
+const editingCategory = ref({
+  name: '',
+  description: '',
+  id: 0
+})
 
-async function setCategories() {
-  const data = await GetCategories()
-  categories.value = data
+function setEditingCategory(category) {
+  editing.value = true
+  editingCategory.value.name = category.name
+  editingCategory.value.description = category.description
+  editingCategory.value.id = category.id
 }
-
-function selectCategory(categoryId) {
-  router.push(`/categories/${categoryId}`)
-}
-
-onMounted(setCategories)
 </script>
 
 <style></style>
