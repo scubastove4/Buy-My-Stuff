@@ -7,6 +7,7 @@ import Contact from './pages/Contact.vue'
 import Login from './pages/Login.vue'
 import Cart from './pages/Cart.vue'
 import Profile from './pages/Profile.vue'
+import AdminLogin from './pages/AdminLogin.vue'
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
@@ -20,7 +21,8 @@ const routes = [
   { path: '/contact', component: Contact, name: 'Contact' },
   { path: '/login', component: Login, name: 'Login' },
   { path: '/cart', component: Cart, name: 'Cart' },
-  { path: '/profile/:user_id', component: Profile, name: 'Profile' }
+  { path: '/profile/:user_id', component: Profile, name: 'Profile' },
+  { path: '/admin', component: AdminLogin, name: 'AdminLogin' }
 ]
 
 const router = createRouter({
