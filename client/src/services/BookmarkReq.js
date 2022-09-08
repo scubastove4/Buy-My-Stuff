@@ -1,24 +1,17 @@
-export const PostCategory = async (data) => {
+import Client from './api'
+
+export const PostBookmark = async (data) => {
   try {
-    const res = await Client.post('/category/', data)
+    const res = await Client.post('/bookmark/', data.value)
     return res.data
   } catch (e) {
     console.error(e)
   }
 }
 
-export const UpdateCategory = async (categoryId, data) => {
+export const DeleteBookmark = async (bookmarkId) => {
   try {
-    const res = await Client.put(`/category/${categoryId}`, data)
-    return res.data
-  } catch (e) {
-    console.error(e)
-  }
-}
-
-export const DeleteCategory = async (categoryId) => {
-  try {
-    await Client.delete(`/category/${categoryId}`)
+    await Client.delete(`/bookmark/${bookmarkId}`)
   } catch (e) {
     console.error(e)
   }

@@ -1,3 +1,5 @@
+import Client from './api'
+
 export const PostCategory = async (data) => {
   try {
     const res = await Client.post('/category/', data)
