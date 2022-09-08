@@ -166,9 +166,7 @@ async function submitEditingItemForm(user) {
 function handleEditImage(upload) {
   const file = upload[0]
   if (file) {
-    console.log(file)
-    // editingItem.value.image = file
-    // console.log(newItemValues.value, newItemValues.value.image)
+    editingItem.value.image = file
   }
   // else {
   //   editingItem.value.image = null don't need?

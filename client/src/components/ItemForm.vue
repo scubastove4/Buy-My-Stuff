@@ -1,9 +1,13 @@
 <template>
   <!-- ////////    edit item form     //////////// -->
-  <form v-if="editing" @submit.prevent="$emit('submitEditingItemForm', user)">
+  <form
+    v-if="editing"
+    @submit.prevent="$emit('submitEditingItemForm', user)"
+    encType="multipart/form-data"
+  >
     <!-- action="/update"
         method="PUT"
-        encType="multipart/form-data" -->
+         -->
     <span>
       <!-- <label for="edit-item-name">Name</label> -->
       <select

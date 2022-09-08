@@ -36,7 +36,15 @@ export const PostItem = async (data) => {
 
 export const UpdateItem = async (itemId, data) => {
   try {
-    const res = await Client.put(`/item/${itemId}`, data)
+    // console.log(data)
+    let formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('image', data.image)
+    formData.append('price', data.price)
+    formData.append('description', data.description)
+    formData.append('categoryId', data.categoryId)
+    formData.append('adminId', data.adminId)
+    const res = await Client.put(`/item/${itemId}`, formData)
     return res.data
   } catch (e) {
     console.error(e)
