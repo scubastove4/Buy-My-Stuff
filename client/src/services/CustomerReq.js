@@ -20,21 +20,11 @@ export const LoginCustomer = async (data) => {
       password: data.value.password
     })
     localStorage.setItem('token', res.data.token)
-    // console.log(res.data.customer)
     return res.data.customer
   } catch (e) {
     console.error(e)
   }
 }
-
-// export const CheckCustomerSession = async () => {
-//   try {
-//     const res = await Client.get('/customer/session')
-//     return res.data
-//   } catch (e) {
-//     console.error(e)
-//   }
-// }
 
 export const ChangeCustomerPassword = async (data) => {
   try {

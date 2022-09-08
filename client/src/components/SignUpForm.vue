@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="" id="sign-up-form">
+  <form @submit.prevent="$emit('signUp')" id="sign-up-form">
     <span>
       <label for="sign-up-name">First Name:</label>
       <input
@@ -27,6 +27,7 @@
         "
         required
       />
+      <p v-if="newCustomer">{{ newCustomer.msg && newCustomer.msg }}</p>
     </span>
     <span>
       <label for="sign-up-password">Password:</label>
@@ -60,10 +61,7 @@
     <button
       type="submit"
       :disabled="
-        !signUpValues.name ||
-        !signUpValues.age ||
-        !signUpValues.location ||
-        !signUpValues.username ||
+        !signUpValues.firstName ||
         !signUpValues.email ||
         !signUpValues.password ||
         !signUpValues.confirmPassword ||
@@ -76,7 +74,8 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
-defineProps(['signUpValues', 'setSignUpValues'])
+defineProps(['signUpValues', 'setSignUpValues', 'newCustomer'])
+defineEmits(['setSignUpValues', 'signUp'])
 </script>

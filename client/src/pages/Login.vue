@@ -9,6 +9,7 @@
     <SignUpForm
       v-else
       :signUpValues="signUpValues"
+      :newCustomer="newCustomer"
       @setSignUpValues="setSignUpValues"
       @signUp="signUp"
     />
@@ -30,7 +31,7 @@ const emit = defineEmits(['setUser'])
 
 ////////////   determine what form will show - default is sign up
 const upOrIn = ref(true)
-const upOrInText = ref('Cllick here to sign up')
+const upOrInText = ref('Click here to sign up')
 function setUpOrIn() {
   if (upOrIn.value) {
     upOrIn.value = false
@@ -56,9 +57,7 @@ function resetLoginValues() {
   }
 }
 async function login() {
-  // console.log(loginValues)
   const payload = await LoginCustomer(loginValues)
-  // console.log(payload)
   emit('setUser', payload)
   resetLoginValues()
   router.push('/')
@@ -71,6 +70,7 @@ const signUpValues = ref({
   password: '',
   confirmPassword: ''
 })
+const newCustomer = ref(null)
 function setSignUpValues(name, val) {
   signUpValues.value[name] = val
 }
@@ -83,11 +83,10 @@ function resetSignUpValues() {
   }
 }
 async function signUp() {
-  if (
-    signUpValues.value.password !== '' &&
-    signUpValues.value.password === signUpValues.value.confirmPassword
-  ) {
-    await SignUpCustomer(signUpValues)
+  newCustomer.value = await SignUpCustomer(signUpValues)
+  if (newCustomer.value.msg) {
+    return newCustomer.value.msg
+  } else {
     resetSignUpValues()
     setUpOrIn()
   }

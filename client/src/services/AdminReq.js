@@ -27,15 +27,6 @@ export const LoginAdmin = async (data) => {
   }
 }
 
-// export const CheckAdminSession = async () => {
-//   try {
-//     const res = await Client.get('/admin/session')
-//     return res.data
-//   } catch (e) {
-//     console.error(e)
-//   }
-// }
-
 export const ChangeAdminPassword = async (data) => {
   try {
     const res = await Client.put('/admin/profile', data)
