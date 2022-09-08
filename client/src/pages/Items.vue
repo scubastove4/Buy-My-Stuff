@@ -35,15 +35,18 @@
           @handleEditImage="handleEditImage"
         />
         <!-- @resetNewItemValues="resetNewItemValues" -->
-        <ItemCard v-else :item="item" @click="selectItem(item.id)" />
-        <span v-if="user">
-          <button v-if="user.isAdmin" @click="setEditingItem(item)">
-            Edit Item
-          </button>
-          <button v-if="user.isAdmin" @click="deleteItem(item.id)">
-            Delete Item
-          </button>
-        </span>
+        <div v-else>
+          <ItemCard :item="item" @click="selectItem(item.id)" />
+          <CartAndSaveButtons :item="item" :user="user" />
+          <span v-if="user">
+            <button v-if="user.isAdmin" @click="setEditingItem(item)">
+              Edit Item
+            </button>
+            <button v-if="user.isAdmin" @click="deleteItem(item.id)">
+              Delete Item
+            </button>
+          </span>
+        </div>
       </div>
     </section>
   </main>
@@ -52,10 +55,12 @@
 <script setup>
 import { onMounted, ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
-import ItemCard from '../components/ItemCard.vue'
-import ItemForm from '../components/ItemForm.vue'
+
 import { GetItems, PostItem, UpdateItem, DeleteItem } from '../services/ItemReq'
 import { GetCategories } from '../services/CategoryReq'
+import ItemForm from '../components/ItemForm.vue'
+import ItemCard from '../components/ItemCard.vue'
+import CartAndSaveButtons from '../components/CartAndSaveButtons.vue'
 
 defineProps(['user'])
 

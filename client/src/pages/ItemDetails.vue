@@ -5,10 +5,6 @@
     <h2>${{ item.price }}</h2>
     <h3 v-if="item.description">{{ item.description }}</h3>
     <CartAndSaveButtons :item="item" :user="user" />
-    <!-- <div v-if="user">
-      <button v-if="!user.isAdmin">Add to Cart</button>
-      <button v-if="!user.isAdmin">Save for Later</button>
-    </div> -->
   </main>
 </template>
 

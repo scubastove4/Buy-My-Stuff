@@ -4,10 +4,7 @@
     <section v-if="category.category_items">
       <div v-for="item in category.category_items" :key="item.id">
         <ItemCard :item="item" @click="selectItem(item.id)" />
-        <div v-if="user">
-          <button v-if="!user.isAdmin">Add to Cart</button>
-          <button v-if="!user.isAdmin">Save for Later</button>
-        </div>
+        <CartAndSaveButtons :item="item" :user="user" />
       </div>
     </section>
   </main>
@@ -19,6 +16,7 @@ import { useRouter, useRoute } from 'vue-router'
 
 import { GetCategoryById } from '../services/CategoryReq'
 import ItemCard from '../components/ItemCard.vue'
+import CartAndSaveButtons from '../components/CartAndSaveButtons.vue'
 
 defineProps(['user'])
 

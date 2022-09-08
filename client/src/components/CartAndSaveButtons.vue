@@ -30,6 +30,4 @@ async function AddBookmark(customerId, itemId) {
     itemId: null
   }
 }
-
-// onMounted(getCategoryDetails)
 </script>
