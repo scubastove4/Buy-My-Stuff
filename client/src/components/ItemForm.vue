@@ -6,7 +6,6 @@
       <select
         id="edit-item-category"
         name="categoryId"
-        :value="editingItem.categoryId"
         @input="
           $emit(
             'changeEditingItemValues',
@@ -20,6 +19,7 @@
           v-for="category in categories"
           :key="category.id"
           :value="category.id"
+          :selected="editingItem.categoryId === category.id && true"
         >
           {{ category.name }}
         </option>
@@ -114,7 +114,7 @@
         "
         required
       >
-        <option disabled value="" hidden>Select Category</option>
+        <option hidden>Select Category</option>
         <option
           v-for="category in categories"
           :key="category.id"
