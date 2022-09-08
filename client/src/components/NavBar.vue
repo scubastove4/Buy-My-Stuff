@@ -9,7 +9,9 @@
       <router-link v-if="user.isAdmin" to="/users" name="Users"
         >Users</router-link
       >
-      <router-link v-else to="/cart" name="Cart">Cart</router-link>
+      <router-link v-else :to="`/cart/${user.id}`" name="Cart"
+        >Cart</router-link
+      >
       <router-link to="/login" name="Logout" @click="$emit('logout')"
         >Logout</router-link
       >

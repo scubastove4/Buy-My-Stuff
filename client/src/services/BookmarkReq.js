@@ -1,5 +1,9 @@
 import Client from './api'
 
+export const GetCartByUserId = async (data) => {
+  console.log(data)
+}
+
 export const PostBookmark = async (data) => {
   try {
     const res = await Client.post('/bookmark/', data.value)

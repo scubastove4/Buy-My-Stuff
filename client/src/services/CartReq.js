@@ -1,5 +1,15 @@
 import Client from './api'
 
+export const GetCartByCustomerId = async (customerId) => {
+  try {
+    const res = await Client.get(`/cart/${customerId}`)
+    // console.log(res.data)
+    return res.data
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export const PostCart = async (data) => {
   try {
     const res = await Client.post('/cart/', data.value)

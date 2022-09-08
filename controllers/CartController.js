@@ -1,5 +1,16 @@
 const { Cart } = require('../models')
 
+const GetCustomerCart = async (req, res) => {
+  try {
+    const cart = await Cart.findAll({
+      where: { customerId: req.params.customer_id }
+    })
+    res.send(cart)
+  } catch (error) {
+    throw error
+  }
+}
+
 const CreateCart = async (req, res) => {
   try {
     const createdCart = await Cart.create({
@@ -26,6 +37,7 @@ const DeleteCart = async (req, res) => {
 }
 
 module.exports = {
+  GetCustomerCart,
   CreateCart,
   DeleteCart
 }
