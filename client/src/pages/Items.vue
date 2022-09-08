@@ -7,6 +7,7 @@
       :newItemValues="newItemValues"
       :editing="editing"
       :editingItem="editingItem"
+      :categories="categories"
       @setNewItemValues="setNewItemValues"
       @resetNewItemValues="resetNewItemValues"
       @submitNewItemForm="submitNewItemForm"
@@ -21,6 +22,7 @@
           :newItemValues="newItemValues"
           :editing="editing"
           :editingItem="editingItem"
+          :categories="categories"
           @setNewItemValues="setNewItemValues"
           @resetNewItemValues="resetNewItemValues"
           @submitNewItemForm="submitNewItemForm"
@@ -43,8 +45,16 @@ import { useRouter } from 'vue-router'
 import ItemCard from '../components/ItemCard.vue'
 import ItemForm from '../components/ItemForm.vue'
 import { GetItems, PostItem, UpdateItem, DeleteItem } from '../services/ItemReq'
+import { GetCategories } from '../services/CategoryReq'
 
 defineProps(['user'])
+
+/////////////  get all categories  /////////////
+const categories = ref([])
+async function setCategories() {
+  const data = await GetCategories()
+  categories.value = data
+}
 
 const router = useRouter()
 // const route = useRoute() useRoute
@@ -55,7 +65,10 @@ async function setItems() {
   const data = await GetItems()
   items.value = data
 }
-onMounted(setItems)
+onMounted(() => {
+  setItems()
+  setCategories()
+})
 
 /////////////  get item by id  /////////////
 function selectItem(itemId) {
@@ -71,7 +84,8 @@ const newItemValues = ref({
   name: '',
   image: '',
   price: '',
-  description: ''
+  description: '',
+  categoryId: null
 })
 function setNewItemValues(name, val) {
   newItemValues.value[name] = val
@@ -79,7 +93,10 @@ function setNewItemValues(name, val) {
 function resetNewItemValues() {
   newItemValues.value = {
     name: '',
-    description: ''
+    image: '',
+    price: '',
+    description: '',
+    categoryId: null
   }
   changeAddingItem()
 }
@@ -94,14 +111,20 @@ async function submitNewItemForm(user) {
 const editing = ref(false)
 const editingItem = ref({
   name: '',
+  image: '',
+  price: '',
   description: '',
+  categoryId: null,
   id: 0
 })
 
 function setEditingItem(item) {
   editing.value = true
   editingItem.value.name = item.name
+  editingItem.value.image = item.image
+  editingItem.value.price = item.price
   editingItem.value.description = item.description
+  editingItem.value.categoryId = item.categoryId
   editingItem.value.id = item.id
 }
 function changeEditingItemValues(name, val) {

@@ -2,6 +2,32 @@
   <!-- ////////    edit item form     //////////// -->
   <form v-if="editing" @submit.prevent="$emit('submitEditingItemForm')">
     <span>
+      <!-- <label for="edit-item-name">Name</label> -->
+      <select
+        type="text"
+        id="edit-item-category"
+        name="categoryId"
+        defaultValue=""
+        @input="
+          $emit(
+            'changeEditingItemValues',
+            $event.target.name,
+            $event.target.value
+          )
+        "
+        required
+      >
+        <option disabled value="" hidden>Select Category</option>
+        <option
+          v-for="category in categories"
+          :key="category.id"
+          :value="parseInt(category.id)"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </span>
+    <span>
       <label for="edit-item-name">Name</label>
       <input
         type="text"
@@ -76,6 +102,28 @@
   <!-- ////////    new item form     //////////// -->
   <form v-else @submit.prevent="$emit('submitNewItemForm', user)">
     <span>
+      <!-- <label for="edit-item-name">Name</label> -->
+      <select
+        type="text"
+        id="add-item-category"
+        name="categoryId"
+        defaultValue=""
+        @input="
+          $emit('setNewItemValues', $event.target.name, $event.target.value)
+        "
+        required
+      >
+        <option disabled value="" hidden>Select Category</option>
+        <option
+          v-for="category in categories"
+          :key="category.id"
+          :value="parseInt(category.id)"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </span>
+    <span>
       <label for="add-item-name">Name</label>
       <input
         type="text"
@@ -138,7 +186,7 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue'
 
-defineProps(['user', 'newItemValues', 'editing', 'editingItem'])
+defineProps(['user', 'newItemValues', 'editing', 'editingItem', 'categories'])
 defineEmits([
   'setNewItemValues',
   'submitNewItemForm',
