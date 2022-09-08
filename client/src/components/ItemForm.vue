@@ -47,19 +47,13 @@
     </span>
     <span>
       <!-- /////////// need to make a file upload/reader -->
-      <label for="edit-item-image">Image</label>
+      <label for="add-item-image">Image</label>
       <input
-        type="text"
-        id="edit-item-image"
-        name="name"
-        :value="editingItem.image"
-        @input="
-          $emit(
-            'changeEditingItemValues',
-            $event.target.name,
-            $event.target.value
-          )
-        "
+        type="file"
+        id="add-item-image"
+        name="image"
+        accept="image/*"
+        @change="$emit('handleEditImage', $event.target.files)"
       />
     </span>
     <span>
@@ -201,6 +195,7 @@ defineEmits([
   'submitNewItemForm',
   'changeEditingItemValues',
   'submitEditingItemForm',
-  'handleImage'
+  'handleImage',
+  'handleEditImage'
 ])
 </script>

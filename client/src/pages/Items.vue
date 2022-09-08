@@ -13,6 +13,7 @@
       @changeEditingItemValues="changeEditingItemValues"
       @submitEditingItemForm="submitEditingItemForm"
       @handleImage="handleImage"
+      @handleEditImage="handleEditImage"
     />
     <!-- @resetNewItemValues="resetNewItemValues" -->
     <section v-if="items">
@@ -29,6 +30,7 @@
           @changeEditingItemValues="changeEditingItemValues"
           @submitEditingItemForm="submitEditingItemForm"
           @handleImage="handleImage"
+          @handleEditImage="handleEditImage"
         />
         <!-- @resetNewItemValues="resetNewItemValues" -->
         <ItemCard v-else :item="item" @click="selectItem(item.id)" />
@@ -158,6 +160,19 @@ async function submitEditingItemForm(user) {
     categoryId: null,
     id: 0
   }
+}
+
+/////////////        edit image      /////////////
+function handleEditImage(upload) {
+  const file = upload[0]
+  if (file) {
+    console.log(file)
+    // editingItem.value.image = file
+    // console.log(newItemValues.value, newItemValues.value.image)
+  }
+  // else {
+  //   editingItem.value.image = null don't need?
+  // }
 }
 
 /////////////  delete item  /////////////
