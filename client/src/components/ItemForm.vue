@@ -1,27 +1,25 @@
 <template>
   <!-- ////////    edit item form     //////////// -->
-  <form v-if="editing" @submit.prevent="$emit('submitEditingItemForm')">
+  <form v-if="editing" @submit.prevent="$emit('submitEditingItemForm', user)">
     <span>
       <!-- <label for="edit-item-name">Name</label> -->
       <select
-        type="text"
         id="edit-item-category"
         name="categoryId"
-        defaultValue=""
+        :value="editingItem.categoryId"
         @input="
           $emit(
             'changeEditingItemValues',
             $event.target.name,
-            $event.target.value
+            parseInt($event.target.value)
           )
         "
         required
       >
-        <option disabled value="" hidden>Select Category</option>
         <option
           v-for="category in categories"
           :key="category.id"
-          :value="parseInt(category.id)"
+          :value="category.id"
         >
           {{ category.name }}
         </option>
@@ -51,7 +49,7 @@
         type="text"
         id="edit-item-image"
         name="name"
-        :value="editingItem.name"
+        :value="editingItem.image"
         @input="
           $emit(
             'changeEditingItemValues',
@@ -104,12 +102,15 @@
     <span>
       <!-- <label for="edit-item-name">Name</label> -->
       <select
-        type="text"
         id="add-item-category"
         name="categoryId"
         defaultValue=""
         @input="
-          $emit('setNewItemValues', $event.target.name, $event.target.value)
+          $emit(
+            'setNewItemValues',
+            $event.target.name,
+            parseInt($event.target.value)
+          )
         "
         required
       >
@@ -117,7 +118,7 @@
         <option
           v-for="category in categories"
           :key="category.id"
-          :value="parseInt(category.id)"
+          :value="category.id"
         >
           {{ category.name }}
         </option>
