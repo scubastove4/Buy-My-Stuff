@@ -1,8 +1,10 @@
 <template>
-  <main v-if="user">
-    <button v-if="user.isAdmin" @click="changeAddingCategory">
-      Add Category
-    </button>
+  <main>
+    <div v-if="user">
+      <button v-if="user.isAdmin" @click="changeAddingCategory">
+        Add Category
+      </button>
+    </div>
     <CategoryForm
       v-if="addingCategory"
       :user="user"
@@ -34,9 +36,13 @@
           :category="category"
           @click="selectCategory(category.id)"
         />
-        <span v-if="user.isAdmin">
-          <button @click="setEditingCategory(category)">Edit Category</button>
-          <button @click="deleteCategory(category.id)">Delete Category</button>
+        <span v-if="user">
+          <button v-if="user.isAdmin" @click="setEditingCategory(category)">
+            Edit Category
+          </button>
+          <button v-if="user.isAdmin" @click="deleteCategory(category.id)">
+            Delete Category
+          </button>
         </span>
       </div>
     </section>

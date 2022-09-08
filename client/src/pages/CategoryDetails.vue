@@ -2,21 +2,24 @@
   <main>
     <header>{{ category.name }}</header>
     <section v-if="category.category_items">
-      <ItemCard
-        v-for="item in category.category_items"
-        :key="item.id"
-        :item="item"
-        @click="selectItem(item.id)"
-      />
+      <div v-for="item in category.category_items" :key="item.id">
+        <ItemCard :item="item" @click="selectItem(item.id)" />
+        <div v-if="user">
+          <button v-if="!user.isAdmin">Add to Cart</button>
+          <button v-if="!user.isAdmin">Save for Later</button>
+        </div>
+      </div>
     </section>
   </main>
 </template>
 
 <script setup>
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, defineProps } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import ItemCard from '../components/ItemCard.vue'
+
+defineProps(['user'])
 
 const router = useRouter()
 const route = useRoute()

@@ -36,7 +36,6 @@ export const PostItem = async (data) => {
 
 export const UpdateItem = async (itemId, data) => {
   try {
-    // console.log(data)
     let formData = new FormData()
     formData.append('name', data.name)
     formData.append('image', data.image)

@@ -1,6 +1,8 @@
 <template>
-  <main v-if="user">
-    <button v-if="user.isAdmin" @click="changeAddingItem">Add Item</button>
+  <main>
+    <div v-if="user">
+      <button v-if="user.isAdmin" @click="changeAddingItem">Add Item</button>
+    </div>
     <ItemForm
       v-if="addingItem"
       :user="user"
@@ -34,9 +36,13 @@
         />
         <!-- @resetNewItemValues="resetNewItemValues" -->
         <ItemCard v-else :item="item" @click="selectItem(item.id)" />
-        <span v-if="user.isAdmin">
-          <button @click="setEditingItem(item)">Edit Item</button>
-          <button @click="deleteItem(item.id)">Delete Item</button>
+        <span v-if="user">
+          <button v-if="user.isAdmin" @click="setEditingItem(item)">
+            Edit Item
+          </button>
+          <button v-if="user.isAdmin" @click="deleteItem(item.id)">
+            Delete Item
+          </button>
         </span>
       </div>
     </section>
