@@ -9,11 +9,12 @@
       :editingItem="editingItem"
       :categories="categories"
       @setNewItemValues="setNewItemValues"
-      @resetNewItemValues="resetNewItemValues"
       @submitNewItemForm="submitNewItemForm"
       @changeEditingItemValues="changeEditingItemValues"
       @submitEditingItemForm="submitEditingItemForm"
+      @handleImage="handleImage"
     />
+    <!-- @resetNewItemValues="resetNewItemValues" -->
     <section v-if="items">
       <div v-for="item in items" :key="item.id">
         <ItemForm
@@ -24,11 +25,12 @@
           :editingItem="editingItem"
           :categories="categories"
           @setNewItemValues="setNewItemValues"
-          @resetNewItemValues="resetNewItemValues"
           @submitNewItemForm="submitNewItemForm"
           @changeEditingItemValues="changeEditingItemValues"
           @submitEditingItemForm="submitEditingItemForm"
+          @handleImage="handleImage"
         />
+        <!-- @resetNewItemValues="resetNewItemValues" -->
         <ItemCard v-else :item="item" @click="selectItem(item.id)" />
         <span v-if="user.isAdmin">
           <button @click="setEditingItem(item)">Edit Item</button>
@@ -82,7 +84,7 @@ function changeAddingItem() {
 }
 const newItemValues = ref({
   name: '',
-  image: '',
+  image: null,
   price: '',
   description: '',
   categoryId: null
@@ -105,6 +107,18 @@ async function submitNewItemForm(user) {
   await PostItem(item)
   resetNewItemValues()
   setItems()
+}
+
+/////////////        add image      /////////////
+function handleImage(upload) {
+  const file = upload[0]
+  if (file) {
+    // console.log(file)
+    newItemValues.value.image = file
+    // console.log(newItemValues.value, newItemValues.value.image)
+  } else {
+    newItemValues.value.image = null
+  }
 }
 
 /////////////  edit item  /////////////

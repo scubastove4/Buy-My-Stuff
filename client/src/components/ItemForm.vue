@@ -1,6 +1,9 @@
 <template>
   <!-- ////////    edit item form     //////////// -->
   <form v-if="editing" @submit.prevent="$emit('submitEditingItemForm', user)">
+    <!-- action="/update"
+        method="PUT"
+        encType="multipart/form-data" -->
     <span>
       <!-- <label for="edit-item-name">Name</label> -->
       <select
@@ -98,7 +101,13 @@
   </form>
 
   <!-- ////////    new item form     //////////// -->
-  <form v-else @submit.prevent="$emit('submitNewItemForm', user)">
+  <form
+    v-else
+    @submit.prevent="$emit('submitNewItemForm', user)"
+    action="/create"
+    method="POST"
+    encType="multipart/form-data"
+  >
     <span>
       <!-- <label for="edit-item-name">Name</label> -->
       <select
@@ -141,14 +150,13 @@
       <!-- /////////// need to make a file upload/reader -->
       <label for="add-item-image">Image</label>
       <input
-        type="text"
+        type="file"
         id="add-item-image"
-        name="name"
-        :value="newItemValues.image"
-        @input="
-          $emit('setNewItemValues', $event.target.name, $event.target.value)
-        "
+        name="image"
+        accept="image/*"
+        @change="$emit('handleImage', $event.target.files)"
       />
+      <!-- :value="newItemValues.image" -->
     </span>
     <span>
       <label for="add-item-price">Price</label>
@@ -192,6 +200,7 @@ defineEmits([
   'setNewItemValues',
   'submitNewItemForm',
   'changeEditingItemValues',
-  'submitEditingItemForm'
+  'submitEditingItemForm',
+  'handleImage'
 ])
 </script>

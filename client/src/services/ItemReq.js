@@ -20,7 +20,14 @@ export const GetItemById = async (itemId) => {
 
 export const PostItem = async (data) => {
   try {
-    const res = await Client.post('/item/', data)
+    let formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('image', data.image)
+    formData.append('price', data.price)
+    formData.append('description', data.description)
+    formData.append('categoryId', data.categoryId)
+    formData.append('adminId', data.adminId)
+    const res = await Client.post('/item/', formData)
     return res.data
   } catch (e) {
     console.error(e)
