@@ -1,26 +1,26 @@
 import Client from './api'
 
-export const PostCategory = async (data) => {
+export const PostCart = async (data) => {
   try {
-    const res = await Client.post('/category/', data)
+    const res = await Client.post('/cart/', data.value)
     return res.data
   } catch (e) {
     console.error(e)
   }
 }
 
-export const UpdateCategory = async (categoryId, data) => {
+export const UpdateCart = async (cartId, data) => {
   try {
-    const res = await Client.put(`/category/${categoryId}`, data)
+    const res = await Client.put(`/cart/${cartId}`, data)
     return res.data
   } catch (e) {
     console.error(e)
   }
 }
 
-export const DeleteCategory = async (categoryId) => {
+export const DeleteCart = async (cartId) => {
   try {
-    await Client.delete(`/category/${categoryId}`)
+    await Client.delete(`/cart/${cartId}`)
   } catch (e) {
     console.error(e)
   }

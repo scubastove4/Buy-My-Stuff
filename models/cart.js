@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id'
         },
         field: 'item_id'
+      },
+      quantity: {
+        type: DataTypes.INTEGER
       }
     },
     {
