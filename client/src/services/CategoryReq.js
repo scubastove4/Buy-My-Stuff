@@ -12,6 +12,7 @@ export const GetCategories = async () => {
 export const GetCategoryById = async (categoryId) => {
   try {
     const res = await Client.get(`/category/${categoryId}`)
+    // console.log(res)
     return res.data
   } catch (e) {
     console.error(e)

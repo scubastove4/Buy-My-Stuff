@@ -17,8 +17,6 @@ import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 
 import { ref, onBeforeMount } from 'vue'
-// import { CheckCustomerSession } from './services/CustomerReq'
-// import { CheckAdminSession } from './services/AdminReq'
 import { CheckSession } from './services/CheckSessionReq'
 
 const user = ref(null)

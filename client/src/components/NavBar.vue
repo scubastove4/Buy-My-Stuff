@@ -23,8 +23,6 @@ import { defineProps, defineEmits } from 'vue'
 
 defineProps(['user'])
 defineEmits(['logout'])
-
-// console.log(user)
 </script>
 
 <style>

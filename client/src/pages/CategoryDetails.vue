@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <header>{{ category.name }}</header>
+  <main v-if="category">
+    <h1>{{ category.name }}</h1>
     <section v-if="category.category_items">
       <div v-for="item in category.category_items" :key="item.id">
         <ItemCard :item="item" @click="selectItem(item.id)" />
@@ -14,9 +14,10 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { onMounted, ref, defineProps } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+
+import { GetCategoryById } from '../services/CategoryReq'
 import ItemCard from '../components/ItemCard.vue'
 
 defineProps(['user'])
@@ -27,11 +28,8 @@ const route = useRoute()
 const category = ref([])
 
 async function getCategoryDetails() {
-  const res = await axios.get(
-    `http://localhost:3001/api/category/${route.params.category_id}`
-  )
-  category.value = res.data
-  console.log(category)
+  const res = await GetCategoryById(route.params.category_id)
+  category.value = res
 }
 
 function selectItem(itemId) {
