@@ -20,7 +20,7 @@ router.delete(
   '/',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
-  controllers.CartController.DeleteCart
+  controllers.CartController.DeleteCartItem
 )
 
 module.exports = router

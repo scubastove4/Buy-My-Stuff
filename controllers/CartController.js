@@ -29,9 +29,14 @@ const CreateCart = async (req, res) => {
   }
 }
 
-const DeleteCart = async (req, res) => {
+const DeleteCartItem = async (req, res) => {
   try {
-    await Cart.destroy({ where: { id: req.params.cart_id } })
+    await Cart.destroy({
+      where: {
+        customerId: req.body.customerId,
+        itemId: req.body.itemId
+      }
+    })
     res.send({
       msg: 'Cart deleted',
       payload: req.params.cart_id,
@@ -45,5 +50,5 @@ const DeleteCart = async (req, res) => {
 module.exports = {
   GetCustomerCart,
   CreateCart,
-  DeleteCart
+  DeleteCartItem
 }

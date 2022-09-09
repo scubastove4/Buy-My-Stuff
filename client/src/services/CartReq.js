@@ -27,9 +27,9 @@ export const UpdateCart = async (cartId, data) => {
   }
 }
 
-export const DeleteCart = async (cartId) => {
+export const DeleteCartItem = async (removedItem) => {
   try {
-    await Client.delete(`/cart/${cartId}`)
+    await Client.delete('/cart', { data: removedItem })
   } catch (e) {
     console.error(e)
   }

@@ -6,6 +6,8 @@
           <h2>{{ item.name }}</h2>
           <h3>{{ item.price }}</h3>
           <img v-if="item.image" :src="item.image" :alt="item.name" />
+          <AddBookmarkButton :user="user" :item="item" />
+          <button @click="removeCartItem(user.id, item.id)">Remove Item</button>
         </li>
       </ul>
     </section>
@@ -17,7 +19,8 @@
 import { defineProps, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { GetCartByCustomerId } from '../services/CartReq'
+import { GetCartByCustomerId, DeleteCartItem } from '../services/CartReq'
+import AddBookmarkButton from '../components/AddBookmarkButton.vue'
 
 defineProps(['user'])
 const route = useRoute()
@@ -27,6 +30,15 @@ const cart = ref(null)
 async function setCart(customerId) {
   const data = await GetCartByCustomerId(customerId)
   cart.value = data.cart
+}
+
+async function removeCartItem(customerId, itemId) {
+  const removedItem = {
+    customerId: customerId,
+    itemId: itemId
+  }
+  await DeleteCartItem(removedItem)
+  setCart(route.params.customer_id)
 }
 
 onMounted(() => {
