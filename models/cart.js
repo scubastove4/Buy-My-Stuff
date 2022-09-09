@@ -34,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
         field: 'item_id'
       },
       quantity: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 1
       }
     },
     {

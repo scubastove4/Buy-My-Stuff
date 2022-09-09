@@ -13,7 +13,7 @@ router.post(
   '/',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
-  controllers.CartController.CreateCart
+  controllers.CartController.CreateCartItem
 )
 
 router.delete(

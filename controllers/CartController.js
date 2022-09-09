@@ -7,7 +7,7 @@ const GetCustomerCart = async (req, res) => {
       include: {
         model: Item,
         as: 'cart',
-        through: { attributes: [] },
+        through: { attributes: ['quantity'] },
         attributes: ['id', 'name', 'price', 'image']
       }
     })
@@ -17,7 +17,7 @@ const GetCustomerCart = async (req, res) => {
   }
 }
 
-const CreateCart = async (req, res) => {
+const CreateCartItem = async (req, res) => {
   try {
     const createdCart = await Cart.create({
       customerId: req.body.customerId,
@@ -49,6 +49,6 @@ const DeleteCartItem = async (req, res) => {
 
 module.exports = {
   GetCustomerCart,
-  CreateCart,
+  CreateCartItem,
   DeleteCartItem
 }
