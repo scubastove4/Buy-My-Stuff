@@ -1,18 +1,22 @@
 const { Admin, Customer } = require('../models')
 
-const GetAllAdmins = async () => {
+const GetAllAdmins = async (req, res) => {
   try {
-    const allAdmins = await Admin.findAll()
-    console.log(allAdmins)
+    const allAdmins = await Admin.findAll({
+      attributes: ['firstName', 'email']
+    })
+    res.send(allAdmins)
   } catch (e) {
     throw e
   }
 }
 
-const GetAllCustomers = async () => {
+const GetAllCustomers = async (req, res) => {
   try {
-    const allCustomers = await Customer.findAll()
-    console.log(allCustomers)
+    const allCustomers = await Customer.findAll({
+      attributes: ['firstName', 'email']
+    })
+    res.send(allCustomers)
   } catch (e) {
     throw e
   }

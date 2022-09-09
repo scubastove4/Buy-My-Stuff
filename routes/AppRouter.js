@@ -14,7 +14,7 @@ router.use('/cart', CartRouter)
 router.use('/category', CategoryRouter)
 router.use('/customer', CustomerRouter)
 router.use('/item', ItemRouter)
-router.use('/users', CheckSessionRouter)
+router.use('/users', UserRouter)
 router.use('/', CheckSessionRouter)
 
 module.exports = router
