@@ -4,6 +4,9 @@
       <div v-for="item in bookmarks" :key="item.id">
         <ItemCard :item="item" />
         <AddToCartButton :user="user" :item="item" />
+        <button @click="removeBookmark(user.id, item.id)">
+          Remove Bookmark
+        </button>
       </div>
     </section>
     <h1 v-else>Nothing saved :(</h1>
@@ -14,7 +17,7 @@
 import { defineProps, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { GetBookmarksByUserId } from '../services/BookmarkReq'
+import { GetBookmarksByUserId, DeleteBookmark } from '../services/BookmarkReq'
 import AddToCartButton from '../components/AddToCartButton.vue'
 import ItemCard from '../components/ItemCard.vue'
 
@@ -26,6 +29,15 @@ const bookmarks = ref(null)
 async function setBookmarks(customerId) {
   const data = await GetBookmarksByUserId(customerId)
   bookmarks.value = data.bookmarks
+}
+
+async function removeBookmark(customerId, itemId) {
+  const removedBookmark = {
+    customerId: customerId,
+    itemId: itemId
+  }
+  await DeleteBookmark(removedBookmark)
+  setBookmarks(route.params.customer_id)
 }
 
 onMounted(() => {

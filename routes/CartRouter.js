@@ -17,7 +17,7 @@ router.post(
 )
 
 router.delete(
-  '/:cart_id',
+  '/',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
   controllers.CartController.DeleteCart

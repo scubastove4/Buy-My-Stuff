@@ -7,8 +7,8 @@ const GetCustomerCart = async (req, res) => {
       include: {
         model: Item,
         as: 'cart',
-        through: Cart,
-        attributes: ['name', 'price', 'image']
+        through: { attributes: [] },
+        attributes: ['id', 'name', 'price', 'image']
       }
     })
     res.send(cart)

@@ -25,7 +25,7 @@ router.post(
 )
 
 router.delete(
-  '/:bookmark_id',
+  '/',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
   controllers.BookmarkController.DeleteBookmark

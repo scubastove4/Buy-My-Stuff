@@ -47,8 +47,8 @@ const GetCustomerBookmark = async (req, res) => {
       include: {
         model: Item,
         as: 'bookmarks',
-        through: Bookmark,
-        attributes: ['name', 'price', 'image']
+        through: { attributes: [] },
+        attributes: ['id', 'name', 'price', 'image']
       }
     })
     res.send(bookmarks)
@@ -71,7 +71,12 @@ const CreateBookmark = async (req, res) => {
 
 const DeleteBookmark = async (req, res) => {
   try {
-    await Bookmark.destroy({ where: { id: req.params.bookmark_id } })
+    await Bookmark.destroy({
+      where: {
+        customer_id: req.body.customerId,
+        item_id: req.body.itemId
+      }
+    })
     res.send({
       msg: 'Bookmark deleted',
       payload: req.params.bookmark_id,
