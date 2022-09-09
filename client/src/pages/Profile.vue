@@ -1,6 +1,6 @@
 <template>
   <main>
-    <section v-if="bookmarks">
+    <section v-if="bookmarks && bookmarks.length > 0">
       <div v-for="item in bookmarks" :key="item.id">
         <ItemCard :item="item" />
         <AddToCartButton :user="user" :item="item" />

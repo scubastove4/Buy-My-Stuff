@@ -29,13 +29,13 @@ const CreateCartItem = async (req, res) => {
   }
 }
 
-const UpdateCartQuantity = async (req, res) => {
+const UpdateCartItemQuantity = async (req, res) => {
   try {
-    const updatedCategory = await Category.update(
+    const updatedQuantity = await Cart.update(
       { ...req.body },
-      { where: { id: req.params.category_id }, returning: true }
+      { where: { id: req.params.cart_item_id }, returning: true }
     )
-    res.send(updatedCategory)
+    res.send(updatedQuantity)
   } catch (e) {
     throw e
   }
@@ -61,5 +61,6 @@ const DeleteCartItem = async (req, res) => {
 module.exports = {
   GetCustomerCart,
   CreateCartItem,
+  UpdateCartItemQuantity,
   DeleteCartItem
 }

@@ -1,11 +1,27 @@
 <template>
   <main>
-    <section v-if="cart">
+    <section v-if="cart && cart.length > 0">
       <ul>
         <li v-for="item in cart" :key="item.id">
           <h2>{{ item.name }}</h2>
           <h3>{{ item.price }}</h3>
           <img v-if="item.image" :src="item.image" :alt="item.name" />
+          <button
+            @click="
+              reduceCartQuantity(item.cart_props.id, item.cart_props.quantity)
+            "
+            :disabled="item.cart_props.quantity === 1"
+          >
+            -
+          </button>
+          <h3>{{ item.cart_props.quantity }}</h3>
+          <button
+            @click="
+              increaseCartQuantity(item.cart_props.id, item.cart_props.quantity)
+            "
+          >
+            +
+          </button>
           <AddBookmarkButton :user="user" :item="item" />
           <button @click="removeCartItem(item.cart_props.id)">
             Remove Item
@@ -21,7 +37,11 @@
 import { defineProps, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { GetCartByCustomerId, DeleteCartItem } from '../services/CartReq'
+import {
+  GetCartByCustomerId,
+  UpdateCartItem,
+  DeleteCartItem
+} from '../services/CartReq'
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
 
 defineProps(['user'])
@@ -36,6 +56,20 @@ async function setCart(customerId) {
 
 async function removeCartItem(cartItemId) {
   await DeleteCartItem(cartItemId)
+  setCart(route.params.customer_id)
+}
+
+async function reduceCartQuantity(cartItemId, itemQuantity) {
+  let quantity = itemQuantity
+  quantity--
+  await UpdateCartItem(cartItemId, { quantity: quantity })
+  setCart(route.params.customer_id)
+}
+
+async function increaseCartQuantity(cartItemId, itemQuantity) {
+  let quantity = itemQuantity
+  quantity++
+  await UpdateCartItem(cartItemId, { quantity: quantity })
   setCart(route.params.customer_id)
 }
 

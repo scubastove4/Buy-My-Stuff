@@ -18,10 +18,11 @@ export const PostCart = async (data) => {
   }
 }
 
-export const UpdateCart = async (data) => {
+export const UpdateCartItem = async (cartItemId, quantity) => {
   try {
-    const res = await Client.put(`/cart`, data)
-    return res.data
+    const res = await Client.put(`/cart/${cartItemId}`, quantity)
+    console.log(res)
+    // return res.data
   } catch (e) {
     console.error(e)
   }

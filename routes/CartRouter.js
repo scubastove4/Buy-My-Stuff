@@ -16,6 +16,13 @@ router.post(
   controllers.CartController.CreateCartItem
 )
 
+router.put(
+  '/:cart_item_id',
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
+  controllers.CartController.UpdateCartItemQuantity
+)
+
 router.delete(
   '/:cart_item_id',
   middleware.CustomerMiddleware.stripToken,
