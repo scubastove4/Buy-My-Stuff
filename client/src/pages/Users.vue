@@ -3,9 +3,7 @@
     <h2>Customers</h2>
     <section v-for="customer in allCustomers" :key="customer.id">
       <UserCard :customer="customer" />
-      <button @click="removeBookmark(item.bookmark_props.id)">
-        Delete Customer
-      </button>
+      <button @click="deleteCustomer(customer.id)">Delete Customer</button>
     </section>
     <h2>Admins</h2>
     <section v-for="admin in allAdmins" :key="admin.id">
@@ -26,7 +24,7 @@ import { defineProps, ref, onMounted } from 'vue'
 // import { useRoute } from 'vue-router'
 
 import { GetAllAdmins, DeleteAdmin } from '../services/AdminReq'
-import { GetAllCustomers } from '../services/CustomerReq'
+import { GetAllCustomers, DeleteCustomer } from '../services/CustomerReq'
 import UserCard from '../components/UserCard.vue'
 
 defineProps(['user'])
@@ -46,8 +44,12 @@ async function deleteAdmin(allAdmins, adminId) {
     admins: allAdmins,
     adminId: adminId
   }
-  // console.log(adminId)
   await DeleteAdmin(adminObj)
+  getAllUsers()
+}
+
+async function deleteCustomer(customerId) {
+  await DeleteCustomer(customerId)
   getAllUsers()
 }
 

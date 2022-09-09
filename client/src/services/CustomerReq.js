@@ -43,3 +43,11 @@ export const ChangeCustomerPassword = async (data) => {
     console.error(e)
   }
 }
+
+export const DeleteCustomer = async (customerId) => {
+  try {
+    await Client.delete(`/customer/${customerId}`)
+  } catch (e) {
+    console.error(e)
+  }
+}

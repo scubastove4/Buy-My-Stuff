@@ -4,7 +4,7 @@ const middleware = require('../middleware')
 const GetAllCustomers = async (req, res) => {
   try {
     const allCustomers = await Customer.findAll({
-      attributes: ['firstName', 'email']
+      attributes: ['id', 'firstName', 'email']
     })
     res.send(allCustomers)
   } catch (e) {
