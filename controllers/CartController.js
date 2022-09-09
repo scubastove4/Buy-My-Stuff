@@ -1,9 +1,15 @@
-const { Cart } = require('../models')
+const { Cart, Customer, Item } = require('../models')
 
 const GetCustomerCart = async (req, res) => {
   try {
-    const cart = await Cart.findAll({
-      where: { customerId: req.params.customer_id }
+    const cart = await Customer.findOne({
+      where: { id: req.params.customer_id },
+      include: {
+        model: Item,
+        as: 'cart',
+        through: Cart,
+        attributes: ['name', 'price', 'image']
+      }
     })
     res.send(cart)
   } catch (error) {
