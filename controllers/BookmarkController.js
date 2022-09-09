@@ -73,8 +73,7 @@ const DeleteBookmark = async (req, res) => {
   try {
     await Bookmark.destroy({
       where: {
-        customer_id: req.body.customerId,
-        item_id: req.body.itemId
+        id: req.params.bookmark_id
       }
     })
     res.send({

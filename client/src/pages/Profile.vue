@@ -4,7 +4,7 @@
       <div v-for="item in bookmarks" :key="item.id">
         <ItemCard :item="item" />
         <AddToCartButton :user="user" :item="item" />
-        <button @click="removeBookmark(user.id, item.id)">
+        <button @click="removeBookmark(item.bookmark_props.id)">
           Remove Bookmark
         </button>
       </div>
@@ -31,12 +31,8 @@ async function setBookmarks(customerId) {
   bookmarks.value = data.bookmarks
 }
 
-async function removeBookmark(customerId, itemId) {
-  const removedBookmark = {
-    customerId: customerId,
-    itemId: itemId
-  }
-  await DeleteBookmark(removedBookmark)
+async function removeBookmark(bookmarkId) {
+  await DeleteBookmark(bookmarkId)
   setBookmarks(route.params.customer_id)
 }
 

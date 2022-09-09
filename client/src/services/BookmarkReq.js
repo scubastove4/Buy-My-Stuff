@@ -18,11 +18,9 @@ export const PostBookmark = async (data) => {
   }
 }
 
-export const DeleteBookmark = async (removedBookmark) => {
+export const DeleteBookmark = async (bookmarkId) => {
   try {
-    await Client.delete('/bookmark', {
-      data: removedBookmark
-    })
+    await Client.delete(`/bookmark/${bookmarkId}`)
   } catch (e) {
     console.error(e)
   }
