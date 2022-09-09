@@ -7,13 +7,13 @@ const GetCustomerCart = async (req, res) => {
       include: {
         model: Item,
         as: 'cart',
-        through: { attributes: ['quantity'] },
-        attributes: ['id', 'name', 'price', 'image']
+        through: { as: 'cart_props', attributes: ['id', 'quantity'] },
+        attributes: ['name', 'price', 'image']
       }
     })
     res.send(cart)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -24,8 +24,20 @@ const CreateCartItem = async (req, res) => {
       itemId: req.body.itemId
     })
     res.send(createdCart)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
+  }
+}
+
+const UpdateCartQuantity = async (req, res) => {
+  try {
+    const updatedCategory = await Category.update(
+      { ...req.body },
+      { where: { id: req.params.category_id }, returning: true }
+    )
+    res.send(updatedCategory)
+  } catch (e) {
+    throw e
   }
 }
 
@@ -33,17 +45,16 @@ const DeleteCartItem = async (req, res) => {
   try {
     await Cart.destroy({
       where: {
-        customerId: req.body.customerId,
-        itemId: req.body.itemId
+        id: req.params.cart_item_id
       }
     })
     res.send({
       msg: 'Cart deleted',
-      payload: req.params.cart_id,
+      payload: req.params.cart_item_id,
       status: 'Ok'
     })
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 

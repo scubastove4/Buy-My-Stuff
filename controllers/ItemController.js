@@ -23,8 +23,8 @@ const GetAllItems = async (req, res) => {
       ]
     })
     res.send(items)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -42,8 +42,8 @@ const GetItemById = async (req, res) => {
       ]
     })
     res.send(item)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -59,8 +59,8 @@ const CreateItem = async (req, res) => {
       createdItem = await Item.create(req.body)
     }
     res.send(createdItem)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -79,8 +79,8 @@ const UpdateItem = async (req, res) => {
       )
     }
     res.send(updatedItem)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -92,8 +92,8 @@ const DeleteItem = async (req, res) => {
       payload: req.params.item_id,
       status: 'Ok'
     })
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 

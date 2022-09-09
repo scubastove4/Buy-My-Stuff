@@ -7,7 +7,9 @@
           <h3>{{ item.price }}</h3>
           <img v-if="item.image" :src="item.image" :alt="item.name" />
           <AddBookmarkButton :user="user" :item="item" />
-          <button @click="removeCartItem(user.id, item.id)">Remove Item</button>
+          <button @click="removeCartItem(item.cart_props.id)">
+            Remove Item
+          </button>
         </li>
       </ul>
     </section>
@@ -32,12 +34,8 @@ async function setCart(customerId) {
   cart.value = data.cart
 }
 
-async function removeCartItem(customerId, itemId) {
-  const removedItem = {
-    customerId: customerId,
-    itemId: itemId
-  }
-  await DeleteCartItem(removedItem)
+async function removeCartItem(cartItemId) {
+  await DeleteCartItem(cartItemId)
   setCart(route.params.customer_id)
 }
 

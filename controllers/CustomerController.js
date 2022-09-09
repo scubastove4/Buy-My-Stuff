@@ -45,7 +45,7 @@ const Login = async (req, res) => {
       let token = middleware.CustomerMiddleware.createToken(payload)
       return res.send({ customer: payload, token })
     }
-    res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
+    res.status(401).send({ status: 'e', msg: 'Unauthorized' })
   } catch (e) {
     throw e
   }
@@ -63,7 +63,7 @@ const ChangeEmail = async (req, res) => {
         msg: `Email udpated to ${req.body.newEmail}!`
       })
     } else {
-      return res.send({ status: 'Error', msg: 'Email not found' })
+      return res.send({ status: 'e', msg: 'Email not found' })
     }
   } catch (e) {
     throw e
@@ -88,9 +88,9 @@ const ChangePassword = async (req, res) => {
       await customer.update({ passwordDigest })
       return res.send({ status: 'Success', msg: 'Password udpated!' })
     } else if (!customer) {
-      return res.send({ status: 'Error', msg: 'Email not found' })
+      return res.send({ status: 'e', msg: 'Email not found' })
     } else {
-      return res.send({ status: 'Error', msg: 'Incorrect password' })
+      return res.send({ status: 'e', msg: 'Incorrect password' })
     }
   } catch (e) {
     throw e
@@ -110,8 +110,8 @@ const DeleteCustomer = async (req, res) => {
       payload: req.params.customer_id,
       status: 'Ok'
     })
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 

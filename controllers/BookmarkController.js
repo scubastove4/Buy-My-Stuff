@@ -21,8 +21,8 @@ const { Bookmark, Customer, Item } = require('../models')
 //           payload: bookmark.id,
 //           status: 'Ok'
 //         })
-//       } catch (error) {
-//         throw error
+//       } catch (e) {
+//         throw e
 //       }
 //     } else {
 //       try {
@@ -31,12 +31,12 @@ const { Bookmark, Customer, Item } = require('../models')
 //           itemId: req.body.itemId
 //         })
 //         res.send(createdBookmark)
-//       } catch (error) {
-//         throw error
+//       } catch (e) {
+//         throw e
 //       }
 //     }
-//   } catch (error) {
-//     throw error
+//   } catch (e) {
+//     throw e
 //   }
 // }
 
@@ -47,13 +47,13 @@ const GetCustomerBookmark = async (req, res) => {
       include: {
         model: Item,
         as: 'bookmarks',
-        through: { attributes: [] },
-        attributes: ['id', 'name', 'price', 'image']
+        through: { as: 'bookmark_props', attributes: ['id'] },
+        attributes: ['name', 'price', 'image']
       }
     })
     res.send(bookmarks)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -64,8 +64,8 @@ const CreateBookmark = async (req, res) => {
       itemId: req.body.itemId
     })
     res.send(createdBookmark)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -82,8 +82,8 @@ const DeleteBookmark = async (req, res) => {
       payload: req.params.bookmark_id,
       status: 'Ok'
     })
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 

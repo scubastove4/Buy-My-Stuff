@@ -13,8 +13,8 @@ const GetAllCategories = async (req, res) => {
       ]
     })
     res.send(categories)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -30,8 +30,8 @@ const GetCategoryById = async (req, res) => {
       ]
     })
     res.send(category)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -39,8 +39,8 @@ const CreateCategory = async (req, res) => {
   try {
     const createdCategory = await Category.create(req.body)
     res.send(createdCategory)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -51,8 +51,8 @@ const UpdateCategory = async (req, res) => {
       { where: { id: req.params.category_id }, returning: true }
     )
     res.send(updatedCategory)
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 
@@ -64,8 +64,8 @@ const DeleteCategory = async (req, res) => {
       payload: req.params.category_id,
       status: 'Ok'
     })
-  } catch (error) {
-    throw error
+  } catch (e) {
+    throw e
   }
 }
 

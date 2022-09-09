@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'categoryId'
       })
       Item.belongsToMany(models.Customer, {
-        as: 'cart_items',
+        as: 'cart_props',
         through: models.Cart,
         foreignKey: 'itemId'
       })
       Item.belongsToMany(models.Customer, {
-        as: 'saved_items',
+        as: 'bookmark_props',
         through: models.Bookmark,
         foreignKey: 'itemId'
       })
