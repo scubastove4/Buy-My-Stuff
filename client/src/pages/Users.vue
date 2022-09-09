@@ -10,7 +10,10 @@
     <h2>Admins</h2>
     <section v-for="admin in allAdmins" :key="admin.id">
       <UserCard :admin="admin" />
-      <button @click="removeBookmark(item.bookmark_props.id)">
+      <button
+        @click="deleteAdmin(allAdmins, admin.id)"
+        :disabled="allAdmins.length === 1"
+      >
         Delete Admin
       </button>
     </section>
@@ -22,7 +25,7 @@
 import { defineProps, ref, onMounted } from 'vue'
 // import { useRoute } from 'vue-router'
 
-import { GetAllAdmins } from '../services/AdminReq'
+import { GetAllAdmins, DeleteAdmin } from '../services/AdminReq'
 import { GetAllCustomers } from '../services/CustomerReq'
 import UserCard from '../components/UserCard.vue'
 
@@ -36,6 +39,16 @@ async function getAllUsers() {
   const customers = await GetAllCustomers()
   allAdmins.value = admins
   allCustomers.value = customers
+}
+
+async function deleteAdmin(allAdmins, adminId) {
+  const adminObj = {
+    admins: allAdmins,
+    adminId: adminId
+  }
+  // console.log(adminId)
+  await DeleteAdmin(adminObj)
+  getAllUsers()
 }
 
 onMounted(() => {

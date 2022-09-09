@@ -4,7 +4,7 @@ const middleware = require('../middleware')
 const GetAllAdmins = async (req, res) => {
   try {
     const allAdmins = await Admin.findAll({
-      attributes: ['firstName', 'email']
+      attributes: ['id', 'firstName', 'email']
     })
     res.send(allAdmins)
   } catch (e) {
@@ -114,6 +114,7 @@ const ChangePassword = async (req, res) => {
 // }
 
 const DeleteAdmin = async (req, res) => {
+  console.log(req.params.admin_id)
   try {
     await Admin.destroy({ where: { id: req.params.admin_id } })
     res.send({

@@ -17,9 +17,7 @@ const verifySessionToken = async (req, res, next) => {
     }
   }
   if (payload) {
-    console.log(payload)
     res.locals.payload = payload
-    console.log(res.locals.payload)
     return next()
   }
 }

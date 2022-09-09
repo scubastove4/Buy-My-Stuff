@@ -44,3 +44,13 @@ export const ChangeAdminPassword = async (data) => {
     console.error(e)
   }
 }
+
+export const DeleteAdmin = async (adminObj) => {
+  if (adminObj.admins === 1) return
+  // console.log(adminObj.admins, adminObj.adminId)
+  try {
+    await Client.delete(`/admin/${adminObj.adminId}`)
+  } catch (e) {
+    console.error(e)
+  }
+}
