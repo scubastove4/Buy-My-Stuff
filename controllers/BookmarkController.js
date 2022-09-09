@@ -1,5 +1,5 @@
 // const { Op } = require('sequelize')
-const { Bookmark } = require('../models')
+const { Bookmark, Customer, Item } = require('../models')
 
 ////////  attempting to combine express/axios reqs to post or delete if exists already
 
@@ -40,6 +40,23 @@ const { Bookmark } = require('../models')
 //   }
 // }
 
+const GetCustomerBookmark = async (req, res) => {
+  try {
+    const bookmarks = await Customer.findOne({
+      where: { id: req.params.customer_id },
+      include: {
+        model: Item,
+        as: 'bookmarks',
+        through: Bookmark,
+        attributes: ['name', 'price', 'image']
+      }
+    })
+    res.send(bookmarks)
+  } catch (error) {
+    throw error
+  }
+}
+
 const CreateBookmark = async (req, res) => {
   try {
     const createdBookmark = await Bookmark.create({
@@ -66,6 +83,7 @@ const DeleteBookmark = async (req, res) => {
 }
 
 module.exports = {
+  GetCustomerBookmark,
   // ToggleBookmark
   CreateBookmark,
   DeleteBookmark

@@ -21,7 +21,7 @@ const routes = [
   { path: '/contact', component: Contact, name: 'Contact' },
   { path: '/login', component: Login, name: 'Login' },
   { path: '/cart/:customer_id', component: Cart, name: 'Cart' },
-  { path: '/profile/:user_id', component: Profile, name: 'Profile' },
+  { path: '/profile/:customer_id', component: Profile, name: 'Profile' },
   { path: '/admin', component: AdminLogin, name: 'AdminLogin' }
 ]
 

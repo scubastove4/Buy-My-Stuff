@@ -10,6 +10,13 @@ const middleware = require('../middleware')
 //   controllers.BookmarkController.ToggleBookmark
 // )
 
+router.get(
+  '/:customer_id',
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
+  controllers.BookmarkController.GetCustomerBookmark
+)
+
 router.post(
   '/',
   middleware.CustomerMiddleware.stripToken,

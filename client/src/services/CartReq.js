@@ -3,7 +3,6 @@ import Client from './api'
 export const GetCartByCustomerId = async (customerId) => {
   try {
     const res = await Client.get(`/cart/${customerId}`)
-    // console.log(res.data)
     return res.data
   } catch (e) {
     console.error(e)
