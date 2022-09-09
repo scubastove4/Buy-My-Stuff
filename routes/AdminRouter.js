@@ -2,13 +2,6 @@ const router = require('express').Router()
 const controllers = require('../controllers')
 const middleware = require('../middleware')
 
-// router.get(
-//   '/session',
-//   middleware.AdminMiddleware.stripToken,
-//   middleware.CheckSessionMiddleware.verifySessionToken,
-//   controllers.AdminController.CheckSession
-// )
-
 router.get(
   '/all_admins',
   middleware.AdminMiddleware.stripToken,

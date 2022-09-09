@@ -108,11 +108,6 @@ const ChangePassword = async (req, res) => {
   }
 }
 
-// const CheckSession = async (req, res) => {
-//   const { payload } = res.locals
-//   res.send(payload)
-// }
-
 const DeleteCustomer = async (req, res) => {
   try {
     await Customer.destroy({ where: { id: req.params.customer_id } })
@@ -132,6 +127,5 @@ module.exports = {
   Login,
   ChangeEmail,
   ChangePassword,
-  // CheckSession,
   DeleteCustomer
 }

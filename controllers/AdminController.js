@@ -108,11 +108,6 @@ const ChangePassword = async (req, res) => {
   }
 }
 
-// const CheckSession = async (req, res) => {
-//   const { payload } = res.locals
-//   res.send(payload)
-// }
-
 const DeleteAdmin = async (req, res) => {
   console.log(req.params.admin_id)
   try {
@@ -133,6 +128,5 @@ module.exports = {
   Login,
   ChangeEmail,
   ChangePassword,
-  // CheckSession,
   DeleteAdmin
 }

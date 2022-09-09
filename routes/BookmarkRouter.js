@@ -2,7 +2,7 @@ const router = require('express').Router()
 const controllers = require('../controllers')
 const middleware = require('../middleware')
 
-////////  attempting to combine express/axio reqs to post or delete if exists already
+////////  attempting to combine express/axios reqs to post or delete if exists already  -- save for post project
 // router.all(
 //   '/',
 //   middleware.CustomerMiddleware.stripToken,

@@ -21,7 +21,6 @@
 
 <script setup>
 import { defineProps, ref, onMounted } from 'vue'
-// import { useRoute } from 'vue-router'
 
 import { GetAllAdmins, DeleteAdmin } from '../services/AdminReq'
 import { GetAllCustomers, DeleteCustomer } from '../services/CustomerReq'

@@ -1,7 +1,7 @@
 // const { Op } = require('sequelize')
 const { Bookmark, Customer, Item } = require('../models')
 
-////////  attempting to combine express/axios reqs to post or delete if exists already
+////////  attempting to combine express/axios reqs to post or delete if exists already  -- save for post project
 
 // const ToggleBookmark = async (req, res) => {
 //   try {
