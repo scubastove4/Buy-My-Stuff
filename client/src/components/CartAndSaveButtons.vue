@@ -8,7 +8,7 @@
 <script setup>
 import AddToCartButton from './AddToCartButton.vue'
 import AddBookmarkButton from './AddBookmarkButton.vue'
-import { defineProps } from 'vue' //defineEmits
+import { defineProps } from 'vue'
 
 defineProps(['user', 'item'])
 </script>

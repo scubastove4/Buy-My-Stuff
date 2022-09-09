@@ -1,13 +1,10 @@
 <template>
   <main>
     <section v-if="bookmarks">
-      <ul>
-        <li v-for="item in bookmarks" :key="item.id">
-          <h2>{{ item.name }}</h2>
-          <h3>{{ item.price }}</h3>
-          <img v-if="item.image" :src="item.image" :alt="item.name" />
-        </li>
-      </ul>
+      <div v-for="item in bookmarks" :key="item.id">
+        <ItemCard :item="item" />
+        <AddToCartButton :user="user" :item="item" />
+      </div>
     </section>
     <h1 v-else>Nothing saved :(</h1>
   </main>
@@ -18,6 +15,8 @@ import { defineProps, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { GetBookmarksByUserId } from '../services/BookmarkReq'
+import AddToCartButton from '../components/AddToCartButton.vue'
+import ItemCard from '../components/ItemCard.vue'
 
 defineProps(['user'])
 const route = useRoute()
