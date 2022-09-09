@@ -1,6 +1,17 @@
 const { Admin } = require('../models')
 const middleware = require('../middleware')
 
+const GetAllAdmins = async (req, res) => {
+  try {
+    const allAdmins = await Admin.findAll({
+      attributes: ['firstName', 'email']
+    })
+    res.send(allAdmins)
+  } catch (e) {
+    throw e
+  }
+}
+
 const SignUp = async (req, res) => {
   try {
     const { firstName, email, password } = req.body
@@ -116,6 +127,7 @@ const DeleteAdmin = async (req, res) => {
 }
 
 module.exports = {
+  GetAllAdmins,
   SignUp,
   Login,
   ChangeEmail,

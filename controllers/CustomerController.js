@@ -1,6 +1,17 @@
 const { Customer } = require('../models')
 const middleware = require('../middleware')
 
+const GetAllCustomers = async (req, res) => {
+  try {
+    const allCustomers = await Customer.findAll({
+      attributes: ['firstName', 'email']
+    })
+    res.send(allCustomers)
+  } catch (e) {
+    throw e
+  }
+}
+
 const SignUp = async (req, res) => {
   try {
     const { firstName, email, password } = req.body
@@ -116,6 +127,7 @@ const DeleteCustomer = async (req, res) => {
 }
 
 module.exports = {
+  GetAllCustomers,
   SignUp,
   Login,
   ChangeEmail,

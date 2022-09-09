@@ -22,7 +22,8 @@
 import { defineProps, ref, onMounted } from 'vue'
 // import { useRoute } from 'vue-router'
 
-import { GetAllCustomers, GetAllAdmins } from '../services/UserReq'
+import { GetAllAdmins } from '../services/AdminReq'
+import { GetAllCustomers } from '../services/CustomerReq'
 import UserCard from '../components/UserCard.vue'
 
 defineProps(['user'])

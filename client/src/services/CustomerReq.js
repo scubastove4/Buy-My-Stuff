@@ -1,5 +1,14 @@
 import Client from './api'
 
+export const GetAllCustomers = async () => {
+  try {
+    const res = await Client.get('/admin/all_customers')
+    return res.data
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export const SignUpCustomer = async (data) => {
   try {
     const res = await Client.post('/customer/sign_up', {
