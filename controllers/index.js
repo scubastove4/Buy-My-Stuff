@@ -5,6 +5,7 @@ const CartController = require('./CartController')
 const CustomerController = require('./CustomerController')
 const ItemController = require('./ItemController')
 const CheckSessionController = require('./CheckSessionController')
+const UserController = require('./UserController')
 
 module.exports = {
   AdminController,
@@ -13,5 +14,6 @@ module.exports = {
   CategoryControllers,
   CustomerController,
   ItemController,
-  CheckSessionController
+  CheckSessionController,
+  UserController
 }

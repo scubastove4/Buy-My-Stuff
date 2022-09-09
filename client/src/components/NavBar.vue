@@ -3,7 +3,10 @@
     <router-link to="/" name="Home">Home</router-link>
     <router-link to="/items" name="Items">Items</router-link>
     <span v-if="user">
-      <router-link :to="`/profile/${user.id}`" name="Profile"
+      <router-link
+        v-if="!user.isAdmin"
+        :to="`/profile/${user.id}`"
+        name="Profile"
         >Profile</router-link
       >
       <router-link v-if="user.isAdmin" to="/users" name="Users"
