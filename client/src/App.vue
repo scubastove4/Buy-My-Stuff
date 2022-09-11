@@ -6,6 +6,7 @@
         header="Buy My Stuff"
         :user="user"
         @setUser="setUser"
+        @logout="logout"
       ></router-view>
     </main>
     <Footer />
@@ -17,8 +18,10 @@ import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 
 import { ref, onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 import { CheckSession } from './services/CheckSessionReq'
 
+const router = useRouter()
 const user = ref(null)
 
 function setUser(payload) {
@@ -34,6 +37,7 @@ async function checkToken() {
 function logout() {
   user.value = null
   localStorage.clear()
+  router.push('/login')
 }
 
 onBeforeMount(() => {

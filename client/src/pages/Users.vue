@@ -18,7 +18,7 @@
     <section v-for="admin in allAdmins" :key="admin.id">
       <UserCard :admin="admin" />
       <button
-        @click="deleteAdmin(allAdmins, admin.id)"
+        @click="deleteAdmin(allAdmins, admin.id, user.id)"
         :disabled="allAdmins.length === 1"
       >
         Delete Admin
@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted } from 'vue'
+import { defineProps, ref, onMounted, defineEmits } from 'vue'
 
 import { GetAllAdmins, SignUpAdmin, DeleteAdmin } from '../services/AdminReq'
 import { GetAllCustomers, DeleteCustomer } from '../services/CustomerReq'
@@ -37,6 +37,7 @@ import UserCard from '../components/UserCard.vue'
 import SignUpForm from '../components/SignUpForm.vue'
 
 defineProps(['user'])
+const emit = defineEmits(['logout'])
 
 //////////     get customers and admins     ///////////////
 
@@ -50,13 +51,14 @@ async function getAllUsers() {
   allCustomers.value = customers
 }
 
-async function deleteAdmin(allAdmins, adminId) {
+async function deleteAdmin(allAdmins, adminId, userId) {
   const adminObj = {
     admins: allAdmins,
     adminId: adminId
   }
   await DeleteAdmin(adminObj)
   getAllUsers()
+  userId === adminId && emit('logout')
 }
 
 async function deleteCustomer(customerId) {
