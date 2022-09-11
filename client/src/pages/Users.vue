@@ -6,6 +6,15 @@
       <button @click="deleteCustomer(customer.id)">Delete Customer</button>
     </section>
     <h2>Admins</h2>
+    <button @click="changeAddingAdmin">Add Admin</button>
+    <SignUpForm
+      v-if="addingAdmin"
+      :user="user"
+      :newAdminValues="newAdminValues"
+      :newAdmin="newAdmin"
+      @setNewAdminValues="setNewAdminValues"
+      @createNewAdmin="createNewAdmin"
+    />
     <section v-for="admin in allAdmins" :key="admin.id">
       <UserCard :admin="admin" />
       <button
@@ -22,11 +31,14 @@
 <script setup>
 import { defineProps, ref, onMounted } from 'vue'
 
-import { GetAllAdmins, DeleteAdmin } from '../services/AdminReq'
+import { GetAllAdmins, SignUpAdmin, DeleteAdmin } from '../services/AdminReq'
 import { GetAllCustomers, DeleteCustomer } from '../services/CustomerReq'
 import UserCard from '../components/UserCard.vue'
+import SignUpForm from '../components/SignUpForm.vue'
 
 defineProps(['user'])
+
+//////////     get customers and admins     ///////////////
 
 const allAdmins = ref(null)
 const allCustomers = ref(null)
@@ -52,7 +64,43 @@ async function deleteCustomer(customerId) {
   getAllUsers()
 }
 
-onMounted(() => {
-  getAllUsers()
+onMounted(getAllUsers)
+
+//////////     open/close new admin form    ///////////////
+const addingAdmin = ref(false)
+function changeAddingAdmin() {
+  !addingAdmin.value ? (addingAdmin.value = true) : (addingAdmin.value = false)
+}
+
+//////////     create new admin     ///////////////
+const newAdminValues = ref({
+  firstName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
 })
+const newAdmin = ref(null)
+function setNewAdminValues(name, val) {
+  newAdminValues.value[name] = val
+}
+function resetNewAdminValues() {
+  newAdminValues.value = {
+    firstName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  }
+}
+async function createNewAdmin() {
+  newAdmin.value = await SignUpAdmin(newAdminValues.value)
+  console.log(newAdminValues)
+  if (newAdmin.value.msg) {
+    return newAdmin.value.msg
+  } else {
+    resetNewAdminValues()
+    changeAddingAdmin()
+    getAllUsers()
+    newAdmin.value = null
+  }
+}
 </script>

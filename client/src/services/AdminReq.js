@@ -9,12 +9,12 @@ export const GetAllAdmins = async () => {
   }
 }
 
-export const SignUpAdmin = async (data) => {
+export const SignUpAdmin = async (newAdmin) => {
   try {
     const res = await Client.post('/admin/sign_up', {
-      firstName: data.value.firstName,
-      email: data.value.email,
-      password: data.value.password
+      firstName: newAdmin.firstName,
+      email: newAdmin.email,
+      password: newAdmin.password
     })
     return res.data
   } catch (e) {
