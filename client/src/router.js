@@ -10,6 +10,7 @@ import Profile from './pages/Profile.vue'
 import AdminLogin from './pages/AdminLogin.vue'
 import Users from './pages/Users.vue'
 import PaymentSuccess from './pages/PaymentSuccess.vue'
+import Orders from './pages/Orders.vue'
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
@@ -26,6 +27,7 @@ const routes = [
   { path: '/profile/:customer_id', component: Profile, name: 'Profile' },
   { path: '/admin', component: AdminLogin, name: 'AdminLogin' },
   { path: '/users', component: Users, name: 'Users' },
+  { path: '/orders', component: Orders, name: 'Orders' },
   {
     path: '/payment-success',
     component: PaymentSuccess,

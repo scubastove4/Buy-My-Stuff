@@ -12,6 +12,9 @@
       <router-link v-if="user.isAdmin" to="/users" name="Users"
         >Users</router-link
       >
+      <router-link v-if="user.isAdmin" to="/orders" name="Orders"
+        >Orders</router-link
+      >
       <router-link v-else :to="`/cart/${user.id}`" name="Cart"
         >Cart</router-link
       >

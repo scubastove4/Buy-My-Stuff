@@ -10,7 +10,7 @@ router.get(
 )
 
 router.post(
-  '/',
+  '/:customer_id',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
   controllers.OrderController.CreateOrder

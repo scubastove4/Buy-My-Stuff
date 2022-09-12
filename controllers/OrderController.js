@@ -11,7 +11,10 @@ const GetOrders = async (req, res) => {
 
 const CreateOrder = async (req, res) => {
   try {
-    const createdOrder = await Order.create(req.body)
+    const createdOrder = await Order.create({
+      ...req.body,
+      customerId: req.params.customer_id
+    })
     res.send(createdOrder)
   } catch (e) {
     throw e
