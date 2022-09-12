@@ -75,7 +75,10 @@
           />
           <label for="credit-card-mount">Credit Card Info: </label>
           <div id="credit-card-mount"></div>
-          <button type="submit">pay!!!!</button>
+          <p v-if="paymentError">{{ paymentError }}</p>
+          <button type="submit" :disabled="loading">
+            {{ !loading ? 'pay!!!!' : 'Sending payment' }}
+          </button>
         </form>
       </div>
     </section>
@@ -134,6 +137,7 @@ const secret = ref(null)
 const loading = ref(true)
 const elements = ref(null)
 const card = ref(null)
+const paymentError = ref(null)
 const STRIPE_PUB_KEY = `${process.env.VUE_APP_STRIPE_PUB_KEY}`
 const itemPrices = ref([])
 const billingFormValues = ref({
@@ -182,25 +186,29 @@ async function deleteCart(userId) {
 async function submitPayment(userId) {
   if (loading.value) return
   if (secret.value) {
-    const res = await stripe.value.confirmCardPayment(
-      `${secret.value.clientSecret}`,
-      {
+    //// set up sendingText, disable submit when sending (or just use loading)
+    loading.value = true
+    await stripe.value
+      .confirmCardPayment(`${secret.value.clientSecret}`, {
         payment_method: {
           card: card.value,
           billing_details: billingFormValues.value
         }
-      }
-    )
-    console.log(res, userId)
-    deleteCart(userId)
-    router.push('/payment-success')
-    loading.value = true
+      })
+      .then(function (result) {
+        if (result.error) {
+          paymentError.value = result.error.message
+        } else {
+          // console.log(res, userId)
+          deleteCart(userId)
+          router.push('/payment-success')
+        }
+      })
   }
 }
 
 onMounted(async () => {
   await setCart(route.params.customer_id)
-
   stripe.value = await loadStripe(STRIPE_PUB_KEY)
 })
 
