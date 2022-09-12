@@ -98,6 +98,7 @@ import {
   DeleteWholeCart
 } from '../services/CartReq'
 import { PostPaymentIntent } from '../services/PaymentReq'
+import { CreateOrder } from '../services/OrderReq'
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
 
 defineProps(['user'])
@@ -183,6 +184,20 @@ async function deleteCart(userId) {
   console.log(userId)
 }
 
+//// set cart to order
+const order = ref([])
+async function addCartToOrder(userId, orderId, cart) {
+  cart.forEach((item) => {
+    order.value.push({
+      itemName: item.name,
+      itemPrice: item.price,
+      itemQuantity: item.cart_props.quantity
+    })
+  })
+  console.log(order.value)
+  await CreateOrder(userId, orderId, order.value)
+}
+
 async function submitPayment(userId) {
   if (loading.value) return
   if (secret.value) {
@@ -195,14 +210,16 @@ async function submitPayment(userId) {
           billing_details: billingFormValues.value
         }
       })
-      .then(function (result) {
+      .then(async function (result) {
         if (result.error) {
           paymentError.value = result.error.message
           loading.value = false
         } else {
           if (result.paymentIntent.status === 'succeeded') {
             // console.log(res, userId)
-            deleteCart(userId)
+            await addCartToOrder(userId, result.paymentIntent.id, cart.value)
+            await deleteCart(userId)
+            order.value = []
             router.push('/payment-success')
           }
         }

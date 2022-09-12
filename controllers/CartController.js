@@ -8,7 +8,7 @@ const GetCustomerCart = async (req, res) => {
         model: Item,
         as: 'cart',
         through: { as: 'cart_props', attributes: ['id', 'quantity'] },
-        attributes: ['name', 'price', 'image']
+        attributes: [['id', 'item_id'], 'name', 'price', 'image']
       }
     })
     res.send(cart)

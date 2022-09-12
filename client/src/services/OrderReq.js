@@ -2,21 +2,22 @@ import Client from './api'
 
 export const GetAllOrders = async () => {
   try {
-    const orders = await Client.get('/orders')
-    console.log(orders)
+    const res = await Client.get('/orders')
+    return res.data
   } catch (e) {
     console.error(e)
   }
 }
 
-export const CreateOrder = async (customerId, orderId, cart) => {
+export const CreateOrder = async (customerId, orderId, order) => {
   try {
-    console.log(orderId, cart)
+    console.log(orderId, order)
     const orderInfo = {
       orderId: orderId,
-      items: cart
+      items: order
     }
-    await Client.post(`/orders/${customerId}`, orderInfo)
+    const res = await Client.post(`/orders/${customerId}`, orderInfo)
+    console.log(res)
   } catch (e) {
     console.error(e)
   }
