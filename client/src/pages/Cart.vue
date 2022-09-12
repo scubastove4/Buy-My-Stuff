@@ -199,9 +199,11 @@ async function submitPayment(userId) {
         if (result.error) {
           paymentError.value = result.error.message
         } else {
-          // console.log(res, userId)
-          deleteCart(userId)
-          router.push('/payment-success')
+          if (result.paymentIntent.status === 'succeeded') {
+            // console.log(res, userId)
+            deleteCart(userId)
+            router.push('/payment-success')
+          }
         }
       })
   }
