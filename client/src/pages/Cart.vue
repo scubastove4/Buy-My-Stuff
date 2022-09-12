@@ -28,14 +28,38 @@
           </button>
         </li>
       </ul>
+      <!-- <OrderForm /> -->
+      <form>
+        <label for="card-name">Name on Card: </label>
+        <input type="text" name="name" id="card-name" />
+        <label for="card-address-one">Address 1: </label>
+        <input type="text" name="addressOne" id="card-address-one" />
+        <label for="card-address">Address 2: </label>
+        <input type="text" name="addressTwo" id="card-address-two" />
+        <label for="card-city">City: </label>
+        <input type="text" name="city" id="card-city" />
+        <label for="card-state">State: </label>
+        <input type="text" name="state" id="card-state" />
+        <label for="card-zip">ZIP: </label>
+        <input type="text" name="zip" id="card-zip" />
+        <label for="credit-card-mount">Credit Card Info: </label>
+        <div id="credit-card-mount"></div>
+        <!-- <label for="card-expiration">Expiration Date: </label>
+    <input type="text" name="expiration" id="card-expiration">
+    <label for="card-expiration">Expiration Date: </label>
+    <input type="text" name="expiration" id="card-expiration"> -->
+      </form>
+      <button @submit.prevent="pay">pay!!!!</button>
     </section>
     <h1 v-else>Browse around! Nothing in your cart :(</h1>
   </main>
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted } from 'vue'
+import { defineProps, ref, onMounted } from 'vue' //onBeforeMount
 import { useRoute } from 'vue-router'
+import { loadStripe } from '@stripe/stripe-js'
+// import { StripeElementCard } from '@vue-stripe/vue-stripe'
 
 import {
   GetCartByCustomerId,
@@ -43,6 +67,7 @@ import {
   DeleteCartItem
 } from '../services/CartReq'
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
+// import OrderForm from '../components/OrderForm.vue'
 
 defineProps(['user'])
 const route = useRoute()
@@ -73,7 +98,41 @@ async function increaseCartQuantity(cartItemId, itemQuantity) {
   setCart(route.params.customer_id)
 }
 
-onMounted(() => {
-  setCart(route.params.customer_id)
+/////////    stripe implementation     //////
+let stripe = null
+let loading = ref(true)
+let elements = null
+const STRIPE_PUB_KEY = `${process.env.STRIPE_PUB_KEY}`
+const itemPrices = ref([])
+
+function setItemPrices(cart) {
+  cart.value.forEach((item) => {
+    itemPrices.value.push({
+      price: item.price,
+      quantity: item.cart_props.quantity,
+      mode: 'payment'
+    })
+  })
+}
+
+onMounted(async () => {
+  await setCart(route.params.customer_id)
+  setItemPrices(cart)
+  const ELEMENT_TYPE = 'card'
+
+  stripe = await loadStripe(STRIPE_PUB_KEY)
+
+  elements = stripe.elements() //add clientSecret here clientSecret: '{{CLIENT_SECRET}}'
+  const element = elements.create(ELEMENT_TYPE) //style
+  element.mount('#credit-card-mount')
+  loading.value = false
 })
+
+// function redirect(user) {
+//   stripe.value.redirectToCheckout({
+//     successUrl: 'http://localhost:3000/',
+//     cancelUrl: `http://localhost:3000/cart/${user.value.id}`,
+//     lineItems: itemPrices.value
+//   })
+// }
 </script>
