@@ -35,3 +35,12 @@ export const DeleteCartItem = async (cartItemId) => {
     console.error(e)
   }
 }
+
+export const DeleteWholeCart = async (customerId) => {
+  try {
+    console.log(customerId)
+    await Client.delete(`/cart/customer/${customerId}`)
+  } catch (e) {
+    console.error(e)
+  }
+}

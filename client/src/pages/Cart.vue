@@ -28,10 +28,9 @@
           </button>
         </li>
       </ul>
-      <!-- <OrderForm /> -->
       <button @click="proceedToCheckout">Proceed to Checkout</button>
       <div v-if="checkout">
-        <form @submit.prevent="submitPayment">
+        <form @submit.prevent="submitPayment(user.id)">
           <label for="card-name">Name on Card: </label>
           <input
             type="text"
@@ -86,19 +85,21 @@
 
 <script setup>
 import { defineProps, ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { loadStripe } from '@stripe/stripe-js'
 
 import {
   GetCartByCustomerId,
   UpdateCartItem,
-  DeleteCartItem
+  DeleteCartItem,
+  DeleteWholeCart
 } from '../services/CartReq'
-import { PostPaymentIntent } from '../services/PaymentReq' //ConfirmPaymentIntent
+import { PostPaymentIntent } from '../services/PaymentReq'
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
 
 defineProps(['user'])
 const route = useRoute()
+const router = useRouter()
 
 const cart = ref(null)
 
@@ -167,14 +168,18 @@ async function proceedToCheckout() {
   !checkout.value ? (checkout.value = true) : (checkout.value = false)
   setItemPrices(cart)
   secret.value = await PostPaymentIntent(itemPrices.value)
-  // console.log(secret)
   elements.value = stripe.value.elements()
   card.value = elements.value.create('card') //style
   card.value.mount('#credit-card-mount')
   loading.value = false
 }
 
-async function submitPayment() {
+async function deleteCart(userId) {
+  await DeleteWholeCart(userId)
+  console.log(userId)
+}
+
+async function submitPayment(userId) {
   if (loading.value) return
   if (secret.value) {
     const res = await stripe.value.confirmCardPayment(
@@ -186,7 +191,9 @@ async function submitPayment() {
         }
       }
     )
-    console.log(res)
+    console.log(res, userId)
+    deleteCart(userId)
+    router.push('/payment-success')
     loading.value = true
   }
 }

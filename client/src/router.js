@@ -9,6 +9,7 @@ import Cart from './pages/Cart.vue'
 import Profile from './pages/Profile.vue'
 import AdminLogin from './pages/AdminLogin.vue'
 import Users from './pages/Users.vue'
+import PaymentSuccess from './pages/PaymentSuccess.vue'
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
@@ -24,7 +25,12 @@ const routes = [
   { path: '/cart/:customer_id', component: Cart, name: 'Cart' },
   { path: '/profile/:customer_id', component: Profile, name: 'Profile' },
   { path: '/admin', component: AdminLogin, name: 'AdminLogin' },
-  { path: '/users', component: Users, name: 'Users' }
+  { path: '/users', component: Users, name: 'Users' },
+  {
+    path: '/payment-success',
+    component: PaymentSuccess,
+    name: 'PaymentSuccess'
+  }
 ]
 
 const router = createRouter({

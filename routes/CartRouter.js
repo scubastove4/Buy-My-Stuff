@@ -30,4 +30,11 @@ router.delete(
   controllers.CartController.DeleteCartItem
 )
 
+router.delete(
+  '/customer/:customerId',
+  middleware.CustomerMiddleware.stripToken,
+  middleware.CustomerMiddleware.verifyToken,
+  controllers.CartController.DeleteWholeCart
+)
+
 module.exports = router

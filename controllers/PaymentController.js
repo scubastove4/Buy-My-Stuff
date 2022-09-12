@@ -13,7 +13,7 @@ const SendPaymentIntent = async (req, res) => {
         enabled: true
       }
     })
-    res.send({
+    res.status(200).send({
       clientSecret: paymentIntent.client_secret
     })
   } catch (e) {

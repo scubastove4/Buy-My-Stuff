@@ -49,8 +49,26 @@ const DeleteCartItem = async (req, res) => {
       }
     })
     res.send({
-      msg: 'Cart deleted',
+      msg: 'Cart item deleted',
       payload: req.params.cart_item_id,
+      status: 'Ok'
+    })
+  } catch (e) {
+    throw e
+  }
+}
+
+const DeleteWholeCart = async (req, res) => {
+  try {
+    console.log(req.params.customerId)
+    await Cart.destroy({
+      where: {
+        customerId: req.params.customerId
+      }
+    })
+    res.send({
+      msg: 'Cart deleted',
+      payload: req.params.customerId,
       status: 'Ok'
     })
   } catch (e) {
@@ -62,5 +80,6 @@ module.exports = {
   GetCustomerCart,
   CreateCartItem,
   UpdateCartItemQuantity,
-  DeleteCartItem
+  DeleteCartItem,
+  DeleteWholeCart
 }
