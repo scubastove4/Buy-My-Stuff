@@ -7,6 +7,7 @@ const CustomerRouter = require('./CustomerRouter')
 const ItemRouter = require('./ItemRouter')
 const CheckSessionRouter = require('./CheckSessionRouter')
 const PaymentRouter = require('./PaymentRouter')
+const OrderRouter = require('./OrderRouter')
 
 router.use('/admin', AdminRouter)
 router.use('/bookmark', BookmarkRouter)
@@ -15,6 +16,7 @@ router.use('/category', CategoryRouter)
 router.use('/customer', CustomerRouter)
 router.use('/item', ItemRouter)
 router.use('/payments', PaymentRouter)
+router.use('/orders', OrderRouter)
 router.use('/', CheckSessionRouter)
 
 module.exports = router
