@@ -211,12 +211,4 @@ onMounted(async () => {
   await setCart(route.params.customer_id)
   stripe.value = await loadStripe(STRIPE_PUB_KEY)
 })
-
-// function redirect(user) {
-//   stripe.value.redirectToCheckout({
-//     successUrl: 'http://localhost:3000/',
-//     cancelUrl: `http://localhost:3000/cart/${user.value.id}`,
-//     lineItems: itemPrices.value
-//   })
-// }
 </script>
