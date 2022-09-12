@@ -6,9 +6,9 @@
 </template>
 
 <script setup>
-import { userRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-const router = userRouter()
+const router = useRouter()
 
 function returnToHomePage() {
   router.push('/')
