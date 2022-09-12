@@ -29,45 +29,73 @@
         </li>
       </ul>
       <!-- <OrderForm /> -->
-      <form>
-        <label for="card-name">Name on Card: </label>
-        <input type="text" name="name" id="card-name" />
-        <label for="card-address-one">Address 1: </label>
-        <input type="text" name="addressOne" id="card-address-one" />
-        <label for="card-address">Address 2: </label>
-        <input type="text" name="addressTwo" id="card-address-two" />
-        <label for="card-city">City: </label>
-        <input type="text" name="city" id="card-city" />
-        <label for="card-state">State: </label>
-        <input type="text" name="state" id="card-state" />
-        <label for="card-zip">ZIP: </label>
-        <input type="text" name="zip" id="card-zip" />
-        <label for="credit-card-mount">Credit Card Info: </label>
-        <div id="credit-card-mount"></div>
-        <!-- <label for="card-expiration">Expiration Date: </label>
-    <input type="text" name="expiration" id="card-expiration">
-    <label for="card-expiration">Expiration Date: </label>
-    <input type="text" name="expiration" id="card-expiration"> -->
-      </form>
-      <button @submit.prevent="pay">pay!!!!</button>
+      <button @click="proceedToCheckout">Proceed to Checkout</button>
+      <div v-if="checkout">
+        <form @submit.prevent="submitPayment">
+          <label for="card-name">Name on Card: </label>
+          <input
+            type="text"
+            name="name"
+            id="card-name"
+            @input="setBillingFormValues"
+          />
+          <label for="card-address-one">Address 1: </label>
+          <input
+            type="text"
+            name="line1"
+            id="card-address-one"
+            @input="setBillingFormValues"
+          />
+          <label for="card-address">Address 2: </label>
+          <input
+            type="text"
+            name="line2"
+            id="card-address-two"
+            @input="setBillingFormValues"
+          />
+          <label for="card-city">City: </label>
+          <input
+            type="text"
+            name="city"
+            id="card-city"
+            @input="setBillingFormValues"
+          />
+          <label for="card-state">State: </label>
+          <input
+            type="text"
+            name="state"
+            id="card-state"
+            @input="setBillingFormValues"
+          />
+          <label for="card-zip">ZIP: </label>
+          <input
+            type="text"
+            name="postal_code"
+            id="card-zip"
+            @input="setBillingFormValues"
+          />
+          <label for="credit-card-mount">Credit Card Info: </label>
+          <div id="credit-card-mount"></div>
+          <button type="submit">pay!!!!</button>
+        </form>
+      </div>
     </section>
     <h1 v-else>Browse around! Nothing in your cart :(</h1>
   </main>
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted } from 'vue' //onBeforeMount
+import { defineProps, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { loadStripe } from '@stripe/stripe-js'
-// import { StripeElementCard } from '@vue-stripe/vue-stripe'
 
 import {
   GetCartByCustomerId,
   UpdateCartItem,
   DeleteCartItem
 } from '../services/CartReq'
+import { PostPaymentIntent, ConfirmPaymentIntent } from '../services/PaymentReq'
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
-// import OrderForm from '../components/OrderForm.vue'
 
 defineProps(['user'])
 const route = useRoute()
@@ -99,33 +127,70 @@ async function increaseCartQuantity(cartItemId, itemQuantity) {
 }
 
 /////////    stripe implementation     //////
-let stripe = null
+const stripe = ref(null)
+const checkout = ref(false)
+const secret = ref(null)
 let loading = ref(true)
 let elements = null
+let card = null
 const STRIPE_PUB_KEY = `${process.env.STRIPE_PUB_KEY}`
 const itemPrices = ref([])
+const billingFormValues = ref({
+  name: '',
+  address: {
+    city: '',
+    line1: '',
+    line2: '',
+    state: '',
+    postal_code: ''
+  }
+})
 
 function setItemPrices(cart) {
   cart.value.forEach((item) => {
     itemPrices.value.push({
       price: item.price,
-      quantity: item.cart_props.quantity,
-      mode: 'payment'
+      quantity: item.cart_props.quantity
     })
   })
 }
 
+function setBillingFormValues(e) {
+  if (e.target.name === 'name') {
+    billingFormValues.value.name = e.target.value
+  } else {
+    billingFormValues.value.address[e.target.name] = e.target.value
+  }
+}
+
+async function proceedToCheckout() {
+  !checkout.value ? (checkout.value = true) : (checkout.value = false)
+  setItemPrices(cart)
+  secret.value = await PostPaymentIntent(itemPrices.value)
+  // console.log(secret)
+  elements = stripe.value.elements(STRIPE_PUB_KEY, secret.value) //add clientSecret here clientSecret: '{{CLIENT_SECRET}}'
+  card = elements.create('card') //style
+  card.mount('#credit-card-mount')
+  loading.value = false
+}
+
+async function submitPayment() {
+  if (loading.value) return
+  if (secret.value) {
+    // console.log(stripe.value)
+    const res = await ConfirmPaymentIntent(
+      secret.value,
+      billingFormValues.value
+    )
+    console.log(res)
+    // loading.value = true
+  }
+}
+
 onMounted(async () => {
   await setCart(route.params.customer_id)
-  setItemPrices(cart)
-  const ELEMENT_TYPE = 'card'
 
-  stripe = await loadStripe(STRIPE_PUB_KEY)
-
-  elements = stripe.elements() //add clientSecret here clientSecret: '{{CLIENT_SECRET}}'
-  const element = elements.create(ELEMENT_TYPE) //style
-  element.mount('#credit-card-mount')
-  loading.value = false
+  stripe.value = await loadStripe(STRIPE_PUB_KEY)
 })
 
 // function redirect(user) {
