@@ -198,6 +198,7 @@ async function submitPayment(userId) {
       .then(function (result) {
         if (result.error) {
           paymentError.value = result.error.message
+          loading.value = false
         } else {
           if (result.paymentIntent.status === 'succeeded') {
             // console.log(res, userId)
