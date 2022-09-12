@@ -94,7 +94,7 @@ import {
   UpdateCartItem,
   DeleteCartItem
 } from '../services/CartReq'
-import { PostPaymentIntent, ConfirmPaymentIntent } from '../services/PaymentReq'
+import { PostPaymentIntent } from '../services/PaymentReq' //ConfirmPaymentIntent
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
 
 defineProps(['user'])
@@ -130,10 +130,10 @@ async function increaseCartQuantity(cartItemId, itemQuantity) {
 const stripe = ref(null)
 const checkout = ref(false)
 const secret = ref(null)
-let loading = ref(true)
-let elements = null
-let card = null
-const STRIPE_PUB_KEY = `${process.env.STRIPE_PUB_KEY}`
+const loading = ref(true)
+const elements = ref(null)
+const card = ref(null)
+const STRIPE_PUB_KEY = `${process.env.VUE_APP_STRIPE_PUB_KEY}`
 const itemPrices = ref([])
 const billingFormValues = ref({
   name: '',
@@ -168,22 +168,26 @@ async function proceedToCheckout() {
   setItemPrices(cart)
   secret.value = await PostPaymentIntent(itemPrices.value)
   // console.log(secret)
-  elements = stripe.value.elements(STRIPE_PUB_KEY, secret.value) //add clientSecret here clientSecret: '{{CLIENT_SECRET}}'
-  card = elements.create('card') //style
-  card.mount('#credit-card-mount')
+  elements.value = stripe.value.elements()
+  card.value = elements.value.create('card') //style
+  card.value.mount('#credit-card-mount')
   loading.value = false
 }
 
 async function submitPayment() {
   if (loading.value) return
   if (secret.value) {
-    // console.log(stripe.value)
-    const res = await ConfirmPaymentIntent(
-      secret.value,
-      billingFormValues.value
+    const res = await stripe.value.confirmCardPayment(
+      `${secret.value.clientSecret}`,
+      {
+        payment_method: {
+          card: card.value,
+          billing_details: billingFormValues.value
+        }
+      }
     )
     console.log(res)
-    // loading.value = true
+    loading.value = true
   }
 }
 

@@ -21,19 +21,6 @@ const SendPaymentIntent = async (req, res) => {
   }
 }
 
-const ConfirmPaymentIntent = async (req, res) => {
-  try {
-    const confirmation = await stripe.confirmCardPayment(req.body.secret, {
-      payment_method: {
-        card: card,
-        billing_details: req.body.billingFormValues
-      }
-    })
-    console.log(confirmation)
-  } catch (e) {}
-}
-
 module.exports = {
-  SendPaymentIntent,
-  ConfirmPaymentIntent
+  SendPaymentIntent
 }

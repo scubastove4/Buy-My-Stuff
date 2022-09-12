@@ -9,11 +9,4 @@ router.post(
   controllers.PaymentController.SendPaymentIntent
 )
 
-router.post(
-  '/confirm-payment-intent',
-  middleware.CustomerMiddleware.stripToken,
-  middleware.CustomerMiddleware.verifyToken,
-  controllers.PaymentController.ConfirmPaymentIntent
-)
-
 module.exports = router
