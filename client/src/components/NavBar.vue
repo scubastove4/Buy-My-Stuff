@@ -43,17 +43,31 @@
     </div>
     <transition name="mobile-nav">
       <div v-show="mobileNav" class="dropdown-nav">
-        <router-link class="link" to="/" name="Home">Home</router-link>
-        <router-link class="link" to="/items" name="Items">Items</router-link>
+        <router-link class="link" to="/" name="Home" @click="toggleMobileNav"
+          >Home</router-link
+        >
+        <router-link
+          class="link"
+          to="/items"
+          name="Items"
+          @click="toggleMobileNav"
+          >Items</router-link
+        >
         <span class="user-nav" v-if="user">
           <router-link
             class="link"
             v-if="!user.isAdmin"
             :to="`/profile/${user.id}`"
             name="Profile"
+            @click="toggleMobileNav"
             >Profile</router-link
           >
-          <router-link class="link" v-if="user.isAdmin" to="/users" name="Users"
+          <router-link
+            class="link"
+            v-if="user.isAdmin"
+            to="/users"
+            name="Users"
+            @click="toggleMobileNav"
             >Users</router-link
           >
           <router-link
@@ -61,20 +75,31 @@
             v-if="user.isAdmin"
             to="/orders"
             name="Orders"
+            @click="toggleMobileNav"
             >Orders</router-link
           >
-          <router-link class="link" v-else :to="`/cart/${user.id}`" name="Cart"
+          <router-link
+            class="link"
+            v-else
+            :to="`/cart/${user.id}`"
+            name="Cart"
+            @click="toggleMobileNav"
             >Cart</router-link
           >
           <router-link
             class="link"
             to="/login"
             name="Logout"
-            @click="$emit('logout')"
+            @click="logoutRedirectAndCollapseNav"
             >Logout</router-link
           >
         </span>
-        <router-link class="link" v-else to="/login" name="Login"
+        <router-link
+          class="link"
+          v-else
+          to="/login"
+          name="Login"
+          @click="toggleMobileNav"
           >Login</router-link
         >
       </div>
@@ -87,7 +112,7 @@ import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import logo from '../../public/assets/creations.jpg'
 
 defineProps(['user'])
-defineEmits(['logout'])
+const emit = defineEmits(['logout'])
 
 const collapsedNav = ref(null)
 const mobile = ref(false)
@@ -109,4 +134,9 @@ function checkScreen() {
 }
 window.addEventListener('resize', checkScreen)
 onMounted(checkScreen)
+
+function logoutRedirectAndCollapseNav() {
+  emit('logout')
+  toggleMobileNav()
+}
 </script>
