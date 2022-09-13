@@ -1,36 +1,96 @@
 <template>
-  <nav>
+  <nav :class="{ 'collapsed-nav': collapsedNav }">
     <img :src="logo" alt="logo" />
-    <router-link to="/" name="Home">Home</router-link>
-    <router-link to="/items" name="Items">Items</router-link>
-    <span v-if="user">
-      <router-link
-        v-if="!user.isAdmin"
-        :to="`/profile/${user.id}`"
-        name="Profile"
-        >Profile</router-link
+    <div v-show="!mobile" class="navigation">
+      <router-link class="link" to="/" name="Home">Home</router-link>
+      <router-link class="link" to="/items" name="Items">Items</router-link>
+      <span v-if="user">
+        <router-link
+          class="link"
+          v-if="!user.isAdmin"
+          :to="`/profile/${user.id}`"
+          name="Profile"
+          >Profile</router-link
+        >
+        <router-link class="link" v-if="user.isAdmin" to="/users" name="Users"
+          >Users</router-link
+        >
+        <router-link class="link" v-if="user.isAdmin" to="/orders" name="Orders"
+          >Orders</router-link
+        >
+        <router-link class="link" v-else :to="`/cart/${user.id}`" name="Cart"
+          >Cart</router-link
+        >
+        <router-link
+          class="link"
+          to="/login"
+          name="Logout"
+          @click="$emit('logout')"
+          >Logout</router-link
+        >
+      </span>
+      <router-link class="link" v-else to="/login" name="Login"
+        >Login</router-link
       >
-      <router-link v-if="user.isAdmin" to="/users" name="Users"
-        >Users</router-link
-      >
-      <router-link v-if="user.isAdmin" to="/orders" name="Orders"
-        >Orders</router-link
-      >
-      <router-link v-else :to="`/cart/${user.id}`" name="Cart"
-        >Cart</router-link
-      >
-      <router-link to="/login" name="Logout" @click="$emit('logout')"
-        >Logout</router-link
-      >
-    </span>
-    <router-link v-else to="/login" name="Login">Login</router-link>
+    </div>
+    <div class="icon">
+      <i
+        class="fa-solid fa-bars"
+        @click="toggleMobileNav"
+        v-show="mobile"
+        :class="{ 'icon-active': mobileNav }"
+      ></i>
+    </div>
+    <transition name="mobile-nav">
+      <div v-show="mobileNav" class="dropdown-nav">
+        <router-link class="link" to="/" name="Home">Home</router-link>
+        <router-link class="link" to="/items" name="Items">Items</router-link>
+        <span v-if="user">
+          <router-link
+            class="link"
+            v-if="!user.isAdmin"
+            :to="`/profile/${user.id}`"
+            name="Profile"
+            >Profile</router-link
+          >
+          <router-link class="link" v-if="user.isAdmin" to="/users" name="Users"
+            >Users</router-link
+          >
+          <router-link
+            class="link"
+            v-if="user.isAdmin"
+            to="/orders"
+            name="Orders"
+            >Orders</router-link
+          >
+          <router-link class="link" v-else :to="`/cart/${user.id}`" name="Cart"
+            >Cart</router-link
+          >
+          <router-link
+            class="link"
+            to="/login"
+            name="Logout"
+            @click="$emit('logout')"
+            >Logout</router-link
+          >
+        </span>
+        <router-link class="link" v-else to="/login" name="Login"
+          >Login</router-link
+        >
+      </div>
+    </transition>
   </nav>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 import logo from '../../public/assets/creations.jpg'
 
 defineProps(['user'])
 defineEmits(['logout'])
+
+const collapsedNav = ref(null)
+const mobile = ref(true)
+const mobileNav = ref(null)
+// const windowWidth = ref(null)
 </script>
