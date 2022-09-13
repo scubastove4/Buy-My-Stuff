@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3001
 //     }
 //   }
 // }
-
+app.options('*', cors())
 app.use((req, res, next) => {
   let allowedOrigins = ['*'] // list of url-s
   let origin = req.headers.origin
@@ -41,7 +41,6 @@ app.use((req, res, next) => {
   // next()
 })
 
-app.options('*', cors())
 app.use(cors({ origin: '*', credentials: true }))
 app.use(logger('dev'))
 app.use(express.json())
