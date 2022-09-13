@@ -18,7 +18,7 @@
         @changeNewPasswordValues="changeNewPasswordValues"
         @changePassword="changePassword"
       />
-      <span id="user-update-btns">
+      <span id="user-update-btns" v-if="!scrollHide">
         <button id="change-email-btn" @click="toggleChangingEmail">
           Change Email
         </button>
@@ -28,17 +28,23 @@
       </span>
     </div>
     <section id="bookmarks" v-if="bookmarks && bookmarks.length > 0">
+      <h2 id="bookmarks-title">Bookmarks</h2>
       <div class="bookmark-container" v-for="item in bookmarks" :key="item.id">
         <ItemCard :item="item" />
         <span class="customer-bookmark-buttons">
           <AddToCartButton :user="user" :item="item" />
-          <button @click="removeBookmark(item.bookmark_props.id)">
+          <button
+            class="remove-bookmark"
+            @click="removeBookmark(item.bookmark_props.id)"
+          >
             Remove Bookmark
           </button>
         </span>
       </div>
     </section>
-    <h2 v-else>Nothing saved :(</h2>
+    <h2 id="no-bookmarks" v-else>
+      Nothing saved <i class="fa-regular fa-face-frown"></i>
+    </h2>
   </main>
 </template>
 
@@ -133,4 +139,18 @@ async function changeEmail(userId, newEmailValue) {
     newEmailCheck.value = null
   }
 }
+
+/////////  test out post course -- hide change email/pass buttons  ///////
+// const scrollHide = ref(null)
+
+// function updateScroll() {
+//   const scrollPosition = window.scrollY
+//   if (scrollPosition > 50) {
+//     scrollHide.value = true
+//     return
+//   }
+//   scrollHide.value = false
+// }
+
+// window.addEventListener('scroll', updateScroll)
 </script>
