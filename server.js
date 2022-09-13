@@ -21,7 +21,16 @@ const PORT = process.env.PORT || 3001
 //   }
 // }
 
-// app.options('*', cors())
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
+})
+
+app.options('*', cors())
 app.use(cors({ origin: '*', credentials: true }))
 app.use(logger('dev'))
 app.use(express.json())
