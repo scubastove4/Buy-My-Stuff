@@ -442,6 +442,8 @@ i .fa-face-frown {
 
   height: 100%;
   width: 100%;
+
+  overflow-y: scroll;
 }
 
 #cart-title {
@@ -542,6 +544,8 @@ i .fa-face-frown {
   margin: 0 0 0 4%;
 }
 
+/* //////////  cart/cart items styling above    ///////////// */
+
 #checkout {
   display: flex;
   flex-direction: column;
@@ -556,4 +560,9 @@ i .fa-face-frown {
 #checkout-btn {
   font-size: 2em;
   width: 35%;
+}
+
+#checkout-form {
+  display: flex;
+  flex-direction: column;
 }

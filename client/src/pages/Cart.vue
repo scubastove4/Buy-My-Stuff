@@ -40,7 +40,7 @@
         Proceed to Checkout
       </button>
       <div v-if="checkout">
-        <form @submit.prevent="submitPayment(user.id)">
+        <form id="checkout-form" @submit.prevent="submitPayment(user.id)">
           <label for="card-name">Name on Card: </label>
           <input
             type="text"
