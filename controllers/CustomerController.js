@@ -64,15 +64,21 @@ const Login = async (req, res) => {
 
 const ChangeEmail = async (req, res) => {
   try {
-    let customer = await Customer.findByPk(req.params.customer_id)
-    if (customer) {
-      await customer.update({ ...customer, email: req.body.newEmail })
-      return res.send({
-        status: 'Success',
-        msg: `Email udpated to ${req.body.newEmail}!`
-      })
+    const { newEmail } = req.body
+    let existingCustomer = await Customer.findOne({
+      where: { email: newEmail }
+    })
+    if (existingCustomer) {
+      res.send({ msg: `${existingCustomer.email} already exists.` })
     } else {
-      return res.send({ status: 'e', msg: 'Email not found' })
+      let customer = await Customer.findByPk(req.params.customer_id)
+      if (customer) {
+        await customer.update({ ...customer, email: req.body.newEmail })
+        return res.send({
+          status: 'Success',
+          msg: `Email udpated to ${req.body.newEmail}!`
+        })
+      }
     }
   } catch (e) {
     throw e

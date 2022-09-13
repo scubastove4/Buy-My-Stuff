@@ -6,7 +6,7 @@ router.post('/sign_up', controllers.CustomerController.SignUp)
 router.post('/login', controllers.CustomerController.Login)
 
 router.put(
-  '/profile/email',
+  '/change/email/:customer_id',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
   controllers.CustomerController.ChangeEmail
