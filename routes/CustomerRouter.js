@@ -12,7 +12,7 @@ router.put(
   controllers.CustomerController.ChangeEmail
 )
 router.put(
-  '/change/password',
+  '/change/password/:customer_id',
   middleware.CustomerMiddleware.stripToken,
   middleware.CustomerMiddleware.verifyToken,
   controllers.CustomerController.ChangePassword

@@ -64,9 +64,7 @@ const Login = async (req, res) => {
 
 const ChangeEmail = async (req, res) => {
   try {
-    let customer = await Customer.findOne({
-      where: { email: req.body.email }
-    })
+    let customer = await Customer.findByPk(req.params.customer_id)
     if (customer) {
       await customer.update({ ...customer, email: req.body.newEmail })
       return res.send({
@@ -83,9 +81,7 @@ const ChangeEmail = async (req, res) => {
 
 const ChangePassword = async (req, res) => {
   try {
-    let customer = await Customer.findOne({
-      where: { email: req.body.email }
-    })
+    let customer = await Customer.findByPk(req.params.customer_id)
     if (
       customer &&
       (await middleware.CustomerMiddleware.comparePassword(
