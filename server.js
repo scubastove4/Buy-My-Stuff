@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3001
 // }
 
 // app.options('*', cors())
-app.use(cors({ origin: '*' }))
+app.use(cors({ origin: '*', credentials: true }))
 app.use(logger('dev'))
 app.use(express.json())
 
