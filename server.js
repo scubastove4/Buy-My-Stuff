@@ -8,7 +8,7 @@ const AppRouter = require('./routes/AppRouter')
 const PORT = process.env.PORT || 3001
 
 const whitelist = [
-  'http://localhost:8080/',
+  'http://localhost:8080',
   'https://buy-my-stuff-online.netlify.app'
 ]
 const corsOptions = {
