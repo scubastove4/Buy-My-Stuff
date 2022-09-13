@@ -2,8 +2,7 @@
   <main id="profile" v-if="user">
     <div id="customer-info">
       <h1>Welcome {{ user.firstName }}!</h1>
-      <h2 v-if="!changingEmail">{{ user.email }}</h2>
-
+      <h2 v-if="!changingEmail && !changingPassword">{{ user.email }}</h2>
       <EmailForm
         v-if="changingEmail"
         :newEmailValue="newEmailValue"
@@ -12,8 +11,6 @@
         @changeNewEmailValue="changeNewEmailValue"
         @changeEmail="changeEmail"
       />
-      <button id="email-btn" @click="toggleChangingEmail">Change Email</button>
-
       <PasswordForm
         v-if="changingPassword"
         :newPasswordValues="newPasswordValues"
@@ -21,17 +18,24 @@
         @changeNewPasswordValues="changeNewPasswordValues"
         @changePassword="changePassword"
       />
-      <button id="password-btn" @click="toggleChangingPassword">
-        Change Password
-      </button>
-    </div>
-    <section v-if="bookmarks && bookmarks.length > 0">
-      <div v-for="item in bookmarks" :key="item.id">
-        <ItemCard :item="item" />
-        <AddToCartButton :user="user" :item="item" />
-        <button @click="removeBookmark(item.bookmark_props.id)">
-          Remove Bookmark
+      <span id="user-update-btns">
+        <button id="change-email-btn" @click="toggleChangingEmail">
+          Change Email
         </button>
+        <button id="change-password-btn" @click="toggleChangingPassword">
+          Change Password
+        </button>
+      </span>
+    </div>
+    <section id="bookmarks" v-if="bookmarks && bookmarks.length > 0">
+      <div class="bookmark-container" v-for="item in bookmarks" :key="item.id">
+        <ItemCard :item="item" />
+        <span class="customer-bookmark-buttons">
+          <AddToCartButton :user="user" :item="item" />
+          <button @click="removeBookmark(item.bookmark_props.id)">
+            Remove Bookmark
+          </button>
+        </span>
       </div>
     </section>
     <h2 v-else>Nothing saved :(</h2>
