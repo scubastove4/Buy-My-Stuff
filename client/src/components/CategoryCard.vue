@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="cat-card">
     <h2>{{ category.name }}</h2>
+    <h3 v-if="category.description">{{ category.description }}</h3>
   </div>
 </template>
 

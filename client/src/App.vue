@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="app-inner">
     <NavBar :user="user" @logout="logout" />
-    <main>
+    <main id="main-content">
       <router-view
         header="Buy My Stuff"
         :user="user"

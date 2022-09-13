@@ -1,5 +1,6 @@
 <template>
   <nav>
+    <img :src="logo" alt="logo" />
     <router-link to="/" name="Home">Home</router-link>
     <router-link to="/items" name="Items">Items</router-link>
     <span v-if="user">
@@ -28,27 +29,8 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
+import logo from '../../public/assets/creations.jpg'
 
 defineProps(['user'])
 defineEmits(['logout'])
 </script>
-
-<style>
-.router-link-exact-active {
-  color: #fff;
-}
-
-nav,
-footer {
-  background: #42b983;
-  padding: 1em;
-}
-
-nav a,
-footer a {
-  margin: 1em;
-  color: #2c3e50;
-  text-decoration: none;
-  font-weight: 800;
-}
-</style>

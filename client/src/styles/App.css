@@ -1,0 +1,85 @@
+nav,
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 5%;
+  width: 100%;
+
+  background-color: #a2c6b5;
+  font-size: 2.5em;
+}
+
+.router-link-exact-active {
+  color: #c7b493;
+  -webkit-text-stroke: 0.2px rgba(0, 0, 0, 0.8);
+}
+
+nav a,
+footer a {
+  margin: 1em;
+  color: #fbf8f7;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+nav img {
+  height: 90%;
+  width: 10%;
+
+  border-radius: 50%;
+}
+
+#main-content {
+  height: 90%;
+  background-color: #faf9fe;
+}
+
+#home {
+  height: 100%;
+  width: 100%;
+}
+
+#categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.cat-card-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 2%;
+  width: 90%;
+  height: 30%;
+
+  background: rgba(162, 198, 181, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
+.cat-card-form h2 {
+  width: 98%;
+
+  text-align: center;
+  font-size: 5em;
+}
+
+.cat-card-form h3 {
+  width: 98%;
+
+  text-align: center;
+  font-size: 3.5em;
+}

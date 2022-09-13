@@ -1,7 +1,11 @@
 <template>
-  <main>
-    <div v-if="user">
-      <button v-if="user.isAdmin" @click="changeAddingCategory">
+  <main id="home">
+    <div id="new-cat-btn-container" v-if="user">
+      <button
+        id="new-cat-btn"
+        v-if="user.isAdmin"
+        @click="changeAddingCategory"
+      >
         {{ addingCategoryText }}
       </button>
     </div>
@@ -17,8 +21,12 @@
       @changeEditingCategoryValues="changeEditingCategoryValues"
       @submitEditingCategoryForm="submitEditingCategoryForm"
     />
-    <section v-if="categories">
-      <div v-for="category in categories" :key="category.id">
+    <section id="categories" v-if="categories">
+      <div
+        class="cat-card-form"
+        v-for="category in categories"
+        :key="category.id"
+      >
         <CategoryForm
           v-if="editing && category.id === editingCategory.id"
           :user="user"
@@ -36,11 +44,19 @@
           :category="category"
           @click="selectCategory(category.id)"
         />
-        <span v-if="user">
-          <button v-if="user.isAdmin" @click="setEditingCategory(category)">
+        <span id="cat-edit-btn-container" v-if="user">
+          <button
+            id="cat-edit-btn"
+            v-if="user.isAdmin"
+            @click="setEditingCategory(category)"
+          >
             Edit Category
           </button>
-          <button v-if="user.isAdmin" @click="deleteCategory(category.id)">
+          <button
+            id="cat-delete-btn"
+            v-if="user.isAdmin"
+            @click="deleteCategory(category.id)"
+          >
             Delete Category
           </button>
         </span>
