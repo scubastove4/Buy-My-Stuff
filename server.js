@@ -7,7 +7,21 @@ const AppRouter = require('./routes/AppRouter')
 
 const PORT = process.env.PORT || 3001
 
-app.use(cors())
+const whitelist = [
+  'http://localhost:8080/',
+  'https://buy-my-stuff-online.netlify.app'
+]
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions))
 app.use(logger('dev'))
 app.use(express.json())
 
