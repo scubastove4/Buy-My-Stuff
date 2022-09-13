@@ -36,12 +36,16 @@ nav img {
   background-color: #faf9fe;
 }
 
-#home {
+/* /////////     global (also in indexMain.css), nav, footer above    ///// */
+
+#home,
+#items-page {
   height: 100%;
   width: 100%;
 }
 
-#categories {
+#categories,
+#items {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -53,7 +57,8 @@ nav img {
   overflow-y: scroll;
 }
 
-.cat-card-form {
+.cat-card-form,
+.item-card-form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +68,7 @@ nav img {
   height: 30%;
 
   background: rgba(162, 198, 181, 0.35);
-  border-radius: 16px;
+  border-radius: 1.2em;
   box-shadow: 0 4px 30px rgba(251, 248, 247.1);
   backdrop-filter: blur(8.1px);
   -webkit-backdrop-filter: blur(8.1px);
@@ -82,4 +87,50 @@ nav img {
 
   text-align: center;
   font-size: 3.5em;
+}
+
+/*  /////// categories (home) and shared categories/items above   /////// */
+
+.item-card-container {
+  display: flex;
+  flex-direction: column;
+
+  width: 98%;
+  height: 100%;
+}
+
+.item-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 90%;
+}
+
+.item-card img {
+  height: 50%;
+  width: 100%;
+
+  border-radius: 1em;
+}
+
+.item-card h2 {
+  font-size: 4em;
+}
+
+.item-card h3 {
+  font-size: 4em;
+}
+
+.item-card h3 span {
+  font-size: 0.7em;
+}
+
+.customer-choice-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 10%;
 }

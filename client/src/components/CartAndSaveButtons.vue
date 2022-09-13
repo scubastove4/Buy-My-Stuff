@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user">
+  <div class="customer-choice-btn-container" v-if="user">
     <AddToCartButton v-if="!user.isAdmin" :user="user" :item="item" />
     <AddBookmarkButton v-if="!user.isAdmin" :user="user" :item="item" />
   </div>

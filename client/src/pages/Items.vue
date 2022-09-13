@@ -1,7 +1,7 @@
 <template>
-  <main>
-    <div v-if="user">
-      <button v-if="user.isAdmin" @click="changeAddingItem">
+  <main id="items-page">
+    <div id="new-item-btn-container" v-if="user">
+      <button id="new-item-btn" v-if="user.isAdmin" @click="changeAddingItem">
         {{ addingItemText }}
       </button>
     </div>
@@ -20,9 +20,8 @@
       @handleEditImage="handleEditImage"
       @resetNewItemValues="resetNewItemValues"
     />
-    <!-- @resetNewItemValues="resetNewItemValues" -->
-    <section v-if="items">
-      <div v-for="item in items" :key="item.id">
+    <section id="items" v-if="items">
+      <div class="item-card-form" v-for="item in items" :key="item.id">
         <ItemForm
           v-if="editing && item.id === editingItem.id"
           :user="user"
@@ -38,11 +37,10 @@
           @handleEditImage="handleEditImage"
           @resetNewItemValues="resetNewItemValues"
         />
-        <!-- @resetNewItemValues="resetNewItemValues" -->
-        <div v-else>
+        <div class="item-card-container" v-else>
           <ItemCard :item="item" @click="selectItem(item.id)" />
           <CartAndSaveButtons :item="item" :user="user" />
-          <span v-if="user">
+          <span class="admin-edit-btn-container" v-if="user">
             <button v-if="user.isAdmin" @click="setEditingItem(item)">
               Edit Item
             </button>
