@@ -105,7 +105,7 @@ nav img {
   justify-content: space-around;
   align-items: center;
 
-  height: 90%;
+  height: 80%;
 }
 
 .item-card img {
@@ -132,5 +132,24 @@ nav img {
   justify-content: center;
   align-items: center;
 
-  height: 10%;
+  height: 20%;
+}
+
+.add-to-cart,
+.add-bookmark {
+  height: 95%;
+  width: 10em;
+  margin-bottom: 5%;
+  font-size: 2em;
+
+  background: rgba(162, 198, 181, 0.15);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
+.add-to-cart {
+  margin-right: 2%;
 }

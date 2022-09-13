@@ -1,5 +1,7 @@
 <template>
-  <button @click="AddBookmark(user.id, item.id)">Save for Later</button>
+  <button class="add-bookmark" @click="AddBookmark(user.id, item.id)">
+    Save for Later
+  </button>
 </template>
 
 <script setup>

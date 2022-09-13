@@ -1,5 +1,7 @@
 <template>
-  <button @click="AddToCart(user.id, item.id)">Add to Cart</button>
+  <button class="add-to-cart" @click="AddToCart(user.id, item.id)">
+    Add to Cart
+  </button>
 </template>
 
 <script setup>
