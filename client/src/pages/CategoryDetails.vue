@@ -1,5 +1,6 @@
 <template>
   <main v-if="category">
+    <button @click="backToCategories">Back to Categories</button>
     <h1>{{ category.name }}</h1>
     <section v-if="category.category_items">
       <div v-for="item in category.category_items" :key="item.id">
@@ -35,6 +36,10 @@ function selectItem(itemId) {
 }
 
 onMounted(getCategoryDetails)
+
+function backToCategories() {
+  router.push('/')
+}
 </script>
 
 <style></style>
