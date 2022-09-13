@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="$emit('changePassword', user.id, newPasswordValues)">
+  <form
+    id="password-form"
+    @submit.prevent="$emit('changePassword', user.id, newPasswordValues)"
+  >
     <span>
       <label for="old-password">Old Password: </label>
       <input

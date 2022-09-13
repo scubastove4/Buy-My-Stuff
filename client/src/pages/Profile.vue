@@ -1,9 +1,9 @@
 <template>
-  <main v-if="user">
-    <div>
-      <h2>Welcome {{ user.firstName }}!</h2>
-      <h3>{{ user.email }}</h3>
-      <button @click="toggleChangingEmail">Change Email</button>
+  <main id="profile" v-if="user">
+    <div id="customer-info">
+      <h1>Welcome {{ user.firstName }}!</h1>
+      <h2 v-if="!changingEmail">{{ user.email }}</h2>
+
       <EmailForm
         v-if="changingEmail"
         :newEmailValue="newEmailValue"
@@ -12,7 +12,8 @@
         @changeNewEmailValue="changeNewEmailValue"
         @changeEmail="changeEmail"
       />
-      <button @click="toggleChangingPassword">Change Password</button>
+      <button id="email-btn" @click="toggleChangingEmail">Change Email</button>
+
       <PasswordForm
         v-if="changingPassword"
         :newPasswordValues="newPasswordValues"
@@ -20,6 +21,9 @@
         @changeNewPasswordValues="changeNewPasswordValues"
         @changePassword="changePassword"
       />
+      <button id="password-btn" @click="toggleChangingPassword">
+        Change Password
+      </button>
     </div>
     <section v-if="bookmarks && bookmarks.length > 0">
       <div v-for="item in bookmarks" :key="item.id">

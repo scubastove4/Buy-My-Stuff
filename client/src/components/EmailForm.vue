@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="$emit('changeEmail', user.id, newEmailValue)">
+  <form
+    id="email-form"
+    @submit.prevent="$emit('changeEmail', user.id, newEmailValue)"
+  >
     <span>
       <label for="new-email">New Email: </label>
       <input

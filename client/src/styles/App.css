@@ -45,7 +45,8 @@ nav img {
 }
 
 #categories,
-#items {
+#items,
+#profile {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -153,3 +154,45 @@ nav img {
 .add-to-cart {
   margin-right: 2%;
 }
+
+/* ///////  item card above  ///////// */
+#customer-info {
+  display: flex;
+  /* grid-template: 30% 50% 20% / 1fr 1fr; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+  width: 95%;
+}
+
+#customer-info h1 {
+  /* grid-column-end: span 2;
+  place-self: center; */
+  font-size: 5em;
+}
+
+#customer-info h2,
+#email-form {
+  /* grid-column-start: 1;
+  grid-row-start: 2; */
+}
+
+#password-form {
+  /* grid-column-start: 2;
+  grid-row-start: 2; */
+}
+
+#email-btn {
+  /* grid-column-start: 1;
+  grid-row-start: 3; */
+}
+
+#password-btn {
+  /* grid-column-start: 2;
+  grid-row-start: 3; */
+}
+
+/* #email-form {
+
+} */
