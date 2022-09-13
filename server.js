@@ -22,12 +22,23 @@ const PORT = process.env.PORT || 3001
 // }
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  let allowedOrigins = ['*'] // list of url-s
+  let origin = req.headers.origin
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  }
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   )
+  res.header('Access-Control-Expose-Headers', 'Content-Disposition')
   next()
+  // res.setHeader('access-control-allow-0rigin', '*')
+  // res.header(
+  //   'Access-Control-Allow-Headers',
+  //   'Origin, X-Requested-With, Content-Type, Accept'
+  // )
+  // next()
 })
 
 app.options('*', cors())
