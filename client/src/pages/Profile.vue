@@ -3,7 +3,15 @@
     <div>
       <h2>Welcome {{ user.firstName }}!</h2>
       <h3>{{ user.email }}</h3>
-      <button>Change Email</button>
+      <button @click="toggleChangingEmail">Change Email</button>
+      <EmailForm
+        v-if="changingEmail"
+        :newEmailValue="newEmailValue"
+        :user="user"
+        :newEmailCheck="newEmailCheck"
+        @changeNewEmailValue="changeNewEmailValue"
+        @changeEmail="changeEmail"
+      />
       <button @click="toggleChangingPassword">Change Password</button>
       <PasswordForm
         v-if="changingPassword"
@@ -31,10 +39,14 @@ import { defineProps, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { GetBookmarksByUserId, DeleteBookmark } from '../services/BookmarkReq'
-import { ChangeCustomerPassword } from '../services/CustomerReq'
+import {
+  ChangeCustomerPassword,
+  ChangeCustomerEmail
+} from '../services/CustomerReq'
 import AddToCartButton from '../components/AddToCartButton.vue'
 import ItemCard from '../components/ItemCard.vue'
 import PasswordForm from '../components/PasswordForm.vue'
+import EmailForm from '../components/EmailForm.vue'
 
 defineProps(['user'])
 const route = useRoute()
@@ -84,6 +96,33 @@ async function changePassword(userId, newPasswordValues) {
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: ''
+  }
+}
+
+//////////////   change email   ///////////////
+const changingEmail = ref(false)
+const newEmailValue = ref(null)
+const newEmailCheck = ref(null)
+
+function toggleChangingEmail() {
+  if (!changingEmail.value) {
+    changingEmail.value = true
+  } else {
+    changingEmail.value = false
+  }
+}
+
+function changeNewEmailValue(val) {
+  newEmailValue.value = val
+}
+
+async function changeEmail(userId, newEmailValue) {
+  const res = await ChangeCustomerEmail(userId, newEmailValue)
+  newEmailCheck.value = res
+  if (newEmailCheck.value.status === 'Success') {
+    toggleChangingEmail()
+    newEmailValue = null
+    newEmailCheck.value = null
   }
 }
 </script>

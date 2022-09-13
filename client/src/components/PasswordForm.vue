@@ -59,7 +59,7 @@
         newPasswordValues.newPassword !== newPasswordValues.confirmNewPassword
       "
     >
-      Change Password
+      Confirm Change
     </button>
     <!-- <button type="button" @click="$emit('resetNewpasswordValues')">
       Clear Form

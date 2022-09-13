@@ -47,6 +47,17 @@ export const ChangeCustomerPassword = async (customerId, passwords) => {
   }
 }
 
+export const ChangeCustomerEmail = async (customerId, newEmail) => {
+  try {
+    const res = await Client.put(`/customer/change/email/${customerId}`, {
+      newEmail: newEmail
+    })
+    return res.data
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export const DeleteCustomer = async (customerId) => {
   try {
     await Client.delete(`/customer/${customerId}`)
