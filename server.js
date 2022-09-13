@@ -22,10 +22,14 @@ const PORT = process.env.PORT || 3001
 // }
 app.options('*', cors())
 app.use((req, res, next) => {
-  let allowedOrigins = ['*'] // list of url-s
+  let allowedOrigins = [
+    'https://buy-my-stuff-online.netlify.app',
+    'http://localhost:8080'
+  ] // list of url-s
   let origin = req.headers.origin
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader('Access-Control-Allow-Origin', origin)
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
   }
   res.header(
     'Access-Control-Allow-Headers',
