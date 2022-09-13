@@ -1,7 +1,9 @@
 <template>
   <main>
     <div v-if="user">
-      <button v-if="user.isAdmin" @click="changeAddingItem">Add Item</button>
+      <button v-if="user.isAdmin" @click="changeAddingItem">
+        {{ addingItemText }}
+      </button>
     </div>
     <ItemForm
       v-if="addingItem"
@@ -16,6 +18,7 @@
       @submitEditingItemForm="submitEditingItemForm"
       @handleImage="handleImage"
       @handleEditImage="handleEditImage"
+      @resetNewItemValues="resetNewItemValues"
     />
     <!-- @resetNewItemValues="resetNewItemValues" -->
     <section v-if="items">
@@ -33,6 +36,7 @@
           @submitEditingItemForm="submitEditingItemForm"
           @handleImage="handleImage"
           @handleEditImage="handleEditImage"
+          @resetNewItemValues="resetNewItemValues"
         />
         <!-- @resetNewItemValues="resetNewItemValues" -->
         <div v-else>
@@ -92,8 +96,15 @@ function selectItem(itemId) {
 
 /////////////  add new Item  /////////////
 const addingItem = ref(false)
+const addingItemText = ref('Add Item')
 function changeAddingItem() {
-  !addingItem.value ? (addingItem.value = true) : (addingItem.value = false)
+  if (!addingItem.value) {
+    addingItem.value = true
+    addingItemText.value = 'Cancel'
+  } else {
+    addingItem.value = false
+    addingItemText.value = 'Add Item'
+  }
 }
 const newItemValues = ref({
   name: '',
@@ -113,13 +124,13 @@ function resetNewItemValues() {
     description: '',
     categoryId: null
   }
-  changeAddingItem()
 }
 async function submitNewItemForm(user) {
   let item = { ...newItemValues.value, adminId: user.id }
   await PostItem(item)
   resetNewItemValues()
   setItems()
+  changeAddingItem()
 }
 
 /////////////        add image      /////////////

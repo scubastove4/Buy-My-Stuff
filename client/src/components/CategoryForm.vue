@@ -37,6 +37,9 @@
     <button type="submit" :disabled="!editingCategory.name">
       Edit Category
     </button>
+    <button type="button" @click="$emit('resetNewCategoryValues')">
+      Clear Form
+    </button>
   </form>
 
   <!-- ////////    new category form     //////////// -->
@@ -69,6 +72,9 @@
     <button type="submit" :disabled="!newCategoryValues.name">
       Add Category
     </button>
+    <button type="button" @click="$emit('resetNewCategoryValues')">
+      Clear Form
+    </button>
   </form>
 </template>
 
@@ -80,6 +86,7 @@ defineEmits([
   'setNewCategoryValues',
   'submitNewCategoryForm',
   'changeEditingCategoryValues',
-  'submitEditingCategoryForm'
+  'submitEditingCategoryForm',
+  'resetNewCategoryValues'
 ])
 </script>

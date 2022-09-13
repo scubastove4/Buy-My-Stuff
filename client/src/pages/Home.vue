@@ -2,7 +2,7 @@
   <main>
     <div v-if="user">
       <button v-if="user.isAdmin" @click="changeAddingCategory">
-        Add Category
+        {{ addingCategoryText }}
       </button>
     </div>
     <CategoryForm
@@ -81,10 +81,15 @@ function selectCategory(categoryId) {
 
 /////////////  add new category  /////////////
 const addingCategory = ref(false)
+const addingCategoryText = ref('Add Category')
 function changeAddingCategory() {
-  !addingCategory.value
-    ? (addingCategory.value = true)
-    : (addingCategory.value = false)
+  if (!addingCategory.value) {
+    addingCategory.value = true
+    addingCategoryText.value = 'Cancel'
+  } else {
+    addingCategory.value = false
+    addingCategoryText.value = 'Add Category'
+  }
 }
 const newCategoryValues = ref({
   name: '',
@@ -98,13 +103,13 @@ function resetNewCategoryValues() {
     name: '',
     description: ''
   }
-  changeAddingCategory()
 }
 async function submitNewCategoryForm(user) {
   let category = { ...newCategoryValues.value, adminId: user.id }
   await PostCategory(category)
   resetNewCategoryValues()
   setCategories()
+  changeAddingCategory()
 }
 
 /////////////  edit category  /////////////

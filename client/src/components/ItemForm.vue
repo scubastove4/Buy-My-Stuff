@@ -5,11 +5,7 @@
     @submit.prevent="$emit('submitEditingItemForm', user)"
     encType="multipart/form-data"
   >
-    <!-- action="/update"
-        method="PUT"
-         -->
     <span>
-      <!-- <label for="edit-item-name">Name</label> -->
       <select
         id="edit-item-category"
         name="categoryId"
@@ -50,7 +46,7 @@
       />
     </span>
     <span>
-      <!-- /////////// need to make a file upload/reader -->
+      <!-- /////////// add filereader preview? -->
       <label for="add-item-image">Image</label>
       <input
         type="file"
@@ -95,6 +91,9 @@
     </span>
     <button type="submit" :disabled="!editingItem.name || !editingItem.price">
       Edit item
+    </button>
+    <button type="button" @click="$emit('resetNewItemValues')">
+      Clear Form
     </button>
   </form>
 
@@ -187,6 +186,9 @@
     >
       Add item
     </button>
+    <button type="button" @click="$emit('resetNewItemValues')">
+      Clear Form
+    </button>
   </form>
 </template>
 
@@ -200,6 +202,7 @@ defineEmits([
   'changeEditingItemValues',
   'submitEditingItemForm',
   'handleImage',
-  'handleEditImage'
+  'handleEditImage',
+  'resetNewItemValues'
 ])
 </script>
