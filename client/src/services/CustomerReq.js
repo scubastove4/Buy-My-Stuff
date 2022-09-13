@@ -9,12 +9,12 @@ export const GetAllCustomers = async () => {
   }
 }
 
-export const SignUpCustomer = async (data) => {
+export const SignUpCustomer = async (newUser) => {
   try {
     const res = await Client.post('/customer/sign_up', {
-      firstName: data.value.firstName,
-      email: data.value.email,
-      password: data.value.password
+      firstName: newUser.value.firstName,
+      email: newUser.value.email,
+      password: newUser.value.password
     })
     return res.data
   } catch (e) {
@@ -22,11 +22,11 @@ export const SignUpCustomer = async (data) => {
   }
 }
 
-export const LoginCustomer = async (data) => {
+export const LoginCustomer = async (customer) => {
   try {
     const res = await Client.post('/customer/login', {
-      email: data.value.email,
-      password: data.value.password
+      email: customer.value.email,
+      password: customer.value.password
     })
     localStorage.setItem('token', res.data.token)
     return res.data.customer
@@ -35,9 +35,12 @@ export const LoginCustomer = async (data) => {
   }
 }
 
-export const ChangeCustomerPassword = async (data) => {
+export const ChangeCustomerPassword = async (customerId, passwords) => {
   try {
-    const res = await Client.put('/customer/profile', data)
+    const res = await Client.put(
+      `/customer/change/password/${customerId}`,
+      passwords
+    )
     return res.data
   } catch (e) {
     console.error(e)
