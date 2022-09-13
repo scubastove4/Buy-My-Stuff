@@ -1,12 +1,12 @@
 <template>
-  <main>
-    <section v-if="cart && cart.length > 0">
-      <ul>
-        <li v-for="item in cart" :key="item.id">
-          <h2>{{ item.name }}</h2>
-          <h3>{{ item.price }}</h3>
-          <img v-if="item.image" :src="item.image" :alt="item.name" />
+  <section id="cart-page" v-if="cart && cart.length > 0">
+    <h2 id="cart-title">Cart</h2>
+    <div id="cart-items">
+      <div class="cart-container" v-for="item in cart" :key="item.id">
+        <ItemCard :item="item" />
+        <span class="quantity-btns">
           <button
+            class="reduce-quantity"
             @click="
               reduceCartQuantity(item.cart_props.id, item.cart_props.quantity)
             "
@@ -16,19 +16,29 @@
           </button>
           <h3>{{ item.cart_props.quantity }}</h3>
           <button
+            class="increase-quantity"
             @click="
               increaseCartQuantity(item.cart_props.id, item.cart_props.quantity)
             "
           >
             +
           </button>
+        </span>
+        <span class="customer-cart-btns">
           <AddBookmarkButton :user="user" :item="item" />
-          <button @click="removeCartItem(item.cart_props.id)">
+          <button
+            class="remove-from-cart"
+            @click="removeCartItem(item.cart_props.id)"
+          >
             Remove Item
           </button>
-        </li>
-      </ul>
-      <button @click="proceedToCheckout">Proceed to Checkout</button>
+        </span>
+      </div>
+    </div>
+    <div id="checkout">
+      <button id="checkout-btn" @click="proceedToCheckout">
+        Proceed to Checkout
+      </button>
       <div v-if="checkout">
         <form @submit.prevent="submitPayment(user.id)">
           <label for="card-name">Name on Card: </label>
@@ -81,9 +91,9 @@
           </button>
         </form>
       </div>
-    </section>
-    <h1 v-else>Browse around! Nothing in your cart :(</h1>
-  </main>
+    </div>
+  </section>
+  <h1 v-else>Browse around! Nothing in your cart :(</h1>
 </template>
 
 <script setup>
@@ -100,6 +110,7 @@ import {
 import { PostPaymentIntent } from '../services/PaymentReq'
 import { CreateOrder } from '../services/OrderReq'
 import AddBookmarkButton from '../components/AddBookmarkButton.vue'
+import ItemCard from '../components/ItemCard.vue'
 
 defineProps(['user'])
 const route = useRoute()

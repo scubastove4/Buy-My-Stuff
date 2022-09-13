@@ -239,7 +239,8 @@ i .fa-bars {
 .add-bookmark,
 #change-email-btn,
 #change-password-btn,
-.remove-bookmark {
+.remove-bookmark,
+.remove-from-cart {
   height: 95%;
   width: 10em;
   margin-bottom: 5%;
@@ -305,7 +306,14 @@ i .fa-bars {
 }
 
 #email-form button,
-#password-form button {
+#password-form button,
+.reduce-quantity,
+.increase-quantity,
+#checkout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 45%;
   width: 30%;
   margin-left: 2%;
@@ -422,4 +430,130 @@ i .fa-bars {
 
 i .fa-face-frown {
   font-size: 2em;
+}
+
+/* ////////////   profile styling above   //////// */
+
+#cart-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+#cart-title {
+  font-size: 5em;
+  height: 10%;
+  padding-top: 5%;
+}
+
+#cart-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  height: 80%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.cart-container,
+.cart-container span {
+  background-color: transparent;
+}
+
+.cart-container {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
+
+  height: 20%;
+  width: 98%;
+}
+
+.cart-container .item-card {
+  grid-column-end: span 3;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cart-container .item-card img {
+  height: 90%;
+  width: 25%;
+
+  border-radius: 1em;
+}
+
+.quantity-btns {
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  align-self: center;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 3em;
+  height: 100%;
+  width: 100%;
+}
+
+.reduce-quantity {
+  margin: 0 4% 0 0;
+}
+
+.quantity-btns h3 {
+  max-height: max-content;
+}
+
+.increase-quantity {
+  margin-left: 0 0 0 4%;
+}
+
+.customer-cart-btns {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  align-self: center;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-cart-btns .add-bookmark,
+.remove-from-cart {
+  height: 50%;
+  width: 45%;
+}
+
+.customer-cart-btns .add-bookmark {
+  margin: 0 4% 0 0;
+}
+
+.remove-from-cart {
+  margin: 0 0 0 4%;
+}
+
+#checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 10%;
+  max-height: 50%;
+  width: 100%;
+}
+
+#checkout-btn {
+  font-size: 2em;
+  width: 35%;
 }
