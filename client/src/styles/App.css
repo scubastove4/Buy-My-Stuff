@@ -40,6 +40,13 @@ nav img {
   transition: 0.5s ease all;
 }
 
+.navigation {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
 .icon {
   display: flex;
   align-items: center;
@@ -56,15 +63,64 @@ i {
   transition: 0.5s ease all;
 }
 
+.icon-active {
+  transform: rotate(180deg);
+}
+
+.dropdown-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  max-width: 250px;
+  height: 33%;
+  background-color: white;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  border-radius: 0 1em 1em 0;
+  box-shadow: 1px 1px 10px black;
+  /* transition: 0.5s ease all; */
+}
+
+.dropdown-nav .user-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-nav .link {
+  /* margin-left: 0; */
+  color: #c7b493;
+  -webkit-text-stroke: 0.2px rgba(0, 0, 0, 0.8);
+}
+
+.dropdown-nav .router-link-exact-active {
+  color: black;
+  /* -webkit-text-stroke: 0.2px rgba(0, 0, 0, 0.8); */
+}
+
+.mobile-nav-enter-active,
+.mobile-nav-leave-active {
+  transition: 1s ease all;
+}
+.mobile-nav-enter-from,
+.mobile-nav-leave-to {
+  transform: translateX(-250px);
+}
+
+.mobile-nav-enter-to {
+  transform: translateX(0);
+}
+
 #main-content {
   height: 90%;
   background-color: #faf9fe;
 }
 
 @media (min-width: 1140px) {
-  nav {
+  /* nav {
     max-width: 1140px;
-  }
+  } */
 }
 
 /* /////////     global (also in indexMain.css), nav, footer above    ///// */

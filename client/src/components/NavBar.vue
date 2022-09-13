@@ -45,7 +45,7 @@
       <div v-show="mobileNav" class="dropdown-nav">
         <router-link class="link" to="/" name="Home">Home</router-link>
         <router-link class="link" to="/items" name="Items">Items</router-link>
-        <span v-if="user">
+        <span class="user-nav" v-if="user">
           <router-link
             class="link"
             v-if="!user.isAdmin"
@@ -83,14 +83,30 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref } from 'vue'
+import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import logo from '../../public/assets/creations.jpg'
 
 defineProps(['user'])
 defineEmits(['logout'])
 
 const collapsedNav = ref(null)
-const mobile = ref(true)
-const mobileNav = ref(null)
-// const windowWidth = ref(null)
+const mobile = ref(false)
+const mobileNav = ref(false)
+const windowWidth = ref(null)
+
+function toggleMobileNav() {
+  mobileNav.value = !mobileNav.value
+}
+
+function checkScreen() {
+  windowWidth.value = window.innerWidth
+  if (windowWidth.value <= 1000) {
+    return (mobile.value = true)
+  }
+  mobile.value = false
+  mobileNav.value = false
+  return
+}
+window.addEventListener('resize', checkScreen)
+onMounted(checkScreen)
 </script>
