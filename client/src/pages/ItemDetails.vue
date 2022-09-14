@@ -1,11 +1,15 @@
 <template>
-  <main v-if="item">
-    <button @click="backToCategory">{{ buttonText }}</button>
-    <button @click="backToItems">Back to All Items</button>
+  <main id="item-details" v-if="item">
+    <span id="item-back-buttons">
+      <button @click="backToCategory">{{ buttonText }}</button>
+      <button @click="backToItems">Back to All Items</button>
+    </span>
     <h1>{{ item.name }}</h1>
     <img v-if="item.image" :src="item.image" :alt="item.name" />
-    <h2>${{ item.price }}</h2>
-    <h3 v-if="item.description">{{ item.description }}</h3>
+    <h2 id="item-details-description" v-if="item.description">
+      {{ item.description }}
+    </h2>
+    <h2 id="item-details-price">${{ item.price }}</h2>
     <CartAndSaveButtons :item="item" :user="user" />
   </main>
 </template>
