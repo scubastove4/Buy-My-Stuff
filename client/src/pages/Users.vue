@@ -35,7 +35,7 @@
       </div>
     </section>
   </main>
-  <h1 v-else>Nothing saved :(</h1>
+  <h1 v-else>You do not have access to this page</h1>
 </template>
 
 <script setup>

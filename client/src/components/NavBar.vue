@@ -42,7 +42,11 @@
       ></i>
     </div>
     <transition name="mobile-nav">
-      <div v-show="mobileNav" class="dropdown-nav">
+      <div
+        v-show="mobileNav"
+        class="dropdown-nav"
+        :class="{ 'has-user': user }"
+      >
         <router-link class="link" to="/" name="Home" @click="toggleMobileNav"
           >Home</router-link
         >
