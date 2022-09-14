@@ -79,7 +79,7 @@ i .fa-bars {
   align-items: center;
   position: fixed;
   max-width: 250px;
-  height: 20%;
+  height: 33%;
   background-color: white;
   top: 0;
   left: 0;
@@ -89,7 +89,7 @@ i .fa-bars {
 }
 
 .has-user {
-  height: 33%;
+  height: 45%;
 }
 
 .dropdown-nav .user-nav {
