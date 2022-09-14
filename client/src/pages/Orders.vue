@@ -1,6 +1,6 @@
 <template>
   <main v-if="user && user.isAdmin">
-    <div v-if="orders.length > 0">
+    <div v-if="orders && orders.length > 0">
       <OrderCard v-for="order in orders" :key="order.id" :order="order" />
     </div>
     <h1 v-else>Put out some ads</h1>
