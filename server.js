@@ -21,7 +21,33 @@ const PORT = process.env.PORT || 3001
 //   }
 // }
 app.all('*', cors())
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
+//   let allowedOrigins = [
+//     'https://buy-my-stuff-online.netlify.app',
+//     'http://localhost:8080'
+//   ] // list of url-s
+// let origin = req.headers.origin
+// if (allowedOrigins.indexOf(origin) > -1) {
+//   res.set({
+//     'Access-Control-Allow-Origin': origin,
+//     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+//   })
+// }
+// res.header(
+//   'Access-Control-Allow-Headers',
+//   'Origin, X-Requested-With, Content-Type, Accept'
+// )
+// res.header('Access-Control-Expose-Headers', 'Content-Disposition')
+// next()
+// res.setHeader('access-control-allow-0rigin', '*')
+// res.header(
+//   'Access-Control-Allow-Headers',
+//   'Origin, X-Requested-With, Content-Type, Accept'
+// )
+//
+//   next()
+// })
+app.options('/*', function (req, res, next) {
   let allowedOrigins = [
     'https://buy-my-stuff-online.netlify.app',
     'http://localhost:8080'
@@ -30,24 +56,15 @@ app.use((req, res, next) => {
   if (allowedOrigins.indexOf(origin) > -1) {
     res.set({
       'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'Content-Type, Authorization, Content-Length, X-Requested-With'
     })
+    next()
   }
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  res.header('Access-Control-Expose-Headers', 'Content-Disposition')
-  next()
-  // res.setHeader('access-control-allow-0rigin', '*')
-  // res.header(
-  //   'Access-Control-Allow-Headers',
-  //   'Origin, X-Requested-With, Content-Type, Accept'
-  // )
-  // next()
 })
 
-app.use(cors({ origin: '*', credentials: true }))
+app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 
