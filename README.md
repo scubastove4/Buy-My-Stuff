@@ -80,6 +80,7 @@ To use JWT and BCrypt you will need to add your own salt rounds and secret wword
   - [ ] Allow customers to enter specific order details
   - [ ] Send receipts when payments go through
   - [ ] Delete or archive completed orders
+  - [ ] Implement product and category search
 
 - Completed updates
 
