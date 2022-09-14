@@ -183,7 +183,7 @@ function setBillingFormValues(e) {
 async function proceedToCheckout() {
   !checkout.value ? (checkout.value = true) : (checkout.value = false)
   setItemPrices(cart)
-  secret.value = await PostPaymentIntent(itemPrices.value)
+  if (checkout.value) secret.value = await PostPaymentIntent(itemPrices.value)
   elements.value = stripe.value.elements()
   card.value = elements.value.create('card') //style
   card.value.mount('#credit-card-mount')
