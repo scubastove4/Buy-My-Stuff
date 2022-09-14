@@ -7,46 +7,7 @@ const AppRouter = require('./routes/AppRouter')
 
 const PORT = process.env.PORT || 3001
 
-// const whitelist = [
-//   'http://localhost:8080',
-//   'https://buy-my-stuff-online.netlify.app'
-// ]
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     if (whitelist.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
 app.all('*', cors())
-// app.use((req, res, next) => {
-//   let allowedOrigins = [
-//     'https://buy-my-stuff-online.netlify.app',
-//     'http://localhost:8080'
-//   ] // list of url-s
-// let origin = req.headers.origin
-// if (allowedOrigins.indexOf(origin) > -1) {
-//   res.set({
-//     'Access-Control-Allow-Origin': origin,
-//     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
-//   })
-// }
-// res.header(
-//   'Access-Control-Allow-Headers',
-//   'Origin, X-Requested-With, Content-Type, Accept'
-// )
-// res.header('Access-Control-Expose-Headers', 'Content-Disposition')
-// next()
-// res.setHeader('access-control-allow-0rigin', '*')
-// res.header(
-//   'Access-Control-Allow-Headers',
-//   'Origin, X-Requested-With, Content-Type, Accept'
-// )
-//
-//   next()
-// })
 app.options('/*', function (req, res, next) {
   let allowedOrigins = [
     'http://www.buy-my-stuff-online.com',
@@ -57,7 +18,7 @@ app.options('/*', function (req, res, next) {
   let origin = req.headers.origin
   if (allowedOrigins.indexOf(origin) > -1) {
     res.set({
-      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Origin': `${origin}`,
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers':
         'Content-Type, Authorization, Content-Length, X-Requested-With, Via, X-Forwarded-For, X-Forwarded-Port, X-Forwarded-Proto, X-Request-Id, X-Request-Start'
