@@ -250,7 +250,7 @@ button:hover {
 
 .category-item-container .item-card img {
   height: 50%;
-  width: 100%;
+  width: 80%;
   border-radius: 1em;
 }
 
@@ -572,7 +572,7 @@ button:hover {
 
 .bookmark-container .item-card img {
   height: 50%;
-  width: 100%;
+  width: 80%;
 
   border-radius: 1em;
 }
