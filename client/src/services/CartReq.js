@@ -9,9 +9,14 @@ export const GetCartByCustomerId = async (customerId) => {
   }
 }
 
-export const PostCart = async (data) => {
+export const PostCart = async (customerId, itemId) => {
   try {
-    const res = await Client.post('/cart/', data)
+    // const cartItem = {
+    //   customerId: customerId,
+    //   itemId: itemId
+    // }
+    console.log(customerId, itemId)
+    const res = await Client.post(`/cart/${customerId}/${itemId}`)
     return res.data
   } catch (e) {
     console.error(e)
@@ -21,8 +26,7 @@ export const PostCart = async (data) => {
 export const UpdateCartItem = async (cartItemId, quantity) => {
   try {
     const res = await Client.put(`/cart/${cartItemId}`, quantity)
-    console.log(res)
-    // return res.data
+    return res.data
   } catch (e) {
     console.error(e)
   }

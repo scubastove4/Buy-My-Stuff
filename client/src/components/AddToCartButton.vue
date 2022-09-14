@@ -5,25 +5,28 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue' //defineEmits
+import { defineProps } from 'vue' //defineEmits ref
 
 import { PostCart } from '../services/CartReq'
 
 defineProps(['user', 'item'])
 
-const cartItem = ref({
-  customerId: null,
-  itemId: null
-})
+// const cartItem = ref({
+//   customerId: null,
+//   itemId: null
+// })
 async function AddToCart(customerId, itemId) {
-  cartItem.value = {
-    customerId: customerId,
-    itemId: itemId
-  }
-  await PostCart(cartItem)
-  cartItem.value = {
-    customerId: null,
-    itemId: null
-  }
+  console.log(customerId, itemId)
+  // cartItem.value = {
+  //   customerId: customerId,
+  //   itemId: itemId
+  // }
+  // console.log(cartItem.value)
+  const res = await PostCart(customerId, itemId)
+  console.log(res)
+  // cartItem.value = {
+  //   customerId: null,
+  //   itemId: null
+  // }
 }
 </script>
