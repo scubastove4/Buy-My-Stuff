@@ -3,6 +3,7 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 const SendPaymentIntent = async (req, res) => {
   try {
+    console.log(req.headers)
     const amount = req.body.reduce((a, v) => {
       return a + v.price * v.quantity
     }, 0)

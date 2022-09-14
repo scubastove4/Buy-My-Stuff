@@ -60,8 +60,9 @@ app.options('/*', function (req, res, next) {
       'Access-Control-Allow-Headers':
         'Content-Type, Authorization, Content-Length, X-Requested-With'
     })
-    next()
+    console.log(res.headers)
   }
+  next()
 })
 
 app.use(cors())
