@@ -15,10 +15,10 @@ const SendPaymentIntent = async (req, res) => {
         automatic_payment_methods: {
           enabled: true
         }
-      },
-      {
-        idempotencyKey: req.body.idempotencyKey
       }
+      // {
+      //   idempotencyKey: req.body.idempotencyKey
+      // }
     )
     res.status(200).send({
       clientSecret: paymentIntent.client_secret
