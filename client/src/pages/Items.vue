@@ -165,7 +165,7 @@ function changeEditingItemValues(name, val) {
 }
 async function submitEditingItemForm(user) {
   let item = { ...editingItem.value, adminId: user.id }
-  const updatedItem = await UpdateItem(editingItem.value.id, item)
+  await UpdateItem(editingItem.value.id, item)
   setItems()
   editing.value = false
   editingItem.value = {
