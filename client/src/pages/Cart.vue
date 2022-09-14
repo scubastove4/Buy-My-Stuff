@@ -1,7 +1,7 @@
 <template>
   <section id="cart-page" v-if="cart && cart.length > 0">
     <h2 id="cart-title">Cart</h2>
-    <div id="cart-items">
+    <div id="cart-items" v-if="!checkout">
       <div class="cart-container" v-for="item in cart" :key="item.id">
         <ItemCard :item="item" />
         <span class="quantity-btns">
@@ -35,60 +35,68 @@
         </span>
       </div>
     </div>
+    <button
+      class="checkout-btn"
+      :class="{ 'in-checkout': checkout }"
+      @click="proceedToCheckout"
+    >
+      Proceed to Checkout
+    </button>
     <div id="checkout">
-      <button id="checkout-btn" @click="proceedToCheckout">
-        Proceed to Checkout
-      </button>
-      <div v-if="checkout">
+      <div id="checkout-form-container" v-if="checkout">
         <form id="checkout-form" @submit.prevent="submitPayment(user.id)">
-          <label for="card-name">Name on Card: </label>
-          <input
-            type="text"
-            name="name"
-            id="card-name"
-            @input="setBillingFormValues"
-          />
-          <label for="card-address-one">Address 1: </label>
-          <input
-            type="text"
-            name="line1"
-            id="card-address-one"
-            @input="setBillingFormValues"
-          />
-          <label for="card-address">Address 2: </label>
-          <input
-            type="text"
-            name="line2"
-            id="card-address-two"
-            @input="setBillingFormValues"
-          />
-          <label for="card-city">City: </label>
-          <input
-            type="text"
-            name="city"
-            id="card-city"
-            @input="setBillingFormValues"
-          />
-          <label for="card-state">State: </label>
-          <input
-            type="text"
-            name="state"
-            id="card-state"
-            @input="setBillingFormValues"
-          />
-          <label for="card-zip">ZIP: </label>
-          <input
-            type="text"
-            name="postal_code"
-            id="card-zip"
-            @input="setBillingFormValues"
-          />
-          <label for="credit-card-mount">Credit Card Info: </label>
-          <div id="credit-card-mount"></div>
-          <p v-if="paymentError">{{ paymentError }}</p>
-          <button type="submit" :disabled="loading">
-            {{ !loading ? 'pay!!!!' : 'Sending payment' }}
-          </button>
+          <div id="billing-info">
+            <label for="card-name">Name on Card: </label>
+            <input
+              type="text"
+              name="name"
+              id="card-name"
+              @input="setBillingFormValues"
+            />
+            <label for="card-address-one">Address 1: </label>
+            <input
+              type="text"
+              name="line1"
+              id="card-address-one"
+              @input="setBillingFormValues"
+            />
+            <label for="card-address">Address 2: </label>
+            <input
+              type="text"
+              name="line2"
+              id="card-address-two"
+              @input="setBillingFormValues"
+            />
+            <label for="card-city">City: </label>
+            <input
+              type="text"
+              name="city"
+              id="card-city"
+              @input="setBillingFormValues"
+            />
+            <label for="card-state">State: </label>
+            <input
+              type="text"
+              name="state"
+              id="card-state"
+              @input="setBillingFormValues"
+            />
+            <label for="card-zip">ZIP: </label>
+            <input
+              type="text"
+              name="postal_code"
+              id="card-zip"
+              @input="setBillingFormValues"
+            />
+          </div>
+          <div id="card-details">
+            <label for="credit-card-mount">Credit Card Info: </label>
+            <div id="credit-card-mount"></div>
+            <p v-if="paymentError">{{ paymentError }}</p>
+            <button type="submit" :disabled="loading">
+              {{ !loading ? 'pay!!!!' : 'Sending payment' }}
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -165,6 +173,12 @@ const billingFormValues = ref({
   }
 })
 
+// const elementAppearance = ref({
+//   theme: 'night',
+
+//   variables: {}
+// })
+
 function setItemPrices(cart) {
   cart.value.forEach((item) => {
     itemPrices.value.push({
@@ -191,6 +205,8 @@ async function proceedToCheckout() {
       itemPrices.value
       // idempotencyKey.value
     )
+  // let clientSecret = `${secret.value.clientSecret}`
+  // let appearance = elementAppearance.value
   elements.value = stripe.value.elements()
   card.value = elements.value.create('card') //style
   card.value.mount('#credit-card-mount')

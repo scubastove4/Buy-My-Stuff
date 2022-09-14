@@ -474,7 +474,7 @@ button:hover {
 #password-form button,
 .reduce-quantity,
 .increase-quantity,
-#checkout-btn {
+.checkout-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -713,24 +713,64 @@ i .fa-face-frown {
 
 #checkout {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  height: 10%;
-  max-height: 50%;
+  height: 70%;
+  /* max-height: 50%; */
   width: 100%;
   overflow-y: scroll;
 }
 
-#checkout-btn {
+.checkout-btn {
   font-size: 2em;
-  width: 35%;
+  width: 40%;
+  height: 20%;
+}
+
+.in-checkout {
+  height: 9%;
+  margin-bottom: 2%;
+}
+
+#checkout-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
 }
 
 #checkout-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 90%;
+}
+
+#checkout-form label {
+  font-size: 3em;
+}
+
+#billing-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#card-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#credi-card-mount {
+  height: 30%;
+  width: 100%;
 }
 
 /* //////////////  checkout styling above   ///////// */
