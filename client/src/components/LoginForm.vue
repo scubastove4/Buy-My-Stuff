@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="$emit('login')" id="login-form">
     <span>
-      <label for="login-email">Email</label>
+      <label for="login-email">Email: </label>
       <input
         type="text"
         id="login-email"
@@ -14,7 +14,7 @@
       />
     </span>
     <span>
-      <label for="login-password">Password</label>
+      <label for="login-password">Password: </label>
       <input
         type="password"
         id="login-password"

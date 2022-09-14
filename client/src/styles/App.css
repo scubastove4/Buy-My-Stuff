@@ -809,3 +809,74 @@ i .fa-face-frown {
   -webkit-backdrop-filter: blur(8.1px);
   border: 1px solid rgba(199, 180, 147, 0.18);
 }
+
+/* /////////////   contact page above   /////////// */
+
+#login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+#login-page button {
+  height: 9%;
+  width: 60%;
+  /* font-size: 4em; */
+  background: rgba(199, 180, 147, 0.15);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 40%;
+  width: 100%;
+}
+
+#login-form span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  height: 30%;
+  width: 98%;
+}
+
+#login-form span label {
+  font-size: 4.5em;
+  margin-right: 3%;
+}
+
+#login-form span input {
+  width: 50%;
+  height: 30%;
+}
+
+#login-form button {
+  /* width: 40%; */
+  height: 15%;
+  font-size: 4em;
+}
+
+#up-or-in {
+  font-size: 3.5em;
+}
+
+#login-img {
+  height: 50%;
+  width: 98%;
+}
+
+/* /////////////   login page above   /////////// */

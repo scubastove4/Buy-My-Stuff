@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="login-page">
     <LoginForm
       v-if="upOrIn"
       :loginValues="loginValues"
@@ -15,15 +15,18 @@
     />
 
     <button id="up-or-in" @click="setUpOrIn">{{ upOrInText }}</button>
+    <img id="login-img" :src="logo" alt="" />
   </div>
 </template>
 
 <script setup>
 import { ref, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
+
+import { SignUpCustomer, LoginCustomer } from '../services/CustomerReq'
 import SignUpForm from '../components/SignUpForm.vue'
 import LoginForm from '../components/LoginForm.vue'
-import { SignUpCustomer, LoginCustomer } from '../services/CustomerReq'
+import logo from '../../public/assets/creations.jpg'
 
 const router = useRouter()
 
