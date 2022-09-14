@@ -49,6 +49,8 @@ app.all('*', cors())
 // })
 app.options('/*', function (req, res, next) {
   let allowedOrigins = [
+    'http://www.buy-my-stuff-online.com',
+    'https://www.buy-my-stuff-online.com',
     'https://buy-my-stuff-online.netlify.app',
     'http://localhost:8080'
   ] // list of url-s
