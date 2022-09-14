@@ -14,7 +14,7 @@ app.options('/*', function (req, res, next) {
     'https://www.buy-my-stuff-online.com',
     'https://buy-my-stuff-online.netlify.app',
     'http://localhost:8080'
-  ] // list of url-s
+  ]
   let origin = req.headers.origin
   if (allowedOrigins.indexOf(origin) > -1) {
     res.set({
