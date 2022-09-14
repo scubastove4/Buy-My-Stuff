@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <h2 v-if="customer">{{ customer.firstName }}</h2>
-    <h2 v-else>{{ admin.firstName }}</h2>
+  <div class="user-card">
+    <span v-if="customer">
+      <h2>{{ customer.firstName }}</h2>
+      <h2>{{ customer.email }}</h2>
+    </span>
+    <span v-else>
+      <h2>{{ admin.firstName }}</h2>
+      <h2>{{ admin.email }}</h2>
+    </span>
   </div>
 </template>
 

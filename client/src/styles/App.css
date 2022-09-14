@@ -831,8 +831,7 @@ i .fa-face-frown {
 #admin-login button {
   height: 9%;
   width: 60%;
-  /* font-size: 4em; */
-  background: rgba(199, 180, 147, 0.15);
+  background: rgba(199, 180, 147, 0.3);
   border-radius: 1.2em;
   box-shadow: 0 4px 30px rgba(251, 248, 247.1);
   backdrop-filter: blur(8.1px);
@@ -872,7 +871,6 @@ i .fa-face-frown {
 }
 
 #login-form button {
-  /* width: 40%; */
   height: 15%;
   font-size: 4em;
 }
@@ -896,7 +894,8 @@ i .fa-face-frown {
   justify-content: flex-start;
 }
 
-#sign-up-form span {
+#sign-up-form span,
+#admin-sign-up-form span {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -911,17 +910,133 @@ i .fa-face-frown {
   margin-right: 3%;
 }
 
-#sign-up-form span input {
+#sign-up-form span input,
+#admin-sign-up-form span input {
   width: 47%;
   height: 47%;
   font-size: 2.2em;
   text-align: center;
 }
 
-#sign-up-form button {
+#sign-up-form button,
+#admin-sign-up-form button {
   /* width: 40%; */
   height: 15%;
   font-size: 4em;
+  background: rgba(199, 180, 147, 0.3);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
 }
 
 /* /////////////   sign up form above   /////////// */
+
+#user-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+#customer-view-title {
+  height: 5%;
+  font-size: 3em;
+}
+
+#customer-view,
+#admin-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+
+  height: 40%;
+  width: 80%;
+  border: 1px solid black;
+  border-radius: 1em;
+  overflow-y: scroll;
+}
+
+.customer-container,
+.admin-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 20%;
+  width: 90%;
+  border: 1px solid black;
+  border-radius: 1em;
+  margin: 2% 0;
+}
+
+.customer-container button,
+.admin-container button {
+  font-size: 2em;
+  height: 50%;
+  width: 40%;
+  background: rgba(199, 180, 147, 0.3);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
+#admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 5%;
+  width: 90%;
+}
+
+#admin-view-title {
+  font-size: 3em;
+  margin-right: 4%;
+}
+
+#add-admin-btn {
+  width: 30%;
+  height: 80%;
+  font-size: 3em;
+  background: rgba(199, 180, 147, 0.3);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
+.user-card span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-card h2 {
+  font-size: 2.3em;
+}
+
+#admin-sign-up-form {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  height: 40%;
+}
+
+#admin-sign-up-form span label {
+  font-size: 3em;
+  margin-right: 3%;
+}
+
+/* /////////////   admin user page above   /////////// */

@@ -1,12 +1,20 @@
 <template>
-  <main v-if="user && user.isAdmin">
-    <h2>Customers</h2>
-    <section v-for="customer in allCustomers" :key="customer.id">
-      <UserCard :customer="customer" />
-      <button @click="deleteCustomer(customer.id)">Delete Customer</button>
+  <main id="user-page" v-if="user && user.isAdmin">
+    <h2 id="customer-view-title">Customers</h2>
+    <section id="customer-view">
+      <div
+        class="customer-container"
+        v-for="customer in allCustomers"
+        :key="customer.id"
+      >
+        <UserCard :customer="customer" />
+        <button @click="deleteCustomer(customer.id)">Delete Customer</button>
+      </div>
     </section>
-    <h2>Admins</h2>
-    <button @click="changeAddingAdmin">Add Admin</button>
+    <span id="admin-header">
+      <h2 id="admin-view-title">Admins</h2>
+      <button id="add-admin-btn" @click="changeAddingAdmin">Add Admin</button>
+    </span>
     <SignUpForm
       v-if="addingAdmin"
       :user="user"
@@ -15,14 +23,16 @@
       @setNewAdminValues="setNewAdminValues"
       @createNewAdmin="createNewAdmin"
     />
-    <section v-for="admin in allAdmins" :key="admin.id">
-      <UserCard :admin="admin" />
-      <button
-        @click="deleteAdmin(allAdmins, admin.id, user.id)"
-        :disabled="allAdmins.length === 1"
-      >
-        Delete Admin
-      </button>
+    <section v-else id="admin-view">
+      <div class="admin-container" v-for="admin in allAdmins" :key="admin.id">
+        <UserCard :admin="admin" />
+        <button
+          @click="deleteAdmin(allAdmins, admin.id, user.id)"
+          :disabled="allAdmins.length === 1"
+        >
+          Delete Admin
+        </button>
+      </div>
     </section>
   </main>
   <h1 v-else>Nothing saved :(</h1>

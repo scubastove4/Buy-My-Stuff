@@ -6,10 +6,10 @@
     id="admin-sign-up-form"
   >
     <span>
-      <label for="sign-up-name">First Name:</label>
+      <label for="admin-sign-up-name">First Name:</label>
       <input
         type="text"
-        id="sign-up-name"
+        id="admin-sign-up-name"
         name="firstName"
         placeholder="Michael"
         :value="newAdminValues.firstName"
@@ -20,10 +20,10 @@
       />
     </span>
     <span>
-      <label for="sign-up-email">Email:</label>
+      <label for="admin-sign-up-email">Email:</label>
       <input
         type="text"
-        id="sign-up-email"
+        id="admin-sign-up-email"
         name="email"
         placeholder="michael@michael.com"
         :value="newAdminValues.email"
@@ -35,10 +35,10 @@
       <p v-if="newAdmin">{{ newAdmin.msg && newAdmin.msg }}</p>
     </span>
     <span>
-      <label for="sign-up-password">Password:</label>
+      <label for="admin-sign-up-password">Password:</label>
       <input
         type="password"
-        id="sign-up-password"
+        id="admin-sign-up-password"
         name="password"
         placeholder="Minimum 8 characters"
         :value="newAdminValues.password"
@@ -50,10 +50,10 @@
       />
     </span>
     <span>
-      <label for="sign-up-confirm-password">Confirm Password:</label>
+      <label for="admin-sign-up-confirm-password">Confirm Password:</label>
       <input
         type="password"
-        id="sign-up-confirm-password"
+        id="admin-sign-up-confirm-password"
         name="confirmPassword"
         placeholder="Must match"
         :value="newAdminValues.confirmPassword"
