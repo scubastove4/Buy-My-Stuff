@@ -109,7 +109,6 @@ const ChangePassword = async (req, res) => {
 }
 
 const DeleteAdmin = async (req, res) => {
-  console.log(req.params.admin_id)
   try {
     await Admin.destroy({ where: { id: req.params.admin_id } })
     res.send({

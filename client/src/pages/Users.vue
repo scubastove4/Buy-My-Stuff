@@ -105,7 +105,6 @@ function resetNewAdminValues() {
 }
 async function createNewAdmin() {
   newAdmin.value = await SignUpAdmin(newAdminValues.value)
-  console.log(newAdminValues)
   if (newAdmin.value.msg) {
     return newAdmin.value.msg
   } else {

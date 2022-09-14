@@ -17,19 +17,10 @@ import OrderCard from '../components/OrderCard.vue'
 defineProps(['user'])
 
 const orders = ref(null)
-// const orderItems = ref([])
 
 async function GetOrders() {
   const res = await GetAllOrders()
   orders.value = res
-  // if (orders.value.items) {
-  //   orders.value.items.forEach(async (item) => {
-  //     let objItem = await JSON.parse(item)
-  //     console.log(objItem)
-  //     // orderItems.value.push(objItem)
-  //   })
-  //   orders.value.items = orderItems.value
-  // }
 }
 
 onMounted(GetOrders)

@@ -74,7 +74,6 @@ async function setCategories() {
 }
 
 const router = useRouter()
-// const route = useRoute() useRoute
 
 /////////////  get all items  /////////////
 const items = ref([])
@@ -135,9 +134,7 @@ async function submitNewItemForm(user) {
 function handleImage(upload) {
   const file = upload[0]
   if (file) {
-    // console.log(file)
     newItemValues.value.image = file
-    // console.log(newItemValues.value, newItemValues.value.image)
   } else {
     newItemValues.value.image = null
   }
@@ -169,7 +166,6 @@ function changeEditingItemValues(name, val) {
 async function submitEditingItemForm(user) {
   let item = { ...editingItem.value, adminId: user.id }
   const updatedItem = await UpdateItem(editingItem.value.id, item)
-  console.log(updatedItem)
   setItems()
   editing.value = false
   editingItem.value = {
@@ -188,9 +184,6 @@ function handleEditImage(upload) {
   if (file) {
     editingItem.value.image = file
   }
-  // else {
-  //   editingItem.value.image = null don't need?
-  // }
 }
 
 /////////////  delete item  /////////////

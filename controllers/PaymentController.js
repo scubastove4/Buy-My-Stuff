@@ -5,11 +5,9 @@ const stripe = Stripe(`${process.env.STRIPE_SECRET_KEY}`)
 
 const SendPaymentIntent = async (req, res) => {
   try {
-    console.log(req.body.itemPrices)
     const amount = req.body.itemPrices.reduce((a, v) => {
       return a + v.price * v.quantity
     }, 0)
-    console.log(amount)
     const paymentIntent = await stripe.paymentIntents.create(
       {
         amount: amount * 100,

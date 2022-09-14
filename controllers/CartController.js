@@ -60,7 +60,6 @@ const DeleteCartItem = async (req, res) => {
 
 const DeleteWholeCart = async (req, res) => {
   try {
-    console.log(req.params.customerId)
     await Cart.destroy({
       where: {
         customerId: req.params.customerId

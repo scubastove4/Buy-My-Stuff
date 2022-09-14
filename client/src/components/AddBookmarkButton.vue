@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue' //defineEmits
+import { defineProps, ref } from 'vue'
 
 import { PostBookmark } from '../services/BookmarkReq'
 

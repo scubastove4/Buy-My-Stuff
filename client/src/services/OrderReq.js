@@ -11,13 +11,12 @@ export const GetAllOrders = async () => {
 
 export const CreateOrder = async (customerId, orderId, order) => {
   try {
-    console.log(orderId, order)
     const orderInfo = {
       orderId: orderId,
       items: order
     }
     const res = await Client.post(`/orders/${customerId}`, orderInfo)
-    console.log(res)
+    return res
   } catch (e) {
     console.error(e)
   }

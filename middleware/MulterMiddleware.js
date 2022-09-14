@@ -14,8 +14,6 @@ const multer = Multer({
     hooks: {
       beforeUpload(req, file) {
         file.originalname = new Date().toISOString() + file.originalname
-        // || 'No image'
-        console.log('before upload:', file)
       }
     }
   })

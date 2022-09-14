@@ -209,15 +209,12 @@ async function proceedToCheckout() {
   // let appearance = elementAppearance.value
   loading.value = false
   elements.value = stripe.value.elements()
-  console.log(elements.value)
   card.value = elements.value.create('card') //style
-  console.log(card.value)
   card.value.mount('#credit-card-mount')
 }
 
 async function deleteCart(userId) {
   await DeleteWholeCart(userId)
-  console.log(userId)
 }
 
 //// set cart to order
@@ -230,7 +227,6 @@ async function addCartToOrder(userId, orderId, cart) {
       itemQuantity: item.cart_props.quantity
     })
   })
-  console.log(order.value)
   await CreateOrder(userId, orderId, order.value)
 }
 
@@ -252,7 +248,6 @@ async function submitPayment(userId) {
           loading.value = false
         } else {
           if (result.paymentIntent.status === 'succeeded') {
-            // console.log(res, userId)
             await addCartToOrder(userId, result.paymentIntent.id, cart.value)
             await deleteCart(userId)
             order.value = []

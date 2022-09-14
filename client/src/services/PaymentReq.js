@@ -5,6 +5,5 @@ export const PostPaymentIntent = async (itemPrices) => {
     itemPrices: itemPrices
     // idempotencyKey   idempotencyKey: idempotencyKey
   })
-  // console.log(res.data)
   return res.data
 }

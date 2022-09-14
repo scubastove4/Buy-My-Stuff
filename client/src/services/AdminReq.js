@@ -29,7 +29,6 @@ export const LoginAdmin = async (data) => {
       password: data.value.password
     })
     localStorage.setItem('token', res.data.token)
-    // console.log(res.data.admin)
     return res.data.admin
   } catch (e) {
     console.error(e)
