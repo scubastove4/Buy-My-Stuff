@@ -138,6 +138,10 @@ input {
   border: 1px solid rgba(199, 180, 147, 0.18);
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 /* /////////     global (also in indexMain.css), nav, footer above    ///// */
 
 #home,
@@ -812,7 +816,8 @@ i .fa-face-frown {
 
 /* /////////////   contact page above   /////////// */
 
-#login-page {
+#login-page,
+#admin-login {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -822,7 +827,8 @@ i .fa-face-frown {
   width: 100%;
 }
 
-#login-page button {
+#login-page button,
+#admin-login button {
   height: 9%;
   width: 60%;
   /* font-size: 4em; */
@@ -878,6 +884,10 @@ i .fa-face-frown {
 #login-img {
   height: 50%;
   width: 98%;
+}
+
+#admin-login h1 {
+  font-size: 5em;
 }
 
 /* /////////////   login page/form above   /////////// */

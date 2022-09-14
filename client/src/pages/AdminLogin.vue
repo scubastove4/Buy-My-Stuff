@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div id="admin-login">
+    <h1>Manager Login</h1>
     <LoginForm
       :loginValues="loginValues"
       @setLoginValues="setLoginValues"
