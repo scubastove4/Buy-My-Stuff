@@ -207,10 +207,12 @@ async function proceedToCheckout() {
     )
   // let clientSecret = `${secret.value.clientSecret}`
   // let appearance = elementAppearance.value
-  elements.value = stripe.value.elements()
-  card.value = elements.value.create('card') //style
-  card.value.mount('#credit-card-mount')
   loading.value = false
+  elements.value = stripe.value.elements()
+  console.log(elements.value)
+  card.value = elements.value.create('card') //style
+  console.log(card.value)
+  card.value.mount('#credit-card-mount')
 }
 
 async function deleteCart(userId) {

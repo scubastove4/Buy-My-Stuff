@@ -18,7 +18,7 @@
         @changeNewPasswordValues="changeNewPasswordValues"
         @changePassword="changePassword"
       />
-      <span id="user-update-btns" v-if="!scrollHide">
+      <span id="user-update-btns">
         <button id="change-email-btn" @click="toggleChangingEmail">
           Change Email
         </button>
