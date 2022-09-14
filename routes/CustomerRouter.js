@@ -18,7 +18,7 @@ router.put(
   controllers.CustomerController.ChangePassword
 )
 
-//////////      used admin aor customer middleware here     /////////
+//////////      used admin aor customer middleware here     ////////
 router.delete(
   '/:customer_id',
   middleware.AdCustMiddleware.stripToken,
