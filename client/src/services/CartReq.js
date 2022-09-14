@@ -11,7 +11,7 @@ export const GetCartByCustomerId = async (customerId) => {
 
 export const PostCart = async (data) => {
   try {
-    const res = await Client.post('/cart/', data.value)
+    const res = await Client.post('/cart/', data)
     return res.data
   } catch (e) {
     console.error(e)
