@@ -19,10 +19,23 @@ app.options('/*', function (req, res, next) {
   if (allowedOrigins.indexOf(origin) > -1) {
     res.set({
       'Access-Control-Allow-Origin': `${origin}`,
+      'Access-Control-Allow-Credentials': true,
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers':
-        'Content-Type, Authorization, Content-Length, X-Requested-With, Via, X-Forwarded-For, X-Forwarded-Port, X-Forwarded-Proto, X-Request-Id, X-Request-Start'
+        'Origin, Content-Type, Authorization, Content-Length, X-Requested-With, Via, X-Forwarded-For, X-Forwarded-Port, X-Forwarded-Proto, X-Request-Id, X-Request-Start, Accept, multipart/form-data',
+      'X-Frame-Options': 'sameorigin'
     })
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+    res.setHeader('X-Frame-Options', 'sameorigin')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept, multipart/form-data'
+    )
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'HEAD,GET,POST,DELETE,OPTIONS,PUT'
+    )
     console.log(res.header)
   }
   next()
