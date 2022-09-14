@@ -60,7 +60,7 @@ app.options('/*', function (req, res, next) {
       'Access-Control-Allow-Headers':
         'Content-Type, Authorization, Content-Length, X-Requested-With'
     })
-    console.log(res.headers)
+    console.log(res.header)
   }
   next()
 })
