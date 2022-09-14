@@ -60,7 +60,7 @@ app.options('/*', function (req, res, next) {
       'Access-Control-Allow-Origin': origin,
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers':
-        'Content-Type, Authorization, Content-Length, X-Requested-With'
+        'Content-Type, Authorization, Content-Length, X-Requested-With, Via, X-Forwarded-For, X-Forwarded-Port, X-Forwarded-Proto, X-Request-Id, X-Request-Start'
     })
     console.log(res.header)
   }
