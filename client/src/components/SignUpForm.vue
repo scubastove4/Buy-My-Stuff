@@ -3,7 +3,7 @@
   <form
     v-if="user && user.isAdmin"
     @submit.prevent="$emit('createNewAdmin')"
-    id="sign-up-form"
+    id="admin-sign-up-form"
   >
     <span>
       <label for="sign-up-name">First Name:</label>

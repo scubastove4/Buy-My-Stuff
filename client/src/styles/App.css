@@ -834,7 +834,8 @@ i .fa-face-frown {
   border: 1px solid rgba(199, 180, 147, 0.18);
 }
 
-#login-form {
+#login-form,
+#sign-up-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -879,4 +880,38 @@ i .fa-face-frown {
   width: 98%;
 }
 
-/* /////////////   login page above   /////////// */
+/* /////////////   login page/form above   /////////// */
+
+#sign-up-form {
+  justify-content: flex-start;
+}
+
+#sign-up-form span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  height: 20%;
+  width: 98%;
+}
+
+#sign-up-form span label {
+  font-size: 3.5em;
+  margin-right: 3%;
+}
+
+#sign-up-form span input {
+  width: 47%;
+  height: 47%;
+  font-size: 2.2em;
+  text-align: center;
+}
+
+#sign-up-form button {
+  /* width: 40%; */
+  height: 15%;
+  font-size: 4em;
+}
+
+/* /////////////   sign up form above   /////////// */
