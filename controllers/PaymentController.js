@@ -17,7 +17,7 @@ const SendPaymentIntent = async (req, res) => {
         }
       },
       {
-        idempotencyKey: 'VdQb4bnVnLUDbvMx'
+        idempotencyKey: req.body.idempotencyKey
       }
     )
     res.status(200).send({
