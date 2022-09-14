@@ -100,7 +100,7 @@
 import { defineProps, ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loadStripe } from '@stripe/stripe-js'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'    uuid and idempotency post-course
 
 import {
   GetCartByCustomerId,
@@ -151,7 +151,7 @@ const loading = ref(true)
 const elements = ref(null)
 const card = ref(null)
 const paymentError = ref(null)
-const idempotencyKey = ref(null)
+// const idempotencyKey = ref(null)
 const STRIPE_PUB_KEY = `${process.env.VUE_APP_STRIPE_PUB_KEY}`
 const itemPrices = ref([])
 const billingFormValues = ref({
@@ -185,11 +185,11 @@ function setBillingFormValues(e) {
 async function proceedToCheckout() {
   !checkout.value ? (checkout.value = true) : (checkout.value = false)
   setItemPrices(cart)
-  if (!idempotencyKey.value) idempotencyKey.value = uuidv4()
+  // if (!idempotencyKey.value) idempotencyKey.value = uuidv4()
   if (checkout.value)
     secret.value = await PostPaymentIntent(
-      itemPrices.value,
-      idempotencyKey.value
+      itemPrices.value
+      // idempotencyKey.value
     )
   elements.value = stripe.value.elements()
   card.value = elements.value.create('card') //style
@@ -238,7 +238,7 @@ async function submitPayment(userId) {
             await addCartToOrder(userId, result.paymentIntent.id, cart.value)
             await deleteCart(userId)
             order.value = []
-            idempotencyKey.value = null
+            // idempotencyKey.value = null
             router.push('/payment-success')
           }
         }

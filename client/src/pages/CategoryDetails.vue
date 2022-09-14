@@ -1,9 +1,15 @@
 <template>
-  <main v-if="category">
-    <button @click="backToCategories">Back to Categories</button>
-    <h1>{{ category.name }}</h1>
-    <section v-if="category.category_items">
-      <div v-for="item in category.category_items" :key="item.id">
+  <main id="category-details" v-if="category">
+    <div id="category-details-header">
+      <button @click="backToCategories">Back to Categories</button>
+      <h1>{{ category.name }}</h1>
+    </div>
+    <section id="category-items" v-if="category.category_items">
+      <div
+        class="category-item-container"
+        v-for="item in category.category_items"
+        :key="item.id"
+      >
         <ItemCard :item="item" @click="selectItem(item.id)" />
         <CartAndSaveButtons :item="item" :user="user" />
       </div>
