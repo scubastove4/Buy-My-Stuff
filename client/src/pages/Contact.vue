@@ -1,42 +1,50 @@
 <template>
-  <form @submit.prevent="submitEmail">
-    <label for="contact-name">Name: </label>
-    <input
-      type="text"
-      name="name"
-      id="contact-name"
-      :value="contactFormValues.name"
-      @input="setContactFormValues"
-      required
-    />
-    <label for="contact-email">Email: </label>
-    <input
-      type="email"
-      name="email"
-      id="contact-email"
-      :value="contactFormValues.email"
-      @input="setContactFormValues"
-      required
-    />
-    <label for="contact-message">Inquiry: </label>
-    <textarea
-      name="message"
-      id="contact-message"
-      :value="contactFormValues.message"
-      @input="setContactFormValues"
-      required
-    ></textarea>
-    <button
-      type="submit"
-      :disabled="
-        !contactFormValues.name ||
-        !contactFormValues.email ||
-        !contactFormValues.message
-      "
-    >
-      Send Email
-    </button>
-  </form>
+  <div id="contact-page">
+    <form id="contact-form" @submit.prevent="submitEmail">
+      <span id="contact-name-container">
+        <label for="contact-name">Name: </label>
+        <input
+          type="text"
+          name="name"
+          id="contact-name"
+          :value="contactFormValues.name"
+          @input="setContactFormValues"
+          required
+        />
+      </span>
+      <span id="contact-email-container">
+        <label for="contact-email">Email: </label>
+        <input
+          type="email"
+          name="email"
+          id="contact-email"
+          :value="contactFormValues.email"
+          @input="setContactFormValues"
+          required
+        />
+      </span>
+      <span id="contact-message-container">
+        <label for="contact-message">Inquiry: </label>
+        <textarea
+          name="message"
+          id="contact-message"
+          :value="contactFormValues.message"
+          @input="setContactFormValues"
+          required
+        ></textarea>
+      </span>
+      <button
+        type="submit"
+        :disabled="
+          !contactFormValues.name ||
+          !contactFormValues.email ||
+          !contactFormValues.message
+        "
+      >
+        Send Email
+      </button>
+    </form>
+  </div>
 </template>
 
 <script setup>

@@ -129,6 +129,15 @@ i .fa-bars {
   } */
 }
 
+input {
+  background: rgba(199, 180, 147, 0.15);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
 /* /////////     global (also in indexMain.css), nav, footer above    ///// */
 
 #home,
@@ -716,3 +725,87 @@ i .fa-face-frown {
 }
 
 /* //////////////  checkout styling above   ///////// */
+
+#contact-page {
+  display: flex;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+  background: rgba(199, 180, 147, 0.4);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 98%;
+  height: 70%;
+}
+
+#contact-name-container,
+#contact-email-container,
+#contact-message-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#contact-name-container {
+  margin: 3%;
+  width: 90%;
+  height: 15%;
+}
+
+#contact-form label {
+  font-size: 5em;
+  margin-right: 2%;
+}
+
+#contact-form input {
+  width: 70%;
+  height: 30%;
+}
+
+#contact-email-container,
+#contact-message-container {
+  margin: 0 3% 3% 3%;
+  width: 90%;
+  height: 15%;
+}
+
+#contact-message-container {
+  flex-direction: column;
+  height: 40%;
+}
+
+#contact-message-container label {
+  margin: 0 0 3% 0;
+}
+
+#contact-message-container textarea {
+  width: 90%;
+  height: 71%;
+  background: rgba(199, 180, 147, 0.15);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
+
+#contact-form button {
+  height: 9%;
+  width: 60%;
+  font-size: 4em;
+  background: rgba(199, 180, 147, 0.15);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 30px rgba(251, 248, 247.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(199, 180, 147, 0.18);
+}
