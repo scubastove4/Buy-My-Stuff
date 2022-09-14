@@ -19,10 +19,11 @@ const GetCustomerCart = async (req, res) => {
 
 const CreateCartItem = async (req, res) => {
   try {
-    console.log(req.params, req.params.customer_id, req.params.item_id)
-    // const createdCart = await Cart.create(req.body)
-    // console.log(createdCart)
-    // res.send(createdCart)
+    const createdCart = await Cart.create({
+      customerId: req.params.customer_id,
+      itemId: req.params.item_id
+    })
+    res.send(createdCart)
   } catch (e) {
     throw e
   }

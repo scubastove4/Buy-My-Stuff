@@ -11,11 +11,6 @@ export const GetCartByCustomerId = async (customerId) => {
 
 export const PostCart = async (customerId, itemId) => {
   try {
-    // const cartItem = {
-    //   customerId: customerId,
-    //   itemId: itemId
-    // }
-    console.log(customerId, itemId)
     const res = await Client.post(`/cart/${customerId}/${itemId}`)
     return res.data
   } catch (e) {
