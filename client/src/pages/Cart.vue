@@ -1,6 +1,6 @@
 <template>
   <section id="cart-page" v-if="cart && cart.length > 0">
-    <h2 id="cart-title">Cart</h2>
+    <h2 class="cart-title" :class="{ 'ct-title': checkout }">Cart</h2>
     <div id="cart-items" v-if="!checkout">
       <div class="cart-container" v-for="item in cart" :key="item.id">
         <ItemCard :item="item" />
