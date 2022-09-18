@@ -753,12 +753,11 @@ i .fa-face-frown {
 
 #checkout {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 
   height: 80%;
-  /* max-height: 50%; */
   width: 100%;
   overflow-y: scroll;
 }
@@ -775,7 +774,7 @@ i .fa-face-frown {
   margin-bottom: 2%;
 }
 
-#checkout-form-container {
+/* #checkout-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -783,9 +782,9 @@ i .fa-face-frown {
 
   overflow-y: scroll;
   width: 100%;
-  /* margin-top: 10%; */
+  margin-top: 10%;
   height: 100%;
-}
+} */
 
 #checkout-form {
   display: flex;
@@ -794,7 +793,8 @@ i .fa-face-frown {
   justify-content: center;
 
   width: 90%;
-  margin-bottom: 2%;
+  height: 100%;
+  padding: 50% 0 0 0;
 }
 
 #checkout-form label {
