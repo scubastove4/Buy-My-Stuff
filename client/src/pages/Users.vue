@@ -28,7 +28,7 @@
         <UserCard :admin="admin" />
         <button
           @click="deleteAdmin(allAdmins, admin.id, user.id)"
-          :disabled="allAdmins.length === 1"
+          :disabled="allAdmins.length === 1 || admin.id === 1"
         >
           Delete Admin
         </button>
